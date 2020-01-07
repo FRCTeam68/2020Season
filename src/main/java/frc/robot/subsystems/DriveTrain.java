@@ -8,18 +8,19 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import frc.robot.Constants;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 public class DriveTrain extends SubsystemBase {
   /**
    * Creates a new DriveTrain.
    */ 
-  private TalonFX fr; //front right
-  private TalonFX br; //back right
-  private TalonFX bl; //back left
-  private TalonFX fl; //front left
+  private WPI_TalonSRX fr; //front right
+  private WPI_TalonSRX br; //back right
+  private WPI_TalonSRX bl; //back left
+  private WPI_TalonSRX fl; //front left
 
 
   public static DriveTrain driveTrain;
@@ -31,10 +32,10 @@ public class DriveTrain extends SubsystemBase {
 		return driveTrain;
 	}
   public DriveTrain() {
-    fr = new TalonFX(Constants.FALCON_FR);
-    br = new TalonFX(Constants.FALCON_BR);
-    bl = new TalonFX(Constants.FALCON_BL);
-    fl = new TalonFX(Constants.FALCON_FL);
+    fr = new WPI_TalonSRX(Constants.FALCON_FR);
+    br = new WPI_TalonSRX(Constants.FALCON_BR);
+    bl = new WPI_TalonSRX(Constants.FALCON_BL);
+    fl = new WPI_TalonSRX(Constants.FALCON_FL);
 
     fr.setNeutralMode(NeutralMode.Coast);
     br.setNeutralMode(NeutralMode.Coast);
