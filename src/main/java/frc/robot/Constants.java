@@ -70,8 +70,8 @@ public final class Constants {
 
     //drive motor values
 
-    public static final int FALCON_FR = 0;
-    public static final int FALCON_FL = 0;
-    public static final int FALCON_BR = 0;
-    public static final int FALCON_BL = 0;
+    public static final int NEO_FR = 0;
+    public static final int NEO_FL = 0;
+    public static final int NEO_BR = 0;
+    public static final int NEO_BL = 0;
 }

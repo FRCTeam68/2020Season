@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import frc.robot.Constants;
@@ -14,15 +15,18 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 public class DriveTrain extends SubsystemBase {
   /**
    * Creates a new DriveTrain.
    */ 
-  private WPI_TalonSRX fr; //front right
-  private WPI_TalonSRX br; //back right
-  private WPI_TalonSRX bl; //back left
-  private WPI_TalonSRX fl; //front left
+  private CANSparkMax fr; //front right
+  private CANSparkMax br; //back right
+  private CANSparkMax bl; //back left
+  private CANSparkMax fl; //front left
 
+  int currentLimit = 40;
 
   public static DriveTrain driveTrain;
 
@@ -33,32 +37,21 @@ public class DriveTrain extends SubsystemBase {
 		return driveTrain;
 	}
   public DriveTrain() {
-    fr = new WPI_TalonSRX(Constants.FALCON_FR);
-    br = new WPI_TalonSRX(Constants.FALCON_BR);
-    bl = new WPI_TalonSRX(Constants.FALCON_BL);
-    fl = new WPI_TalonSRX(Constants.FALCON_FL);
+    fr = new CANSparkMax(Constants.NEO_FR, MotorType.kBrushless);
+    br = new CANSparkMax(Constants.NEO_BR, MotorType.kBrushless);
+    bl = new CANSparkMax(Constants.NEO_BL, MotorType.kBrushless);
+    fl = new CANSparkMax(Constants.NEO_FL, MotorType.kBrushless);
 
-    fr.setNeutralMode(NeutralMode.Coast);
-    br.setNeutralMode(NeutralMode.Coast);
-    fl.setNeutralMode(NeutralMode.Coast);
-    bl.setNeutralMode(NeutralMode.Coast);
-
-
-    fr.configPeakOutputForward(1);
-    br.configPeakOutputForward(1);
-    fl.configPeakOutputForward(1);
-    bl.configPeakOutputForward(1);
-    fr.configPeakOutputReverse(-1);
-    br.configPeakOutputReverse(-1);
-    bl.configPeakOutputReverse(-1);
-    fl.configPeakOutputReverse(-1);
-
+    fr.setSmartCurrentLimit(currentLimit);
+    br.setSmartCurrentLimit(currentLimit);
+    fl.setSmartCurrentLimit(currentLimit);
+    bl.setSmartCurrentLimit(currentLimit);
   }
   public void setSpeedFalcon(double left, double right){
-    fr.set(ControlMode.PercentOutput,right);
-    br.set(ControlMode.PercentOutput,right);
-    fl.set(ControlMode.PercentOutput,left);
-    bl.set(ControlMode.PercentOutput,left);
+    fr.set(right);
+    br.set(right);
+    fl.set(left);
+    bl.set(left);
   }
 
 
