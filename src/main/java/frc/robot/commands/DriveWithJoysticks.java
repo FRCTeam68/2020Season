@@ -8,7 +8,8 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.*;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 public class DriveWithJoysticks extends CommandBase {
   /**
@@ -26,7 +27,14 @@ public class DriveWithJoysticks extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    DriveTrain.getDriveTrain().setSpeedFalcon(RobotContainer.getRobotContainer().getLeftXboxJoystickValue(), RobotContainer.getRobotContainer().getLeftXboxJoystickValue());
+    if(RobotContainer.getXboxDriveRB() == true){
+      DriveTrain.getDriveTrain().setSpeedFalcon(RobotContainer.getRobotContainer().getLeftXboxJoystickValue() + Robot.vision.steeringAdjust(),
+          RobotContainer.getRobotContainer().getLeftXboxJoystickValue() - Robot.vision.steeringAdjust());
+    }
+    else{
+      DriveTrain.getDriveTrain().setSpeedFalcon(RobotContainer.getRobotContainer().getLeftXboxJoystickValue(), RobotContainer.getRobotContainer().getLeftXboxJoystickValue()); 
+    }
+    
   }
 
   // Called once the command ends or is interrupted.

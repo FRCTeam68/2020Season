@@ -11,6 +11,9 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.XboxController.Button;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Robot;
 /*import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -30,35 +33,53 @@ public class RobotContainer {
 
   XboxController xboxDrive = new XboxController(Constants.XBOX_DRIVE);
 
+	private POVButton xboxDrivePOVUp;
+	private POVButton xboxDrivePOVDown;
+	private POVButton xboxDrivePOVLeft;
+	private POVButton xboxDrivePOVRight;
+	private static JoystickButton xboxDriveRB;
+	private static JoystickButton xboxDriveLB;
+	private static JoystickButton xboxDriveRTButton;
+	private static JoystickButton xboxDriveLTButton;
+	private static JoystickButton xboxDriveTriangle;
+	private static JoystickButton xboxDriveCircle;
+	private static JoystickButton xboxDriveSquare;
+	private static JoystickButton xboxDriveX;
+	private static JoystickButton xboxDriveStart;
+	private static JoystickButton xboxDriveSL;
+	private static JoystickButton xboxDriveSR;
 	private static RobotContainer robotContainer;
-	
 
-	public static RobotContainer getRobotContainer(){
+	public static RobotContainer getRobotContainer() {
 		if (robotContainer == null) {
 			robotContainer = new RobotContainer();
 		}
-		return robotContainer;	
+		return robotContainer;
 	}
 
-  public RobotContainer() {
-    // Configure the button bindings
-    configureButtonBindings();
-  }
+	public RobotContainer() {
+		// Configure the button bindings
+		configureButtonBindings();
 
-  /**
-   * Use this method to define your button->command mappings.  Buttons can be created by
-   * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
-   * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
-   */
-  private void configureButtonBindings() {
-  }	
-  public double getLeftXboxJoystickValue() {
+	}
+
+	/**
+	 * Use this method to define your button->command mappings. Buttons can be
+	 * created by instantiating a {@link GenericHID} or one of its subclasses
+	 * ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then
+	 * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
+	 */
+	private void configureButtonBindings() {
+		xboxDriveRB = new JoystickButton(xboxDrive, Constants.XBOX_DRIVE_RB);
+		xboxDriveLB = new JoystickButton(xboxDrive, Constants.XBOX_DRIVE_LB);
+	}
+
+	public double getLeftXboxJoystickValue() {
 		double leftAxis;
 		leftAxis = xboxDrive.getY(Hand.kLeft);
 		// Allow for up to 10% of joystick noises
 		leftAxis = (Math.abs(leftAxis) < 0.1) ? 0 : leftAxis;
-    	return leftAxis;
+		return leftAxis;
 	}
 
 	// Drivetrain Tank Drive Right
@@ -67,8 +88,24 @@ public class RobotContainer {
 		rightAxis = xboxDrive.getY(Hand.kRight);
 		// Allow for up to 10% of joystick noise
 		rightAxis = (Math.abs(rightAxis) < 0.1) ? 0 : rightAxis;
-    	return rightAxis;
-    	
+		return rightAxis;
+
+	}
+
+	public static boolean getXboxDriveRB() {
+		boolean buttonPressed = false;
+		if (xboxDriveRB.get()) {
+			buttonPressed = true;
+		}
+		return buttonPressed;
+	}
+
+	public boolean getXboxDriveLB() {
+		boolean buttonPressed = false;
+		if(xboxDriveLB.get()){
+			buttonPressed = true;
+		}
+		return buttonPressed;
 	}
 
 
