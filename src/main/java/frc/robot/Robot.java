@@ -25,7 +25,7 @@ public class Robot extends TimedRobot {
   
   private RobotContainer m_robotContainer;
 
-  private static DriveTrain driveTrain;
+  public static DriveTrain driveTrain;
   public static Vision vision;
 
   /**

@@ -27,12 +27,14 @@ public class DriveWithJoysticks extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(RobotContainer.getXboxDriveRB() == true){
-      DriveTrain.getDriveTrain().setSpeedFalcon(RobotContainer.getRobotContainer().getLeftXboxJoystickValue() + Robot.vision.steeringAdjust(),
-          RobotContainer.getRobotContainer().getLeftXboxJoystickValue() - Robot.vision.steeringAdjust());
+    if(RobotContainer.getXboxDriveRB() == true){ 
+      DriveTrain.getDriveTrain().setSpeedFalcon(Robot.driveTrain.leftVisionAdjusted(),Robot.driveTrain.rightVisionAdjusted());
     }
     else{
-      DriveTrain.getDriveTrain().setSpeedFalcon(RobotContainer.getRobotContainer().getLeftXboxJoystickValue(), RobotContainer.getRobotContainer().getLeftXboxJoystickValue()); 
+      RobotContainer.getRobotContainer();
+      RobotContainer.getRobotContainer();
+      DriveTrain.getDriveTrain().setSpeedFalcon(RobotContainer.getLeftXboxJoystickValue(),
+          RobotContainer.getLeftXboxJoystickValue());
     }
     
   }

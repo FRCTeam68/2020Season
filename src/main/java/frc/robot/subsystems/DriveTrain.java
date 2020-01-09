@@ -10,7 +10,9 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
+import frc.robot.RobotContainer;
 import frc.robot.commands.DriveWithJoysticks;
+import frc.robot.subsystems.*;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import frc.robot.Constants;
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -64,5 +66,16 @@ public class DriveTrain extends SubsystemBase {
 
   public void initDefaultCommand() {
 		setDefaultCommand(new DriveWithJoysticks());
-	}
+  }
+  
+  public double leftVisionAdjusted(){
+    double leftSpeed;
+    leftSpeed = RobotContainer.getLeftXboxJoystickValue() + Robot.vision.steeringAdjust();
+    return leftSpeed;
+  }
+  public double rightVisionAdjusted(){
+    double rightSpeed;
+    rightSpeed = RobotContainer.getRightXboxJoystickValue() - Robot.vision.steeringAdjust();
+    return rightSpeed;
+  }
 }

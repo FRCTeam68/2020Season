@@ -31,7 +31,7 @@ public class RobotContainer {
 
   //private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
-  XboxController xboxDrive = new XboxController(Constants.XBOX_DRIVE);
+  	static XboxController xboxDrive = new XboxController(Constants.XBOX_DRIVE);
 
 	private POVButton xboxDrivePOVUp;
 	private POVButton xboxDrivePOVDown;
@@ -74,7 +74,7 @@ public class RobotContainer {
 		xboxDriveLB = new JoystickButton(xboxDrive, Constants.XBOX_DRIVE_LB);
 	}
 
-	public double getLeftXboxJoystickValue() {
+	public static double getLeftXboxJoystickValue() {
 		double leftAxis;
 		leftAxis = xboxDrive.getY(Hand.kLeft);
 		// Allow for up to 10% of joystick noises
@@ -83,7 +83,7 @@ public class RobotContainer {
 	}
 
 	// Drivetrain Tank Drive Right
-	public double getRightXboxJoystickValue() {
+	public static double getRightXboxJoystickValue() {
 		double rightAxis;
 		rightAxis = xboxDrive.getY(Hand.kRight);
 		// Allow for up to 10% of joystick noise
