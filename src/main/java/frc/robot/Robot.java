@@ -23,7 +23,7 @@ import frc.robot.subsystems.*;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   
-  private RobotContainer m_robotContainer;
+  public static RobotContainer m_robotContainer;
 
   public static DriveTrain driveTrain;
   public static Vision vision;
