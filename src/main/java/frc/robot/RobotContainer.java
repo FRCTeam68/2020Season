@@ -10,11 +10,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants;
-import frc.robot.commands.DrivePath;
-import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
+//import frc.robot.Robot;
 /*import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -25,16 +22,14 @@ import edu.wpi.first.wpilibj2.command.Command;
  * periodic methods (other than the scheduler calls).  Instead, the structure of the robot
  * (including subsystems, commands, and button mappings) should be declared here.
  */
+//import frc.robot.commands.DriveWithJoysticks;
+//import frc.robot.subsystems.DriveTrain;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
- // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
-  //private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-
-  XboxController xboxDrive = new XboxController(Constants.XBOX_DRIVE);
+  XboxController xboxDrive;
 
 	private static RobotContainer robotContainer;
-  private static DrivePath m_autoCommand;
 
 	public static RobotContainer getRobotContainer(){
 		if (robotContainer == null) {
@@ -46,6 +41,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+    xboxDrive = new XboxController(Constants.XBOX_DRIVE);
   }
 
   /**
@@ -55,6 +51,7 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    xboxDrive = new XboxController(Constants.XBOX_DRIVE);
   }	
   public double getLeftXboxJoystickValue() {
 		double leftAxis;
@@ -80,8 +77,8 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public DrivePath getAutonomousCommand() {
+ /* public DrivePath getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     return m_autoCommand;
-  }
+  }*/
 }

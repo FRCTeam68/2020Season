@@ -19,11 +19,11 @@ import frc.robot.subsystems.DriveTrain;
  * project.
  */
 public class Robot extends TimedRobot {
-  private Command m_autonomousCommand;
+  public static Command m_autonomousCommand;
   
-  private RobotContainer m_robotContainer;
+  public static RobotContainer m_robotContainer;
 
-  private DriveTrain driveTrain;
+  public static DriveTrain driveTrain;
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -49,7 +49,7 @@ public class Robot extends TimedRobot {
     // commands, running already-scheduled commands, removing finished or interrupted commands,
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
-    CommandScheduler.getInstance().run();
+    CommandScheduler.getInstance().run();    
   }
 
   /**
@@ -68,12 +68,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    ///m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    driveTrain = new DriveTrain();
+    m_robotContainer = new RobotContainer();
 
     // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.schedule();
-    }
   }
 
   /**
@@ -89,9 +88,10 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
-    }
+
+    driveTrain = new DriveTrain();
+    m_robotContainer = new RobotContainer();
+
   }
 
   /**
@@ -99,6 +99,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    m_robotContainer = new RobotContainer();
+    driveTrain = new DriveTrain();
+
   }
 
   @Override

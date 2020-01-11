@@ -7,12 +7,16 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import frc.robot.Constants;
+import frc.robot.Robot;
+import frc.robot.commands.DriveWithJoysticks;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+//import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 public class DriveTrain extends SubsystemBase {
   /**
    * Creates a new DriveTrain.
@@ -53,16 +57,15 @@ public class DriveTrain extends SubsystemBase {
     fl.configPeakOutputReverse(-1);
 
   }
+
+  @Override
+  public void periodic() {
+    CommandScheduler.getInstance().setDefaultCommand(Robot.driveTrain, new DriveWithJoysticks());
+  }
   public void setSpeedFalcon(double left, double right){
     fr.set(ControlMode.PercentOutput,right);
     br.set(ControlMode.PercentOutput,right);
     fl.set(ControlMode.PercentOutput,left);
     bl.set(ControlMode.PercentOutput,left);
-  }
-
-
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
   }
 }
