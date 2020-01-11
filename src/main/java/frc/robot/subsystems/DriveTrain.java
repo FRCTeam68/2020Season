@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
 import frc.robot.RobotContainer;
@@ -21,25 +22,27 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 public class DriveTrain extends SubsystemBase {
   /**
    * Creates a new DriveTrain.
    */ 
-  private CANSparkMax fr; //front right
-  private CANSparkMax br; //back right
-  private CANSparkMax bl; //back left
-  private CANSparkMax fl; //front left
+  private final CANSparkMax fr; // front right
+  private final CANSparkMax br; // back right
+  private final CANSparkMax bl; // back left
+  private final CANSparkMax fl; // front left
 
   int currentLimit = 40;
 
   public static DriveTrain driveTrain;
 
-	public static DriveTrain getDriveTrain() {
-		if (driveTrain == null) {
-			driveTrain = new DriveTrain();
-		}
-		return driveTrain;
-	}
+  public static DriveTrain getDriveTrain() {
+    if (driveTrain == null) {
+      driveTrain = new DriveTrain();
+    }
+    return driveTrain;
+  }
+
   public DriveTrain() {
     fr = new CANSparkMax(Constants.NEO_FR, MotorType.kBrushless);
     br = new CANSparkMax(Constants.NEO_BR, MotorType.kBrushless);
@@ -51,31 +54,37 @@ public class DriveTrain extends SubsystemBase {
     fl.setSmartCurrentLimit(currentLimit);
     bl.setSmartCurrentLimit(currentLimit);
   }
-  public void setSpeedFalcon(double left, double right){
+
+  @Override
+  public void periodic() {
+    CommandScheduler.getInstance().setDefaultCommand(Robot.driveTrain, new DriveWithJoysticks());
+  }
+
+  public void setSpeedFalcon(final double left, final double right) {
     fr.set(right);
     br.set(right);
     fl.set(left);
     bl.set(left);
   }
 
-
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
-
-  public void initDefaultCommand() {
-		setDefaultCommand(new DriveWithJoysticks());
-  }
+  
   
   public double leftVisionAdjusted(){
     double leftSpeed;
-    leftSpeed = RobotContainer.getLeftXboxJoystickValue() + Robot.vision.steeringAdjust();
+    double joystickSpeed;
+    double visionCorrect;
+    joystickSpeed = RobotContainer.getLeftXboxJoystickValue();
+    visionCorrect = Robot.vision.steeringAdjust();
+    leftSpeed = joystickSpeed += visionCorrect;
     return leftSpeed;
   }
   public double rightVisionAdjusted(){
     double rightSpeed;
-    rightSpeed = RobotContainer.getRightXboxJoystickValue() - Robot.vision.steeringAdjust();
+    double joystickSpeed;
+    double visionCorrect;
+    joystickSpeed = RobotContainer.getRightXboxJoystickValue();
+    visionCorrect = Robot.vision.steeringAdjust();
+    rightSpeed =  joystickSpeed -= visionCorrect;
     return rightSpeed;
   }
 }

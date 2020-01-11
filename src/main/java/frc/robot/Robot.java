@@ -23,7 +23,7 @@ import frc.robot.subsystems.*;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   
-  private RobotContainer m_robotContainer;
+  public static RobotContainer m_robotContainer;
 
   public static DriveTrain driveTrain;
   public static Vision vision;
@@ -101,6 +101,8 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
+    driveTrain = new DriveTrain();
+    vision = new Vision();
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }

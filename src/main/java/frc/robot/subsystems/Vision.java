@@ -12,11 +12,11 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class Vision extends SubsystemBase {
 
-    private final NetworkTable Limelight;
-    private final NetworkTableEntry V;
-    private final NetworkTableEntry X;
-    private final NetworkTableEntry Y;
-    private final NetworkTableEntry A;
+    public static NetworkTable Limelight;
+    public static NetworkTableEntry V;
+    public static NetworkTableEntry X;
+    public static NetworkTableEntry Y;
+    public static NetworkTableEntry A;
     
 
     public static Vision vision;
@@ -29,7 +29,7 @@ public class Vision extends SubsystemBase {
     }
 
     public Vision() {
-        Limelight = NetworkTableInstance.getDefault().getTable("LimeLight");
+        Limelight = NetworkTableInstance.getDefault().getTable("limelight");
         V = Limelight.getEntry("tv");
         X = Limelight.getEntry("tx");
         Y = Limelight.getEntry("ty");
@@ -77,8 +77,8 @@ public class Vision extends SubsystemBase {
         
      double steeringAdjust = 0; 
      double x = X.getDouble(0.0);
-     float Kp = -0.1f;
-     float min_command = 0.05f;
+     double Kp = -0.1;
+     double min_command = 0.05;
      double heading_error = -x;
 
         if(x>1.0){
