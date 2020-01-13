@@ -24,6 +24,8 @@ public class Robot extends TimedRobot {
   public static RobotContainer m_robotContainer;
 
   public static DriveTrain driveTrain;
+
+  public static PathFollower pathFollower;
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -34,6 +36,7 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     driveTrain = new DriveTrain();
+    pathFollower = new PathFollower();
   }
 
   /**
@@ -69,8 +72,9 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     ///m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-    driveTrain = new DriveTrain();
     m_robotContainer = new RobotContainer();
+
+    pathFollower.autonomousInit("Stinky");
 
     // schedule the autonomous command (example)
   }

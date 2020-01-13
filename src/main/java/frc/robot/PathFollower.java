@@ -24,6 +24,11 @@ import jaci.pathfinder.followers.EncoderFollower;
     I have chosen to create a class for Following a path to make it easier to adjust just path following
  */
 public class PathFollower{
+
+    /*
+    / Upload the Stinky.path file for the robot to run!!!!!!!!!!!!!!
+    */
+
     private static final int k_ticks_per_rev = 1024;
     private static final double k_wheel_diameter = 4.0 / 12.0;
     private static final double k_max_velocity = 10;
@@ -69,11 +74,6 @@ public class PathFollower{
         m_left_encoder = new Encoder(Constants.FALCON_FL, Constants.FALCON_BL);
         m_right_encoder = new Encoder(Constants.FALCON_FR,Constants.FALCON_BR);
       }
-
-      public void setSetpoint(final double setpoint) {
-    setPoint = setpoint;
-    // turnController.setSetpoint(setpoint);
-  }
 
   public double getYaw() {
     return -m_gyro.getYaw();
