@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.auton;
 import frc.robot.subsystems.DriveTrain;
 
 /**
@@ -19,13 +20,13 @@ import frc.robot.subsystems.DriveTrain;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static Command m_autonomousCommand;
+  public static Command m_autonomousCommand ;
   
   public static RobotContainer m_robotContainer;
 
   public static DriveTrain driveTrain;
 
-  public static PathFollower pathFollower;
+  public static frc.robot.subsystems.PathFollower pathFollower;
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -34,10 +35,9 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
-    m_robotContainer = new RobotContainer();
     driveTrain = new DriveTrain();
-    pathFollower = new PathFollower();
-  }
+    m_autonomousCommand = new auton();
+ }
 
   /**
    * This function is called every robot packet, no matter the mode. Use this for items like
@@ -72,9 +72,15 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     ///m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-    m_robotContainer = new RobotContainer();
 
-    pathFollower.autonomousInit("Stinky");
+    pathFollower = new frc.robot.subsystems.PathFollower();
+
+    // schedule the autonomous command (example)
+    if (m_autonomousCommand != null) {
+      m_autonomousCommand.schedule();
+    }
+    
+    //pathFollower.autonomousInit("Stinky");
 
     // schedule the autonomous command (example)
   }

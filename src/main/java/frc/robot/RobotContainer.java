@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants;
+//import frc.robot.subsystems.PathFollower;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 //import frc.robot.Robot;
 /*import frc.robot.commands.ExampleCommand;
@@ -29,8 +30,14 @@ public class RobotContainer {
 
   XboxController xboxDrive;
 
-	private static RobotContainer robotContainer;
+  private static RobotContainer robotContainer;
 
+  //private final PathFollower m_exampleSubsystem = new PathFollower();
+
+  
+  //private final auton m_autoCommand;
+
+  
 	public static RobotContainer getRobotContainer(){
 		if (robotContainer == null) {
 			robotContainer = new RobotContainer();
@@ -77,7 +84,7 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
- /* public DrivePath getAutonomousCommand() {
+  /*public auton getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     return m_autoCommand;
   }*/
