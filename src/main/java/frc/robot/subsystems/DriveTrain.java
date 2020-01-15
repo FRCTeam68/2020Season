@@ -36,10 +36,10 @@ public class DriveTrain extends SubsystemBase {
 		return driveTrain;
 	}
   public DriveTrain() {
-    fr = new WPI_TalonSRX(Constants.FALCON_FR);
-    br = new WPI_TalonSRX(Constants.FALCON_BR);
-    bl = new WPI_TalonSRX(Constants.FALCON_BL);
-    fl = new WPI_TalonSRX(Constants.FALCON_FL);
+    fr = new WPI_TalonSRX(Constants.TALONSRX_FR);
+    br = new WPI_TalonSRX(Constants.TALONSRX_BR);
+    bl = new WPI_TalonSRX(Constants.TALONSRX_BL);
+    fl = new WPI_TalonSRX(Constants.TALONSRX_FL);
 
     fr.setNeutralMode(NeutralMode.Coast);
     br.setNeutralMode(NeutralMode.Coast);

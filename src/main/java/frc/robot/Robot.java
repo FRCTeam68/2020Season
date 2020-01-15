@@ -10,8 +10,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.auton;
+//import frc.robot.commands.auton;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.DriveTrainAuton;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -26,6 +27,8 @@ public class Robot extends TimedRobot {
 
   public static DriveTrain driveTrain;
 
+  public static DriveTrainAuton driveTrainAuton;
+
   public static frc.robot.subsystems.PathFollower pathFollower;
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -36,7 +39,8 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     driveTrain = new DriveTrain();
-    m_autonomousCommand = new auton();
+    //driveTrainAuton = new DriveTrainAuton();
+    //m_autonomousCommand = new auton();
  }
 
   /**
@@ -72,6 +76,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     ///m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    driveTrainAuton = new DriveTrainAuton();
 
     pathFollower = new frc.robot.subsystems.PathFollower();
 

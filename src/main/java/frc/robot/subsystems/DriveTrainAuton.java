@@ -15,21 +15,21 @@ import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 
 public class DriveTrainAuton extends SubsystemBase {
-  private final SpeedControllerGroup m_leftMotors = new SpeedControllerGroup(new WPI_TalonSRX(Constants.FALCON_BL),
-      new WPI_TalonSRX(Constants.FALCON_FL));
+  private final SpeedControllerGroup m_leftMotors = new SpeedControllerGroup(new WPI_TalonSRX(Constants.TALONSRX_BL),
+      new WPI_TalonSRX(Constants.TALONSRX_FL));
 
   // The motors on the right side of the drive.
-  private final SpeedControllerGroup m_rightMotors = new SpeedControllerGroup(new WPI_TalonSRX(Constants.FALCON_BR),
-      new WPI_TalonSRX(Constants.FALCON_FR));
+  private final SpeedControllerGroup m_rightMotors = new SpeedControllerGroup(new WPI_TalonSRX(Constants.TALONSRX_BR),
+      new WPI_TalonSRX(Constants.TALONSRX_FR));
 
   // The robot's drive
   private final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotors, m_rightMotors);
 
   // The left-side drive encoder
-  private final Encoder m_leftEncoder = new Encoder(Constants.FALCON_FL, Constants.FALCON_BL);
+  private final Encoder m_leftEncoder = new Encoder(Constants.TALONSRX_FL, Constants.TALONSRX_BL);
 
   // The right-side drive encoder
-  private final Encoder m_rightEncoder = new Encoder(Constants.FALCON_FR, Constants.FALCON_BR);
+  private final Encoder m_rightEncoder = new Encoder(Constants.TALONSRX_FR, Constants.TALONSRX_BR);
 
   // The gyro sensor
   private final AHRS m_gyro = new AHRS();
@@ -39,7 +39,15 @@ public class DriveTrainAuton extends SubsystemBase {
 
   /**
    * Creates a new DriveSubsystem.
-   */      
+   */        
+
+   public static DriveTrainAuton driveTrainAuton;
+  public static DriveTrainAuton getDriveTrainAuton() {
+    if (driveTrainAuton == null) {
+      driveTrainAuton = new DriveTrainAuton();
+    }
+    return driveTrainAuton;
+  }
   public DriveTrainAuton() {
 
     // Sets the distance per pulse for the encoders
@@ -89,8 +97,8 @@ public class DriveTrainAuton extends SubsystemBase {
    * @param fwd the commanded forward movement
    * @param rot the commanded rotation
    */
-  public void arcadeDrive(final double fwd, final double rot) {
-    m_drive.arcadeDrive(fwd, rot);
+  public void TankDrive(final double left, final double right) {
+    m_drive.tankDrive(left, right);
   }
 
   /**

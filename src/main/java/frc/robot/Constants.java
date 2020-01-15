@@ -74,10 +74,10 @@ public final class Constants {
 
     //drive motor values
 
-    public static final int FALCON_FR = 1;
-    public static final int FALCON_FL = 2;
-    public static final int FALCON_BR = 4;
-    public static final int FALCON_BL = 3;
+    public static final int TALONSRX_FR = 1;
+    public static final int TALONSRX_FL = 2;
+    public static final int TALONSRX_BR = 4;
+    public static final int TALONSRX_BL = 3;
 
     // Drivetrain Left PID Config
     public static final int DRIVETRAIN_LEFT_PID_SLOT = 0;

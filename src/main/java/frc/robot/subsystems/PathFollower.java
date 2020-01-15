@@ -42,8 +42,12 @@ public PathFollower() {
   }
   public void runAuton(String pathName){
     try{
+      System.out.print("B4 Traj");
+
       final Trajectory exampleTrajectory = TrajectoryUtil
           .fromPathweaverJson(Paths.get("/home/lvuser/deploy/paths/"+ pathName + ".wpilib.json"));
+      System.out.print(pathName);
+      
   
       final RamseteCommand ramseteCommand = new RamseteCommand(
       exampleTrajectory,
