@@ -2,10 +2,11 @@
 
 package frc.robot.subsystems;
 
+import frc.robot.Robot;
+import frc.robot.RobotContainer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
-
-
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.CameraMode;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -39,7 +40,7 @@ public class Vision extends SubsystemBase {
 
     @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    CommandScheduler.getInstance().setDefaultCommand(Robot.vision, new CameraMode());
   }
 
   public boolean getTarget(){
@@ -77,8 +78,8 @@ public class Vision extends SubsystemBase {
         
      double steeringAdjust = 0; 
      double x = X.getDouble(0.0);
-     double Kp = -0.1;
-     double min_command = 0.05;
+     double Kp = -0.03;
+     double min_command = 0.015;
      double heading_error = -x;
 
         if(x>1.0){

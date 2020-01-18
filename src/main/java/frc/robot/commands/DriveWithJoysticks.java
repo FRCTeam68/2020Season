@@ -29,7 +29,7 @@ public class DriveWithJoysticks extends CommandBase {
   @Override
   public void execute() {
     if(RobotContainer.getXboxDriveRB() == true){ 
-      DriveTrain.getDriveTrain().setSpeedFalcon(Robot.driveTrain.leftVisionAdjusted()*.25,Robot.driveTrain.rightVisionAdjusted()*-.25);
+      DriveTrain.getDriveTrain().setSpeedFalcon(Robot.driveTrain.leftVisionAdjusted(),-Robot.driveTrain.rightVisionAdjusted());
     }
     else{
       RobotContainer.getRobotContainer();
@@ -50,4 +50,5 @@ public class DriveWithJoysticks extends CommandBase {
   public boolean isFinished() {
     return false;
   }
+  
 }

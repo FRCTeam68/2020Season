@@ -106,6 +106,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    Vision.getVision().setCameraMode(1, 1);
   }
 
   /**
