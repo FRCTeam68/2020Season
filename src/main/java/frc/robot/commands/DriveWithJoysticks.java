@@ -31,6 +31,8 @@ public class DriveWithJoysticks extends CommandBase {
   public void execute() {
 
     //System.out.println(Robot.m_robotContainer);
+    //System.out.println("LEFT : "+Robot.driveTrain.getLeftEnc());
+    //System.out.println("RIGHT : "+Robot.driveTrain.getRightEnc());
 
     DriveTrain.getDriveTrain().setSpeedFalcon(Robot.m_robotContainer.getLeftXboxJoystickValue(), Robot.m_robotContainer.getRightXboxJoystickValue());
   }

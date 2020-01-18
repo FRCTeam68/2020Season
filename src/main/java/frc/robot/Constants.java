@@ -81,22 +81,28 @@ public final class Constants {
 
     // Drivetrain Left PID Config
     public static final int DRIVETRAIN_LEFT_PID_SLOT = 0;
-    public static final double DRIVETRAIN_LEFT_PID_F = 0.498;
-    public static final double DRIVETRAIN_LEFT_PID_P = 1;
-    public static final double DRIVETRAIN_LEFT_PID_I = 0.0;
-    public static final double DRIVETRAIN_LEFT_PID_D = 10.0;
+    public static final double DRIVETRAIN_LEFT_PID_F = 0.507;
+    public static final double  DRIVETRAIN_LEFT_PID_P = 1;
+    public static final double DRIVETRAIN_LEFT_PID_I = 0;
+    public static final double DRIVETRAIN_LEFT_PID_D = 0;
     // Drivetrain Right PID Config
     public static final int DRIVETRAIN_RIGHT_PID_SLOT = 0;
     public static final double DRIVETRAIN_RIGHT_PID_F = 0.507;
-    public static final double DRIVETRAIN_RIGHT_PID_P = 1.0;
-    public static final double DRIVETRAIN_RIGHT_PID_I = 0.0;
-    public static final double DRIVETRAIN_RIGHT_PID_D = 10.0;
+    public static final double DRIVETRAIN_RIGHT_PID_P = 1;
+    public static final double DRIVETRAIN_RIGHT_PID_I = 0;
+    public static final double DRIVETRAIN_RIGHT_PID_D = 0;
+
+    public static final double DRIVETRAIN_RIGHT_SLOT = 0;
+    public static final double DRIVETRAIN_LEFT_SLOT = 0;
 
 
     //auton
     public static final double ksVolts = 0.22;
-    public static final double kvVoltSecondsPerMeter = 1.98;
-    public static final double kaVoltSecondsSquaredPerMeter = 0.2;
+    public static final double kvVoltSecondsPerMeter = 1;
+    public static final double kaVoltSecondsSquaredPerMeter = 1;
+
+    public static final double RIGHT_DRIVE_TO_METER = 41071;
+    public static final double LEFT_DRIVE_TO_METER = -41387;
 
     // Example value only - as above, this must be tuned for your drive!
     public static final double kPDriveVel = 8.5;
@@ -106,6 +112,8 @@ public final class Constants {
     public static final double kMaxAccelerationMetersPerSecondSquared = 3;
 
     public static final double kTrackwidthMeters = 0.69;
+    public static final boolean kGyroReversed = false;
+
     public static final DifferentialDriveKinematics kDriveKinematics =
         new DifferentialDriveKinematics(kTrackwidthMeters);
 }
