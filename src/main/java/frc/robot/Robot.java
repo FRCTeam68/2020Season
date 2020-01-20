@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import java.io.File;
 import java.io.IOException;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -14,8 +15,12 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 //import frc.robot.commands.auton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.AutonTrajectory;
+import frc.robot.commands.RunAutonCommand;
 import frc.robot.subsystems.DriveTrain;
 //import frc.robot.subsystems.DriveTrainAuton;
+import frc.robot.subsystems.PathFollower;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -31,6 +36,15 @@ public class Robot extends TimedRobot {
 
   public static DriveTrain driveTrain;
 
+  Command auton;
+
+  private static String lvToPath = "/home/lvuser/deploy/paths";
+
+  //private static PathFollower pathFollower;
+
+  private static AutonTrajectory autonTraj;
+ // private SmartDashboard smartDashboard;
+
   // public static DriveTrainAuton driveTrainAuton;
 
   /// public static frc.robot.subsystems.PathFollower pathFollower;
@@ -45,11 +59,13 @@ public class Robot extends TimedRobot {
     // and put our
     // autonomous chooser on the dashboard.
     driveTrain = new DriveTrain();
+    //driveTrain.ResetEncoders();
     m_robotContainer = new RobotContainer();
-    driveTrain.ResetEncoders();
-    // driveTrainAuton = new DriveTrainAuton();
-    // m_autonomousCommand =
-    // RobotContainer.getRobotContainer().getAutonomousCommand();
+    //auton = autonTraj;
+    RunAutonCommand runAutonCommand;
+
+    //pathFollower = new PathFollower(null, null);
+    //driveTrain.ResetEncoders();
   }
 
   /**
@@ -90,9 +106,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-
-    // schedule the autonomous command (example)
-
+    autonTraj = new AutonTrajectory(new File(lvToPath + "/simpleright.csv"), new File(lvToPath + "/simpleleft.csv"));
+    autonTraj.schedule();
+    //pathFollower = new PathFollower(leftPath, rightPath);
   }
 
   /**
@@ -100,16 +116,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    try {
-      m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-      if (m_autonomousCommand != null) {
-        m_autonomousCommand.schedule();
-      }
-    } catch (IOException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-      System.out.print("AHAHHAHAHAHHA VERY STINKY FUNNY HAHHAA DIDNT WORK");
-    }
+    ///autonTraj.execute();
   }
 
   @Override

@@ -118,9 +118,6 @@ private final AHRS m_gyro = new AHRS();
     fl.set(ControlMode.PercentOutput,left);
     br.set(ControlMode.PercentOutput,right);
   }
-  public Pose2d getPose() {
-    return m_odometry.getPoseMeters();
-  }
 
   /**
    * Returns the current wheel speeds of the robot.
@@ -134,12 +131,7 @@ private final AHRS m_gyro = new AHRS();
    *
    * @param pose The pose to which to set the odometry.
    */
-  public void resetOdometry(Pose2d pose) {
-    m_odometry.resetPosition(pose, Rotation2d.fromDegrees(getHeading()));
-  }
-  public DifferentialDriveWheelSpeeds getWheelSpeeds() {
-    return new DifferentialDriveWheelSpeeds(fl.get(), br.get());
-  }
+
   /**
    * Drives the robot using arcade controls.
    *
@@ -154,40 +146,16 @@ private final AHRS m_gyro = new AHRS();
    * @param leftVolts  the commanded left output
    * @param rightVolts the commanded right output
    */
-  public void tankDriveVolts(double leftVolts, double rightVolts) {
-    fl.setVoltage(leftVolts);
-    br.setVoltage(-rightVolts);
+  public void positionalMode(double leftVolts, double rightVolts) {
+    fl.set(ControlMode.Position,leftVolts);
+    br.set(ControlMode.Position, rightVolts);
+    
    }
 
-  /**
-   * Resets the drive encoders to currently read a position of 0.
-
-  /**
-   * Gets the average distance of the two encoders.
-   *
-   * @return the average of the two encoder readings
-   */
-
-
-  /**
-   * Gets the left drive encoder.
-   *
-   * @return the left drive encoder
-   */
-
-
-  /**
-   * Sets the max output of the drive.  Useful for scaling the drive to drive more slowly.
-   *
-   * @param maxOutput the maximum output to which the drive will be constrained
-   */
 
   /**
    * Zeroes the heading of the robot.
    */
-  public void zeroHeading() {
-    m_gyro.reset();
-  }
   public void ResetEncoders(){
     fl.setSelectedSensorPosition(0);
     br.setSelectedSensorPosition(0);
@@ -199,7 +167,7 @@ private final AHRS m_gyro = new AHRS();
    * @return the robot's heading in degrees, from 180 to 180
    */
   public double getHeading() {
-    return Math.IEEEremainder(m_gyro.getAngle(), 360) * (Constants.kGyroReversed ? -1.0 : 1.0);
+    return m_gyro.getAngle();
   }
 
   /**
@@ -213,7 +181,7 @@ private final AHRS m_gyro = new AHRS();
   public int getLeftEnc(){
     return fl.getSelectedSensorPosition(0);
   }
-  public double getRightEnc(){
+  public int getRightEnc(){
     return br.getSelectedSensorPosition(0);
 
   }

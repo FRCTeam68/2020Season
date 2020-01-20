@@ -7,23 +7,18 @@
 
 package frc.robot;
 
+import java.io.File;
 import java.io.IOException;
-import java.nio.file.Paths;
-
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.commands.AutonTrajectory;
 ///import frc.robot.commands.Auton;
 //import frc.robot.subsystems.PathFollower;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj.controller.PIDController;
-import edu.wpi.first.wpilibj.controller.RamseteController;
-import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
-import edu.wpi.first.wpilibj.trajectory.TrajectoryUtil;
-import edu.wpi.first.wpilibj2.command.RamseteCommand;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj.trajectory.Trajectory;
+import edu.wpi.first.wpilibj.command.Command;
+import jaci.pathfinder.*;
+import jaci.pathfinder.followers.EncoderFollower;
 
 //import frc.robot.Robot;
 /*import frc.robot.commands.ExampleCommand;
@@ -48,9 +43,8 @@ public class RobotContainer {
 
   // private final PathFollower m_exampleSubsystem = new PathFollower();
 
-  private static DriveTrain m_robotDrive = new DriveTrain();
+  //private static DriveTrain m_robotDrive = new DriveTrain();
   // public final Auton m_autoCommand;
-
   public static RobotContainer getRobotContainer() {
     if (robotContainer == null) {
       robotContainer = new RobotContainer();
@@ -96,31 +90,7 @@ public class RobotContainer {
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
-   * @return the command to run in autonomous
    * @throws IOException
    */
-  SequentialCommandGroup getAutonomousCommand() throws IOException {
-     //An ExampleCommand will run in autonomous
-    //return m_autoCommand;
-    Trajectory exampleTrajectory = TrajectoryUtil.fromPathweaverJson(Paths.get("/home/lvuser/deploy/paths/EZPZ.wpilib.json"));
-    RamseteCommand ramseteCommand = new RamseteCommand(
 
-      exampleTrajectory,
-      m_robotDrive::getPose,
-      new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta),
-      new SimpleMotorFeedforward(Constants.ksVolts,
-                                 Constants.kvVoltSecondsPerMeter,
-                                 Constants.kaVoltSecondsSquaredPerMeter),
-      Constants.kDriveKinematics,
-      m_robotDrive::getWheelSpeeds,
-      new PIDController(Constants.DRIVETRAIN_LEFT_PID_P, Constants.DRIVETRAIN_LEFT_PID_I, Constants.DRIVETRAIN_LEFT_PID_D),
-      new PIDController(Constants.DRIVETRAIN_RIGHT_PID_P, Constants.DRIVETRAIN_RIGHT_PID_I, Constants.DRIVETRAIN_RIGHT_PID_D),
-      // RamseteCommand passes volts to the callback
-      m_robotDrive::tankDriveVolts,
-      m_robotDrive
-  );
-
-  // Run path following command, then stop at the end.
-  return ramseteCommand.andThen(() -> m_robotDrive.tankDriveVolts(0, 0));
-  }
 }
