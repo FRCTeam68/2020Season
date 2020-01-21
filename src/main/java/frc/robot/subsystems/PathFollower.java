@@ -20,11 +20,11 @@ public class PathFollower extends SubsystemBase {
    * Creates a new PathFollower.
    */
   double timeStep = 0.05;
-	double maxVel = 3;
+	double maxVel = 10;
 	double maxAccel = 2;
 	double maxJerk = 80;
 	double wheelBaseWidth = 2.208333;
-	int ticksPerRev = 8400; 
+	int ticksPerRev = 24342; 
 	double wheelDiameter = 0.33333333;
 
 	/* PID values and kV, kA, 

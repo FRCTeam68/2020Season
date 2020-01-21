@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.Robot;
@@ -31,9 +32,10 @@ public class DriveWithJoysticks extends CommandBase {
   @Override
   public void execute() {
 
-    //System.out.println(Robot.m_robotContainer);
-    //System.out.println("LEFT : "+Robot.driveTrain.getLeftEnc());
-    //System.out.println("RIGHT : "+Robot.driveTrain.getRightEnc());
+    //System.out.println(Robot.m_robotContainer);''
+    SmartDashboard.putNumber("left Enc",Robot.driveTrain.getLeftEnc());
+    SmartDashboard.putNumber("Right Enc",Robot.driveTrain.getRightEnc());
+
 
     DriveTrain.getDriveTrain().setSpeedFalcon(Robot.m_robotContainer.getLeftXboxJoystickValue(), Robot.m_robotContainer.getRightXboxJoystickValue());
   }

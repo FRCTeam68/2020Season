@@ -65,7 +65,7 @@ public class Robot extends TimedRobot {
     RunAutonCommand runAutonCommand;
 
     //pathFollower = new PathFollower(null, null);
-    //driveTrain.ResetEncoders();
+    driveTrain.ResetEncoders();
   }
 
   /**
@@ -106,6 +106,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+    //driveTrain.ResetEncoders();
+
     autonTraj = new AutonTrajectory(new File(lvToPath + "/simpleright.csv"), new File(lvToPath + "/simpleleft.csv"));
     autonTraj.schedule();
     //pathFollower = new PathFollower(leftPath, rightPath);

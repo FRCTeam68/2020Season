@@ -62,7 +62,7 @@ public class AutonTrajectory extends CommandBase {
     double turn = 5 * (-1.0/80.0) * angleDifference;
 
     /* Add power to motors to drive */
-    Robot.driveTrain.positionalMode(l+turn, r-turn);
+    Robot.driveTrain.setSpeedFalcon(l+turn, r-turn);
 
     /* Check if the path is finished */
       if(path.encRight.isFinished() && path.encRight.isFinished()){
