@@ -29,9 +29,9 @@ public class PathFollower extends SubsystemBase {
 
 	/* PID values and kV, kA, 
 	 * Recommend reading Drivetrain Characterization from Blair Witch to get velocityRatio, maxVel, etc*/
-	double p = 3.0;
+	double p = 1.2;
 	double i = 0.0;
-	double d = 0.6;
+	double d = 0;
 	double velocityRatio = 1/maxVel;
 	double accelGain = 0.0;	
 	// The first argument is the proportional gain. Usually this will be quite high

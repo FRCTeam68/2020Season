@@ -65,7 +65,7 @@ public class Robot extends TimedRobot {
     RunAutonCommand runAutonCommand;
 
     //pathFollower = new PathFollower(null, null);
-    driveTrain.ResetEncoders();
+    //driveTrain.ResetEncoders();
   }
 
   /**
@@ -106,9 +106,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    //driveTrain.ResetEncoders();
+    driveTrain.ResetEncoders();
 
-    autonTraj = new AutonTrajectory(new File(lvToPath + "/simpleright.csv"), new File(lvToPath + "/simpleleft.csv"));
+    autonTraj = new AutonTrajectory(new File(lvToPath + "/stleft.csv"), new File(lvToPath + "/stright.csv"));
     autonTraj.schedule();
     //pathFollower = new PathFollower(leftPath, rightPath);
   }
@@ -123,6 +123,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    driveTrain.ResetEncoders();
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove

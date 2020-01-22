@@ -66,7 +66,7 @@ public class AutonTrajectory extends CommandBase {
 
     /* Check if the path is finished */
       if(path.encRight.isFinished() && path.encRight.isFinished()){
-        Robot.driveTrain.positionalMode(0, 0);
+        Robot.driveTrain.setSpeedFalcon(0, 0);
         System.out.println("Both trajectories finished");
         isFinished = true;
       }

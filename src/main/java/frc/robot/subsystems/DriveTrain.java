@@ -157,8 +157,9 @@ private final AHRS m_gyro = new AHRS();
    * Zeroes the heading of the robot.
    */
   public void ResetEncoders(){
-    fl.setSelectedSensorPosition(0);
-    br.setSelectedSensorPosition(0);
+    fl.setSelectedSensorPosition(100,0,0);
+    br.setSelectedSensorPosition(100,0,0);
+
   }
 
   /**
