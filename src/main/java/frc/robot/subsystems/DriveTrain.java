@@ -107,6 +107,7 @@ private final AHRS m_gyro = new AHRS();
   public void setSpeedFalcon(double left, double right){
     fl.set(ControlMode.PercentOutput,left);
     br.set(ControlMode.PercentOutput,right);
+    
   }
 
   /**
@@ -145,7 +146,7 @@ private final AHRS m_gyro = new AHRS();
   public void ResetEncoders(){
     fl.setSelectedSensorPosition(100,0,0);
     br.setSelectedSensorPosition(100,0,0);
-
+    /*m_gyro.reset(); for auton experimental we may have to reset thee navx to re run a new path */
   }
 
   /**
