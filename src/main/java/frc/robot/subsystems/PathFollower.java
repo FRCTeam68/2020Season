@@ -74,7 +74,6 @@ public class PathFollower extends SubsystemBase {
 			encRight.configurePIDVA(p, i, d, velocityRatio, accelGain);
 			
 			//Set mode PercentOutput
-			//Robot.driveTrain.setModePercentVbus();
 		}catch(Exception e){
 			e.printStackTrace();
 			System.out.println("Error in Path Construction" + e.getMessage());

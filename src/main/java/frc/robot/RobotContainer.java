@@ -7,24 +7,12 @@
 
 package frc.robot;
 
-import java.io.File;
-import java.io.IOException;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants;
-import frc.robot.commands.AutonTrajectory;
-///import frc.robot.commands.Auton;
-//import frc.robot.subsystems.PathFollower;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj.command.Command;
-import jaci.pathfinder.*;
-import jaci.pathfinder.followers.EncoderFollower;
 
-//import frc.robot.Robot;
-/*import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
-import edu.wpi.first.wpilibj2.command.Command;
-*/
+
 /**
  * This class is where the bulk of the robot should be declared. Since
  * Command-based is a "declarative" paradigm, very little robot logic should
@@ -41,10 +29,6 @@ public class RobotContainer {
 
   private static RobotContainer robotContainer;
 
-  // private final PathFollower m_exampleSubsystem = new PathFollower();
-
-  //private static DriveTrain m_robotDrive = new DriveTrain();
-  // public final Auton m_autoCommand;
   public static RobotContainer getRobotContainer() {
     if (robotContainer == null) {
       robotContainer = new RobotContainer();
@@ -56,7 +40,6 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
     xboxDrive = new XboxController(Constants.XBOX_DRIVE);
-    // m_autoCommand = new Auton();
   }
 
   /**

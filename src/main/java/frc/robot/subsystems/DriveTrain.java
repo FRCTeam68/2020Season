@@ -7,13 +7,6 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.geometry.Pose2d;
-import edu.wpi.first.wpilibj.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
-import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -42,7 +35,6 @@ public class DriveTrain extends SubsystemBase {
 
 // The left-side drive encoder
 
-private final DifferentialDriveOdometry m_odometry;
 
 // The right-side drive encoder
 
@@ -100,7 +92,6 @@ private final AHRS m_gyro = new AHRS();
     bl.configPeakOutputReverse(-1);
     fl.configPeakOutputReverse(-1);
 
-    m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getHeading()));
     
     m_gyro.reset();
     m_gyro.setAngleAdjustment(0);
@@ -110,8 +101,7 @@ private final AHRS m_gyro = new AHRS();
 
   @Override
   public void periodic() {
-    m_odometry.update(Rotation2d.fromDegrees(getHeading()), .5,
-    .5);
+
     CommandScheduler.getInstance().setDefaultCommand(Robot.driveTrain, new DriveWithJoysticks());
   }
   public void setSpeedFalcon(double left, double right){
@@ -146,11 +136,7 @@ private final AHRS m_gyro = new AHRS();
    * @param leftVolts  the commanded left output
    * @param rightVolts the commanded right output
    */
-  public void positionalMode(double leftVolts, double rightVolts) {
-    fl.set(ControlMode.Position,leftVolts);
-    br.set(ControlMode.Position, rightVolts);
-    
-   }
+
 
 
   /**
@@ -176,9 +162,6 @@ private final AHRS m_gyro = new AHRS();
    *
    * @return The turn rate of the robot, in degrees per second
    */
-  public double getTurnRate() {
-    return m_gyro.getRate() * (Constants.kGyroReversed ? -1.0 : 1.0);
-  }
   public int getLeftEnc(){
     return fl.getSelectedSensorPosition(0);
   }
