@@ -1,5 +1,7 @@
 # 2020Season
 Projects for the 2020 season
+
+
 To upload Robot Code first install FileZilla from https://filezilla-project.org/download.php?type=client
 After installation connect to the robot via USB Cable
 Run FileZilla Type in roboRIO-68-frc.local for Host: for the username type in lvuser :KEEP PASSWORD BLANK: and port 22 and quick connect
