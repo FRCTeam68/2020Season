@@ -40,10 +40,10 @@ public class PathFollower extends SubsystemBase {
 		// The fourth argument is the velocity ratio. This is 1 over the maximum velocity you provided in the 
 		//	      trajectory configuration (it translates m/s to a -1 to 1 scale that your motors can read)
 		// The fifth argument is your acceleration gain. Tweak this if you want to get to a higher or lower speed quicker
-
+		// ethic is key!
 		double l;
 		double r;
-
+		double pp;
 		/* Find and create trajectory, create followers with input from encoders */
 		public Trajectory forwardLeftTrajectory;
 		public Trajectory forwardRightTrajectory;
