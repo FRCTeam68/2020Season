@@ -43,7 +43,7 @@ public class PathFollower extends SubsystemBase {
 		// ethic is key!
 		double l;
 		double r;
-		double pp;
+
 		/* Find and create trajectory, create followers with input from encoders */
 		public Trajectory forwardLeftTrajectory;
 		public Trajectory forwardRightTrajectory;
