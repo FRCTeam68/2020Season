@@ -19,19 +19,19 @@ public class PathFollower extends SubsystemBase {
   /**
    * Creates a new PathFollower.
    */
-  double timeStep = 0.05;
-	double maxVel = 10;
+  double timeStep = 0.02;
+	double maxVel = 5;
 	double maxAccel = 2;
-	double maxJerk = 80;
+	double maxJerk = 10;
 	double wheelBaseWidth = 2.208333;
 	int ticksPerRev = 24342; 
 	double wheelDiameter = 0.33333333;
 
 	/* PID values and kV, kA, 
 	 * Recommend reading Drivetrain Characterization from Blair Witch to get velocityRatio, maxVel, etc*/
-	double p = 1.2;
+	double p = 6.75;
 	double i = 0.0;
-	double d = 0;
+	double d = 0.0;
 	double velocityRatio = 1/maxVel;
 	double accelGain = 0.0;	
 	// The first argument is the proportional gain. Usually this will be quite high

@@ -88,7 +88,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     driveTrain.ResetEncoders();
 
-    autonTraj = new AutonTrajectory(new File(lvToPath + "/stleft.csv"), new File(lvToPath + "/stright.csv"));
+    autonTraj = new AutonTrajectory(new File(lvToPath + "/extreme_left.csv"), new File(lvToPath + "/extreme_right.csv"));
     autonTraj.schedule();
   }
 
