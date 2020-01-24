@@ -31,10 +31,10 @@ public class DriveTrain extends SubsystemBase{
         fl = new WPI_TalonSRX(Constants.FALCON_FL);
         bl = new WPI_TalonSRX(Constants.FALCON_BL);
 
-        fr.setNeutralMode(NeutralMode.Coast); //Set to Coast When Neutral
-        br.setNeutralMode(NeutralMode.Coast);
-        fl.setNeutralMode(NeutralMode.Coast);
-        bl.setNeutralMode(NeutralMode.Coast);
+        fr.setNeutralMode(NeutralMode.Brake); //Set to Brake When Neutral
+        br.setNeutralMode(NeutralMode.Brake);
+        fl.setNeutralMode(NeutralMode.Brake);
+        bl.setNeutralMode(NeutralMode.Brake);
 
         fr.configPeakOutputForward(1); //Setting Peak Forward Speed
         br.configPeakOutputForward(1);

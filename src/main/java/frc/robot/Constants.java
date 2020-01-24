@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.I2C;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants.  This class should not be used for any other purpose.  All constants should be
@@ -75,8 +77,14 @@ public final class Constants {
     public static final double PID_D = 0.0;
 
     //Drive Motor Values
-    public static final int FALCON_FR = 0;
-    public static final int FALCON_FL = 0;
-    public static final int FALCON_BR = 0;
-    public static final int FALCON_BL = 0;
+    public static final int FALCON_FR = 1;
+    public static final int FALCON_FL = 2;
+    public static final int FALCON_BR = 4;
+    public static final int FALCON_BL = 3;
+
+    //DJ Spinner Motors
+    public static final int SPINNER_MOTOR = 8;
+
+    //Color Sensor
+    public static final I2C.Port i2cPort = I2C.Port.kOnboard;
 }
