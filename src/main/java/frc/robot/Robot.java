@@ -109,9 +109,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    SmartDashboard.getNumber("Blue", Robot.djSpinner.getBlueValue());
-    SmartDashboard.getNumber("Green", Robot.djSpinner.getGreenValue());
-    SmartDashboard.getNumber("Red", Robot.djSpinner.getRedValue());
+    SmartDashboard.putNumber("Blue", Robot.djSpinner.getBlueValue());
+    SmartDashboard.putNumber("Green", Robot.djSpinner.getGreenValue());
+    SmartDashboard.putNumber("Red", Robot.djSpinner.getRedValue());
   }
 
   @Override
