@@ -47,20 +47,20 @@ public class DJSpinner extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public double getBlueValue() {
-    double RGB_Blue;
+  public int getBlueValue() {
+    int RGB_Blue;
     RGB_Blue = sensor.getBlue();
     return RGB_Blue;
   }
 
-  public double getGreenValue() {
-    double RGB_Green;
+  public int getGreenValue() {
+    int RGB_Green;
     RGB_Green = sensor.getGreen();
     return RGB_Green;
   }
 
-  public double getRedValue() {
-    double RGB_Red;
+  public int getRedValue() {
+    int RGB_Red;
     RGB_Red = sensor.getRed();
     return RGB_Red;
   }
