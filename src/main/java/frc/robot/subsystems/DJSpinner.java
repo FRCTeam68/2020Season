@@ -19,11 +19,11 @@ public class DJSpinner extends SubsystemBase {
   /**
    * Creates a new DJSpinner.
    */
-  private final WPI_TalonSRX spinner;
+  //private final WPI_TalonSRX spinner;
 
   private final ColorSensorV3 sensor;
 
-  public static DJSpinner djSpinner;
+  private static DJSpinner djSpinner;
 
   public static DJSpinner getDJSpinner() {
     if (djSpinner == null) {
@@ -32,12 +32,12 @@ public class DJSpinner extends SubsystemBase {
     return djSpinner;
   }
 
-  public DJSpinner() {
-    spinner = new WPI_TalonSRX(Constants.SPINNER_MOTOR);
-    spinner.setNeutralMode(NeutralMode.Brake);
+  private DJSpinner() {
+    //spinner = new WPI_TalonSRX(Constants.SPINNER_MOTOR);
+    //spinner.setNeutralMode(NeutralMode.Brake);
 
-    spinner.configPeakOutputForward(1);
-    spinner.configPeakOutputReverse(-1);
+    //spinner.configPeakOutputForward(1);
+    //spinner.configPeakOutputReverse(-1);
 
     sensor = new ColorSensorV3(Constants.i2cPort);
   }
