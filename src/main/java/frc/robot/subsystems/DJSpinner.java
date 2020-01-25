@@ -9,9 +9,10 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.wpilibj.I2C;
-
+import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -25,6 +26,8 @@ public class DJSpinner extends SubsystemBase {
 
   public static DJSpinner djSpinner;
 
+  public Color detectedColor;
+ 
   public static DJSpinner getDJSpinner() {
     if (djSpinner == null) {
       djSpinner = new DJSpinner();
@@ -45,6 +48,12 @@ public class DJSpinner extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+  }
+
+  public Color getColor() {
+    Color color;
+    color = sensor.getColor();
+    return color;
   }
 
   public double getBlueValue() {
