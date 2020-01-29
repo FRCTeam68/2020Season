@@ -9,8 +9,11 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.Command;
+//import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.XboxController.Button;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Robot;
 
 /**
@@ -26,6 +29,22 @@ public class RobotContainer {
   //private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
   XboxController xboxDrive = new XboxController(Constants.XBOX_DRIVE);
+
+  private POVButton xboxDrivePOVUp;
+  private POVButton xboxDrivePOVDown;
+  private POVButton xboxDrivePOVLeft;
+  private POVButton xboxDrivePOVRight;
+  private static JoystickButton xboxDriveRB;
+  private static JoystickButton xboxDriveLB;
+  private static JoystickButton xboxDriveRTButton;
+  private static JoystickButton xboxDriveLTButton;
+  private static JoystickButton xboxDriveTriangle;
+  private static JoystickButton xboxDriveCircle;
+  private static JoystickButton xboxDriveSquare;
+  private static JoystickButton xboxDriveX;
+  private static JoystickButton xboxDriveStart;
+  private static JoystickButton xboxDriveSL;
+  private static JoystickButton xboxDriveSR;
 
   private static RobotContainer robotContainer;
 
@@ -51,7 +70,10 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    xboxDriveRB = new JoystickButton(xboxDrive, Constants.XBOX_DRIVE_RB);
+
   }
+
   public double getLeftXboxJoystickValue() {
     double leftAxis;
     leftAxis = xboxDrive.getY(Hand.kLeft);
@@ -65,6 +87,23 @@ public class RobotContainer {
     rightAxis = (Math.abs(rightAxis) < 0.1) ? 0 : rightAxis;
       return rightAxis;
   }
+
+  public static boolean getXboxDriveRB() {
+    boolean buttonPressed = false;
+    if (xboxDriveLB.get()) {
+      buttonPressed = true;
+    }
+    return buttonPressed;
+  }
+
+  public static boolean getXboxDriveLB() {
+    boolean buttonPressed = false;
+    if (xboxDriveLB.get()) {
+      buttonPressed = true;
+    }
+    return buttonPressed;
+  }
+
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
