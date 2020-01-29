@@ -19,6 +19,7 @@ import frc.robot.commands.DriveWithJoysticks;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import edu.wpi.first.wpilibj.SPI;
 //import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 public class DriveTrain extends SubsystemBase {
   /**
@@ -39,7 +40,7 @@ public class DriveTrain extends SubsystemBase {
 // The right-side drive encoder
 
 // The gyro sensor
-private final AHRS m_gyro = new AHRS();
+private AHRS m_gyro = new AHRS();
 
   public static DriveTrain driveTrain;
 
@@ -51,6 +52,11 @@ private final AHRS m_gyro = new AHRS();
 		return driveTrain;
 	}
   public DriveTrain() {
+    // NAVX CONFIG
+    m_gyro = new AHRS(SPI.Port.kMXP);
+    m_gyro.reset();
+    m_gyro.setAngleAdjustment(0);
+    // DriveTrain Motors Config
     fr = new WPI_TalonSRX(Constants.TALONSRX_FR);
     br = new WPI_TalonSRX(Constants.TALONSRX_BR);
     bl = new WPI_TalonSRX(Constants.TALONSRX_BL);
@@ -92,11 +98,6 @@ private final AHRS m_gyro = new AHRS();
     bl.configPeakOutputReverse(-1);
     fl.configPeakOutputReverse(-1);
 
-    
-    m_gyro.reset();
-    m_gyro.setAngleAdjustment(0);
-
-
   }
 
   @Override
@@ -105,38 +106,11 @@ private final AHRS m_gyro = new AHRS();
     CommandScheduler.getInstance().setDefaultCommand(Robot.driveTrain, new DriveWithJoysticks());
   }
   public void setSpeedFalcon(double left, double right){
+    
     fl.set(ControlMode.PercentOutput,left);
     br.set(ControlMode.PercentOutput,right);
     
   }
-
-  /**
-   * Returns the current wheel speeds of the robot.
-   *
-   * @return The current wheel speeds.
-   */
-
-
-  /**
-   * Resets the odometry to the specified pose.
-   *
-   * @param pose The pose to which to set the odometry.
-   */
-
-  /**
-   * Drives the robot using arcade controls.
-   *
-   * @param fwd the commanded forward movement
-   * @param rot the commanded rotation
-   */
-
-
-  /**
-   * Controls the left and right sides of the drive directly with voltages.
-   *
-   * @param leftVolts  the commanded left output
-   * @param rightVolts the commanded right output
-   */
 
 
 
