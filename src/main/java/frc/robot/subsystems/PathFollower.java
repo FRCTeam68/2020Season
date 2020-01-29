@@ -73,7 +73,7 @@ public class PathFollower extends SubsystemBase {
 			encLeft.configurePIDVA(p, i, d, velocityRatio, accelGain);
 			encRight.configurePIDVA(p, i, d, velocityRatio, accelGain);
 			
-			//Set mode PercentOutput
+			
 		}catch(Exception e){
 			e.printStackTrace();
 			System.out.println("Error in Path Construction" + e.getMessage());

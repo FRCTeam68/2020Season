@@ -47,7 +47,9 @@ public class AutonTrajectory extends CommandBase {
     r = path.encRight.calculate(Robot.driveTrain.getRightEnc());
 
     /* Get navX values to compensate for the errors */
-    double theta = Robot.driveTrain.getHeading();
+
+    //note dont use getAngle() as it goes 0-360 degrees use getYaw because it is from -180 - 180 this could be why the robot kept drifting
+    double theta = Robot.driveTrain.getYAW();
     if (backwards) {
       theta = theta * -1;
     }

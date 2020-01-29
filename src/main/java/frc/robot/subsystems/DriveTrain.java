@@ -118,8 +118,8 @@ private AHRS m_gyro = new AHRS();
    * Zeroes the heading of the robot.
    */
   public void ResetEncoders(){
-    fl.setSelectedSensorPosition(100,0,0);
-    br.setSelectedSensorPosition(100,0,0);
+    fl.setSelectedSensorPosition(10,0,0);
+    br.setSelectedSensorPosition(10,0,0);
     /*m_gyro.reset(); for auton experimental we may have to reset thee navx to re run a new path */
   }
 
@@ -130,6 +130,10 @@ private AHRS m_gyro = new AHRS();
    */
   public double getHeading() {
     return m_gyro.getAngle();
+  }
+
+  public double getYAW() {
+    return m_gyro.getYaw();
   }
 
   /**
