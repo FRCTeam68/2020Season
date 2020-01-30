@@ -48,9 +48,12 @@ public class AutonTrajectory extends CommandBase {
 
     /* Get navX values to compensate for the errors */
 
-    /*note dont use getAngle() as it goes 0-360 degrees use getYaw because it is 
+    /*
+    note dont use getAngle() as it goes 0-360 degrees use getYaw because it is 
     from -180 - 180 this could be why the robot kept drifting after attempting an angle less
-    than 0 and Cheesy Path likes to use negative angles*/
+    than 0 and Cheesy Path likes to use negative angles
+    NOTE if a path generator writes the angles 0 to 360 switch theta from getYAW to getANGLE
+    */
     double theta = Robot.driveTrain.getYAW();
     if (backwards) {
       theta = theta * -1;
@@ -66,7 +69,7 @@ public class AutonTrajectory extends CommandBase {
     double turn = 5 * (-1.0/80.0) * angleDifference;
 
     /* Add power to motors to drive */
-    Robot.driveTrain.setSpeedFalcon(l+turn, r-turn);
+      Robot.driveTrain.setSpeedAuto(l+turn, r-turn);
 
     /* Check if the path is finished */
       if(path.encRight.isFinished() && path.encRight.isFinished()){

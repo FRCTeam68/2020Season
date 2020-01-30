@@ -19,19 +19,21 @@ public class PathFollower extends SubsystemBase {
   /**
    * Creates a new PathFollower.
    */
-  double timeStep = 0.02;
-	double maxVel = 5;
-	double maxAccel = 2;
-	double maxJerk = 10;
-	double wheelBaseWidth = 2.208333;
-	int ticksPerRev = 24342; 
-	double wheelDiameter = 0.33333333;
+  	double timeStep = 0.02; //amount of points created and read per second
+
+    double maxVel = 110; // max velocity in inches per second
+	double maxAccel = 120; // max acceleration in inches per second
+	double maxJerk = 1200; 
+	double wheelBaseWidth = 24; // distance between center of wheels(in inches)
+	int ticksPerRevLeft = 25780;  
+	int ticksPerRevRight = 25520;  
+	double wheelDiameter = 7.50; //wheel diameter in inches
 
 	/* PID values and kV, kA, 
 	 * Recommend reading Drivetrain Characterization from Blair Witch to get velocityRatio, maxVel, etc*/
-	double p = 6.75; // calculate this 
-	double i = 0.0; // somewhat touch
-	double d = 0.0; // dont touch
+	double p = 6.0; // calculate this 
+	double i = 0.0; // dont touch
+	double d = 0.6; // calculate this
 	double velocityRatio = 1/maxVel;
 	double accelGain = 0.0;	
 	// The first argument is the proportional gain. Usually this will be quite high
@@ -65,9 +67,9 @@ public class PathFollower extends SubsystemBase {
 			/* Create and configure the encoder followers using the previous settings */
 			encLeft = new EncoderFollower(trajectoryLW);
 			encRight = new EncoderFollower(trajectoryRW);
-			/*egs (Encoder vals, ticksPerRev, wheelDiameter) */
-			encLeft.configureEncoder(Robot.driveTrain.getLeftEnc(), ticksPerRev, wheelDiameter);
-			encRight.configureEncoder(Robot.driveTrain.getRightEnc(), ticksPerRev, wheelDiameter);
+			/*egs (Encsoder vals, ticksPerRev, wheelDiameter) */
+			encLeft.configureEncoder(Robot.driveTrain.getLeftEnc(), ticksPerRevLeft, wheelDiameter);
+			encRight.configureEncoder(Robot.driveTrain.getRightEnc(), ticksPerRevRight, wheelDiameter);
 			
 			// Configure PIDVA
 			encLeft.configurePIDVA(p, i, d, velocityRatio, accelGain);

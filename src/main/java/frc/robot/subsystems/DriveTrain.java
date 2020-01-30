@@ -55,29 +55,29 @@ private AHRS m_gyro = new AHRS();
     // NAVX CONFIG
     m_gyro = new AHRS(SPI.Port.kMXP);
     m_gyro.reset();
-    m_gyro.setAngleAdjustment(0);
+    m_gyro.zeroYaw();
     // DriveTrain Motors Config
     fr = new WPI_TalonSRX(Constants.TALONSRX_FR);
     br = new WPI_TalonSRX(Constants.TALONSRX_BR);
     bl = new WPI_TalonSRX(Constants.TALONSRX_BL);
     fl = new WPI_TalonSRX(Constants.TALONSRX_FL);
 
-    fl.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,0,0);
-    fl.selectProfileSlot(Constants.DRIVETRAIN_RIGHT_PID_SLOT, 0);
-		fl.config_kF(Constants.DRIVETRAIN_RIGHT_PID_SLOT, Constants.DRIVETRAIN_RIGHT_PID_F, 0);
-		fl.config_kP(Constants.DRIVETRAIN_RIGHT_PID_SLOT, Constants.DRIVETRAIN_RIGHT_PID_P, 0);
-		fl.config_kI(Constants.DRIVETRAIN_RIGHT_PID_SLOT, Constants.DRIVETRAIN_RIGHT_PID_I, 0);
-    fl.config_kD(Constants.DRIVETRAIN_RIGHT_PID_SLOT, Constants.DRIVETRAIN_RIGHT_PID_D, 0);
-    fl.setSensorPhase(false);
-
-
     br.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,0,0);
-    br.selectProfileSlot(Constants.DRIVETRAIN_LEFT_PID_SLOT, 0);
-		br.config_kF(Constants.DRIVETRAIN_LEFT_PID_SLOT, Constants.DRIVETRAIN_LEFT_PID_F, 0);
-		br.config_kP(Constants.DRIVETRAIN_LEFT_PID_SLOT, Constants.DRIVETRAIN_LEFT_PID_P, 0);
-		br.config_kI(Constants.DRIVETRAIN_LEFT_PID_SLOT, Constants.DRIVETRAIN_LEFT_PID_I, 0);
-    br.config_kD(Constants.DRIVETRAIN_LEFT_PID_SLOT, Constants.DRIVETRAIN_LEFT_PID_D, 0);
-    bl.setSensorPhase(false);
+    br.selectProfileSlot(Constants.DRIVETRAIN_RIGHT_PID_SLOT, 0);
+		br.config_kF(Constants.DRIVETRAIN_RIGHT_PID_SLOT, Constants.DRIVETRAIN_RIGHT_PID_F, 0);
+		br.config_kP(Constants.DRIVETRAIN_RIGHT_PID_SLOT, Constants.DRIVETRAIN_RIGHT_PID_P, 0);
+		br.config_kI(Constants.DRIVETRAIN_RIGHT_PID_SLOT, Constants.DRIVETRAIN_RIGHT_PID_I, 0);
+    br.config_kD(Constants.DRIVETRAIN_RIGHT_PID_SLOT, Constants.DRIVETRAIN_RIGHT_PID_D, 0);
+    br.setSensorPhase(false);
+
+
+    fl.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,0,0);
+    fl.selectProfileSlot(Constants.DRIVETRAIN_LEFT_PID_SLOT, 0);
+		fl.config_kF(Constants.DRIVETRAIN_LEFT_PID_SLOT, Constants.DRIVETRAIN_LEFT_PID_F, 0);
+		fl.config_kP(Constants.DRIVETRAIN_LEFT_PID_SLOT, Constants.DRIVETRAIN_LEFT_PID_P, 0);
+		fl.config_kI(Constants.DRIVETRAIN_LEFT_PID_SLOT, Constants.DRIVETRAIN_LEFT_PID_I, 0);
+    fl.config_kD(Constants.DRIVETRAIN_LEFT_PID_SLOT, Constants.DRIVETRAIN_LEFT_PID_D, 0);
+    fl.setSensorPhase(false);
 
     bl.set(ControlMode.Follower, fl.getDeviceID());
     fr.set(ControlMode.Follower, br.getDeviceID());
@@ -111,7 +111,12 @@ private AHRS m_gyro = new AHRS();
     br.set(ControlMode.PercentOutput,right);
     
   }
-
+  public void setSpeedAuto(double left, double right){
+    
+    fl.set(left);
+    br.set(right);
+    
+  }
 
 
   /**
@@ -120,6 +125,7 @@ private AHRS m_gyro = new AHRS();
   public void ResetEncoders(){
     fl.setSelectedSensorPosition(10,0,0);
     br.setSelectedSensorPosition(10,0,0);
+    m_gyro.zeroYaw();
     /*m_gyro.reset(); for auton experimental we may have to reset thee navx to re run a new path */
   }
 
