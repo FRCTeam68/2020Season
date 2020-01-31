@@ -9,10 +9,14 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.ExampleCommand;
+import frc.robot.Constants;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Robot;
+/*import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
-
+*/
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -21,15 +25,22 @@ import edu.wpi.first.wpilibj2.command.Command;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+ // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  //private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
+  XboxController xboxDrive = new XboxController(Constants.XBOX_DRIVE);
 
+	private static RobotContainer robotContainer;
+	
 
-  /**
-   * The container for the robot.  Contains subsystems, OI devices, and commands.
-   */
+	public static RobotContainer getRobotContainer(){
+		if (robotContainer == null) {
+			robotContainer = new RobotContainer();
+		}
+		return robotContainer;	
+	}
+
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
@@ -42,7 +53,24 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-  }
+  }	
+  public double getLeftXboxJoystickValue() {
+		double leftAxis;
+		leftAxis = xboxDrive.getY(Hand.kLeft);
+		// Allow for up to 10% of joystick noises
+		leftAxis = (Math.abs(leftAxis) < 0.1) ? 0 : leftAxis;
+    	return leftAxis;
+	}
+
+	// Drivetrain Tank Drive Right
+	public double getRightXboxJoystickValue() {
+		double rightAxis;
+		rightAxis = xboxDrive.getY(Hand.kRight);
+		// Allow for up to 10% of joystick noise
+		rightAxis = (Math.abs(rightAxis) < 0.1) ? 0 : rightAxis;
+    	return rightAxis;
+    	
+	}
 
 
   /**
@@ -50,8 +78,10 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
+  /*
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     return m_autoCommand;
   }
+  */
 }
