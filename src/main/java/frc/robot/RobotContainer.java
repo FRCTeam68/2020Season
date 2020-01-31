@@ -11,9 +11,9 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj.XboxController.Button;
+//import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.POVButton;
+// import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Robot;
 /*import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -33,21 +33,21 @@ public class RobotContainer {
 
   	static XboxController xboxDrive = new XboxController(Constants.XBOX_DRIVE);
 
-	private POVButton xboxDrivePOVUp;
-	private POVButton xboxDrivePOVDown;
-	private POVButton xboxDrivePOVLeft;
-	private POVButton xboxDrivePOVRight;
+	//private POVButton xboxDrivePOVUp;
+	// private POVButton xboxDrivePOVDown;
+	// private POVButton xboxDrivePOVLeft;
+	// private POVButton xboxDrivePOVRight;
 	private static JoystickButton xboxDriveRB;
 	private static JoystickButton xboxDriveLB;
-	private static JoystickButton xboxDriveRTButton;
-	private static JoystickButton xboxDriveLTButton;
-	private static JoystickButton xboxDriveTriangle;
-	private static JoystickButton xboxDriveCircle;
-	private static JoystickButton xboxDriveSquare;
-	private static JoystickButton xboxDriveX;
-	private static JoystickButton xboxDriveStart;
-	private static JoystickButton xboxDriveSL;
-	private static JoystickButton xboxDriveSR;
+	// private static JoystickButton xboxDriveRTButton;
+	// private static JoystickButton xboxDriveLTButton;
+	// private static JoystickButton xboxDriveTriangle;
+	// private static JoystickButton xboxDriveCircle;
+	// private static JoystickButton xboxDriveSquare;
+	// private static JoystickButton xboxDriveX;
+	// private static JoystickButton xboxDriveStart;
+	// private static JoystickButton xboxDriveSL;
+	// private static JoystickButton xboxDriveSR;
 	private static RobotContainer robotContainer;
 
 	public static RobotContainer getRobotContainer() {

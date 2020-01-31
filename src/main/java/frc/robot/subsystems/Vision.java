@@ -3,7 +3,6 @@
 package frc.robot.subsystems;
 
 import frc.robot.Robot;
-import frc.robot.RobotContainer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.CameraMode;
