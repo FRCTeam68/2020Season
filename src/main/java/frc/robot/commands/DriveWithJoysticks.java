@@ -8,7 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.*;
 import frc.robot.Robot;
 import frc.robot.RobotContainer;
 public class DriveWithJoysticks extends CommandBase {
@@ -16,6 +16,7 @@ public class DriveWithJoysticks extends CommandBase {
    * Creates a new DriveWithJoysticks.
    */
   public DriveWithJoysticks() {
+    // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(Robot.driveTrain);
   }
 
@@ -27,7 +28,16 @@ public class DriveWithJoysticks extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    DriveTrain.getDriveTrain().setSpeedFalcon(RobotContainer.getRobotContainer().getLeftXboxJoystickValue(), RobotContainer.getRobotContainer().getRightXboxJoystickValue());
+    if(RobotContainer.getXboxDriveRB() == true){ 
+      DriveTrain.getDriveTrain().setSpeedFalcon(Robot.driveTrain.leftVisionAdjusted(),-Robot.driveTrain.rightVisionAdjusted());
+    }
+    else{
+      RobotContainer.getRobotContainer();
+      RobotContainer.getRobotContainer();
+      DriveTrain.getDriveTrain().setSpeedFalcon(-RobotContainer.getLeftXboxJoystickValue(),
+          RobotContainer.getRightXboxJoystickValue());
+    }
+    
   }
 
   // Called once the command ends or is interrupted.
@@ -40,4 +50,5 @@ public class DriveWithJoysticks extends CommandBase {
   public boolean isFinished() {
     return false;
   }
+  
 }

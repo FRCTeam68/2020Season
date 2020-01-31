@@ -7,15 +7,26 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import frc.robot.Robot;
+import frc.robot.RobotContainer;
+import frc.robot.commands.DriveWithJoysticks;
+import frc.robot.subsystems.*;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.commands.DriveWithJoysticks;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 public class DriveTrain extends SubsystemBase {
   /**
    * Creates a new DriveTrain.
@@ -25,15 +36,17 @@ public class DriveTrain extends SubsystemBase {
   private TalonFX bl; //back left
   private TalonFX fl; //front left
 
+  int currentLimit = 40;
 
   public static DriveTrain driveTrain;
 
-	public static DriveTrain getDriveTrain() {
-		if (driveTrain == null) {
-			driveTrain = new DriveTrain();
-		}
-		return driveTrain;
-	}
+  public static DriveTrain getDriveTrain() {
+    if (driveTrain == null) {
+      driveTrain = new DriveTrain();
+    }
+    return driveTrain;
+  }
+
   public DriveTrain() {
     fr = new TalonFX(Constants.FALCON_FR);
     br = new TalonFX(Constants.FALCON_BR);
@@ -54,18 +67,38 @@ public class DriveTrain extends SubsystemBase {
     br.configPeakOutputReverse(-1);
     bl.configPeakOutputReverse(-1);
     fl.configPeakOutputReverse(-1);
-
   }
-  public void setSpeedFalcon(double left, double right){
+
+  @Override
+  public void periodic() {
+    CommandScheduler.getInstance().setDefaultCommand(Robot.driveTrain, new DriveWithJoysticks());
+  }
+
+  public void setSpeedFalcon(final double left, final double right) {
     fr.set(ControlMode.PercentOutput,right);
     br.set(ControlMode.PercentOutput,right);
     fl.set(ControlMode.PercentOutput,left);
     bl.set(ControlMode.PercentOutput,left);
   }
 
-
-  @Override
-  public void periodic() {
-    CommandScheduler.getInstance().setDefaultCommand(Robot.driveTrain, new DriveWithJoysticks());
+  
+  
+  public double leftVisionAdjusted(){
+    double leftSpeed;
+    double joystickSpeed;
+    double visionCorrect;
+    joystickSpeed = RobotContainer.getLeftXboxJoystickValue();
+    visionCorrect = Robot.vision.steeringAdjust();
+    leftSpeed = joystickSpeed += visionCorrect;
+    return leftSpeed;
+  }
+  public double rightVisionAdjusted(){
+    double rightSpeed;
+    double joystickSpeed;
+    double visionCorrect;
+    joystickSpeed = RobotContainer.getRightXboxJoystickValue();
+    visionCorrect = Robot.vision.steeringAdjust();
+    rightSpeed =  joystickSpeed -= visionCorrect;
+    return rightSpeed;
   }
 }
