@@ -7,13 +7,15 @@
 
 package frc.robot;
 
-import java.io.File;
-
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 //import frc.robot.commands.auton;
-import frc.robot.commands.AutonTrajectory;
 import frc.robot.subsystems.DriveTrain;
+import frc.paths.eckert;
+import frc.paths.ratliff;
+import frc.robot.commands.PathFollower;
 //import frc.robot.subsystems.DriveTrainAuton;
 
 /**
@@ -29,10 +31,7 @@ public class Robot extends TimedRobot {
 
   public static DriveTrain driveTrain;
 
-  private static String lvToPath = "/home/lvuser/deploy/paths";
-
-
-  private static AutonTrajectory autonTraj;
+  CommandBase autonomousCommand;
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -46,6 +45,9 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     driveTrain = new DriveTrain();
     m_robotContainer = new RobotContainer();
+
+    
+    
   }
 
   /**
@@ -86,8 +88,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    autonTraj = new AutonTrajectory(new File(lvToPath + "/left.csv"), new File(lvToPath + "/right.csv"));
-    autonTraj.schedule();
+    driveTrain.ResetEncoders();
+    autonomousCommand = new PathFollower(new eckert(), driveTrain);
+    if(autonomousCommand != null){
+      autonomousCommand.schedule();
+    }
   }
 
   /**

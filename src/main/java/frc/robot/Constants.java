@@ -94,6 +94,16 @@ public final class Constants {
     public static final double DRIVETRAIN_RIGHT_SLOT = 0;
     public static final double DRIVETRAIN_LEFT_SLOT = 0;
 
-
+    //auton
+    public static final double WHEEL_DIAMETER = 7;
+    public static final int ENCODER_TICK_LEFT_REVOLUTION = 98000; //-24427
+    public static final int ENCODER_TICK_RIGHT_REVOLUTION = 98000; //24508
+    public static final double AUTON_DISTANCE_KP = 3;
+    public static final double AUTON_DISTANCE_KI = 0;
+    public static final double AUTON_DISTANCE_KD = 0;
+    public static final double AUTON_ANGLE_KP = 0;
+    public static final double AUTON_ANGLE_KI = 0;
+    public static final double AUTON_ANGLE_KD = 0;
 
 }
+ 

@@ -34,14 +34,15 @@ public class DriveWithJoysticks extends CommandBase {
     SmartDashboard.putNumber("left Enc",Robot.driveTrain.getLeftEnc());
     SmartDashboard.putNumber("Right Enc",Robot.driveTrain.getRightEnc());
 
+    SmartDashboard.putNumber("Right Joy",Robot.m_robotContainer.getRightXboxJoystickValue());
+    SmartDashboard.putNumber("left joy",Robot.m_robotContainer.getLeftXboxJoystickValue());
+
+
 
     DriveTrain.getDriveTrain().setSpeedFalcon(Robot.m_robotContainer.getLeftXboxJoystickValue(), Robot.m_robotContainer.getRightXboxJoystickValue());
   }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-  }
+
 
   // Returns true when the command should end.
   @Override

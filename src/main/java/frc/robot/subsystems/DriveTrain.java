@@ -7,11 +7,9 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
-
+import frc.team2363.utilities.HelixMath;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.commands.DriveWithJoysticks;
@@ -20,6 +18,8 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 //import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 public class DriveTrain extends SubsystemBase {
   /**
@@ -99,12 +99,11 @@ private AHRS m_gyro = new AHRS();
     fl.configPeakOutputReverse(-1);
 
   }
-
   @Override
   public void periodic() {
-
     CommandScheduler.getInstance().setDefaultCommand(Robot.driveTrain, new DriveWithJoysticks());
   }
+
   public void setSpeedFalcon(double left, double right){
     
     fl.set(ControlMode.PercentOutput,left);
@@ -113,9 +112,9 @@ private AHRS m_gyro = new AHRS();
   }
   public void setSpeedAuto(double left, double right){
     
-    fl.set(left);
-    br.set(right);
-    
+    fl.set(ControlMode.Velocity,HelixMath.convertFromFpsToTicksPer100Ms(left, Constants.WHEEL_DIAMETER, Constants.ENCODER_TICK_LEFT_REVOLUTION));
+    br.set(ControlMode.Velocity,HelixMath.convertFromFpsToTicksPer100Ms(right, Constants.WHEEL_DIAMETER, Constants.ENCODER_TICK_RIGHT_REVOLUTION));
+
   }
 
 
@@ -123,8 +122,8 @@ private AHRS m_gyro = new AHRS();
    * Zeroes the heading of the robot.
    */
   public void ResetEncoders(){
-    fl.setSelectedSensorPosition(10,0,0);
-    br.setSelectedSensorPosition(10,0,0);
+    fl.setSelectedSensorPosition(0,0,0);
+    br.setSelectedSensorPosition(0,0,0);
     m_gyro.zeroYaw();
     /*m_gyro.reset(); for auton experimental we may have to reset thee navx to re run a new path */
   }
@@ -154,4 +153,13 @@ private AHRS m_gyro = new AHRS();
     return br.getSelectedSensorPosition(0);
 
   }
+  public double getLeftPosition() {
+    return HelixMath.convertFromTicksToFeet(fl.getSelectedSensorPosition(0), Constants.WHEEL_DIAMETER, Constants.ENCODER_TICK_LEFT_REVOLUTION);
+  }
+
+  public double getRightPosition() {
+    return  HelixMath.convertFromTicksToFeet(br.getSelectedSensorPosition(0), Constants.WHEEL_DIAMETER, Constants.ENCODER_TICK_RIGHT_REVOLUTION);
+  }
+
+
 }
