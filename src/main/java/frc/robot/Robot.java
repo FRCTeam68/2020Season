@@ -7,14 +7,14 @@
 
 package frc.robot;
 
+
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 //import frc.robot.commands.auton;
 import frc.robot.subsystems.DriveTrain;
-import frc.paths.eckert;
-import frc.paths.ratliff;
+import frc.paths.Curve;
 import frc.robot.commands.PathFollower;
 //import frc.robot.subsystems.DriveTrainAuton;
 
@@ -46,7 +46,7 @@ public class Robot extends TimedRobot {
     driveTrain = new DriveTrain();
     m_robotContainer = new RobotContainer();
 
-    
+    driveTrain.resetYaw(); // ONLY CALL ON ROBOT INIT
     
   }
 
@@ -88,8 +88,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+    
     driveTrain.ResetEncoders();
-    autonomousCommand = new PathFollower(new eckert(), driveTrain);
+    autonomousCommand = new PathFollower(new Curve());
     if(autonomousCommand != null){
       autonomousCommand.schedule();
     }
@@ -100,6 +101,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
+    SmartDashboard.putNumber("HEADING IN RADS", Math.toRadians(Robot.driveTrain.getYAW()));
   }
 
   @Override

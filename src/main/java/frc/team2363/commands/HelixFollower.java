@@ -84,7 +84,7 @@ public abstract class HelixFollower extends CommandBase {
    * Get the current robot heading in the units that your path is stored in. 
    * This will typically be in radians.
    * 
-   * @return the current robot distance
+   * @return the current robot heading
    */
   public abstract double getCurrentHeading();
 
@@ -167,6 +167,7 @@ public abstract class HelixFollower extends CommandBase {
     double expectedPosition = trajectory.getValue(segment, CENTER_POSITION);
     getDistanceController().setReference(reverse ? -expectedPosition : expectedPosition);
     double currentPosition = getCurrentDistance();
+    SmartDashboard.putNumber("DIST TRAVELED", getCurrentDistance());
 
     // Set our expected heading to be the setpoint of our direction controller
     double expectedHeading = trajectory.getValue(segment, HEADING);

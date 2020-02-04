@@ -9,7 +9,6 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
-import frc.team2363.utilities.HelixMath;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.commands.DriveWithJoysticks;
@@ -17,7 +16,13 @@ import frc.robot.commands.DriveWithJoysticks;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
+
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 //import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -30,6 +35,12 @@ public class DriveTrain extends SubsystemBase {
   private WPI_TalonSRX bl; //back left
   private WPI_TalonSRX fl; //front left\
 
+  private final DifferentialDriveOdometry m_odometry;
+
+  
+  NetworkTableEntry m_xEntry = NetworkTableInstance.getDefault().getTable("troubleshooting").getEntry("X");
+  NetworkTableEntry m_yEntry = NetworkTableInstance.getDefault().getTable("troubleshooting").getEntry("Y");
+  
 
 
 // The robot's drive
@@ -54,8 +65,9 @@ private AHRS m_gyro = new AHRS();
   public DriveTrain() {
     // NAVX CONFIG
     m_gyro = new AHRS(SPI.Port.kMXP);
-    m_gyro.reset();
-    m_gyro.zeroYaw();
+    //m_gyro.reset();
+    
+		
     // DriveTrain Motors Config
     fr = new WPI_TalonSRX(Constants.TALONSRX_FR);
     br = new WPI_TalonSRX(Constants.TALONSRX_BR);
@@ -64,19 +76,11 @@ private AHRS m_gyro = new AHRS();
 
     br.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,0,0);
     br.selectProfileSlot(Constants.DRIVETRAIN_RIGHT_PID_SLOT, 0);
-		br.config_kF(Constants.DRIVETRAIN_RIGHT_PID_SLOT, Constants.DRIVETRAIN_RIGHT_PID_F, 0);
-		br.config_kP(Constants.DRIVETRAIN_RIGHT_PID_SLOT, Constants.DRIVETRAIN_RIGHT_PID_P, 0);
-		br.config_kI(Constants.DRIVETRAIN_RIGHT_PID_SLOT, Constants.DRIVETRAIN_RIGHT_PID_I, 0);
-    br.config_kD(Constants.DRIVETRAIN_RIGHT_PID_SLOT, Constants.DRIVETRAIN_RIGHT_PID_D, 0);
     br.setSensorPhase(false);
 
 
     fl.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,0,0);
     fl.selectProfileSlot(Constants.DRIVETRAIN_LEFT_PID_SLOT, 0);
-		fl.config_kF(Constants.DRIVETRAIN_LEFT_PID_SLOT, Constants.DRIVETRAIN_LEFT_PID_F, 0);
-		fl.config_kP(Constants.DRIVETRAIN_LEFT_PID_SLOT, Constants.DRIVETRAIN_LEFT_PID_P, 0);
-		fl.config_kI(Constants.DRIVETRAIN_LEFT_PID_SLOT, Constants.DRIVETRAIN_LEFT_PID_I, 0);
-    fl.config_kD(Constants.DRIVETRAIN_LEFT_PID_SLOT, Constants.DRIVETRAIN_LEFT_PID_D, 0);
     fl.setSensorPhase(false);
 
     bl.set(ControlMode.Follower, fl.getDeviceID());
@@ -98,10 +102,21 @@ private AHRS m_gyro = new AHRS();
     bl.configPeakOutputReverse(-1);
     fl.configPeakOutputReverse(-1);
 
+    //m_odometry.resetPosition(, m_gyro.getYaw());
+    m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getHeading()));
+    
+
   }
   @Override
   public void periodic() {
     CommandScheduler.getInstance().setDefaultCommand(Robot.driveTrain, new DriveWithJoysticks());
+    m_odometry.update(Rotation2d.fromDegrees(getYAW()), Constants.ENCODER_TICK_LEFT_REVOLUTION/(3.14159*Constants.WHEEL_DIAMETER/12), Robot.driveTrain.getRightEnc()/Constants.ENCODER_TICK_RIGHT_REVOLUTION/(3.14159*Constants.WHEEL_DIAMETER/12));
+
+    var translation = m_odometry.getPoseMeters().getTranslation();
+    m_xEntry.setNumber(translation.getX());
+    m_yEntry.setNumber(translation.getY());
+
+    //SmartDashboard.putNumber("m_xEntry", m_xEntry);
   }
 
   public void setSpeedFalcon(double left, double right){
@@ -111,10 +126,14 @@ private AHRS m_gyro = new AHRS();
     
   }
   public void setSpeedAuto(double left, double right){
+   /*
+    fl.set(ControlMode.Velocity,left*5000);
+    br.set(ControlMode.Velocity,right*5000);
     
-    fl.set(ControlMode.Velocity,HelixMath.convertFromFpsToTicksPer100Ms(left, Constants.WHEEL_DIAMETER, Constants.ENCODER_TICK_LEFT_REVOLUTION));
-    br.set(ControlMode.Velocity,HelixMath.convertFromFpsToTicksPer100Ms(right, Constants.WHEEL_DIAMETER, Constants.ENCODER_TICK_RIGHT_REVOLUTION));
-
+    /*
+    fl.set(ControlMode.Velocity,left*200);
+    br.set(ControlMode.Velocity,right*200);
+    */
   }
 
 
@@ -124,8 +143,12 @@ private AHRS m_gyro = new AHRS();
   public void ResetEncoders(){
     fl.setSelectedSensorPosition(0,0,0);
     br.setSelectedSensorPosition(0,0,0);
+    
+        /*m_gyro.reset(); for auton experimental we may have to reset thee navx to re run a new path */
+  }
+
+  public void resetYaw(){
     m_gyro.zeroYaw();
-    /*m_gyro.reset(); for auton experimental we may have to reset thee navx to re run a new path */
   }
 
   /**
@@ -133,12 +156,15 @@ private AHRS m_gyro = new AHRS();
    *
    * @return the robot's heading in degrees, from 180 to 180
    */
-  public double getHeading() {
-    return m_gyro.getAngle();
+  public float getHeading() {
+    return m_gyro.getYaw();
   }
 
   public double getYAW() {
     return m_gyro.getYaw();
+  }
+  public boolean isNavXReady(){
+    return m_gyro.isCalibrating();
   }
 
   /**
@@ -153,6 +179,7 @@ private AHRS m_gyro = new AHRS();
     return br.getSelectedSensorPosition(0);
 
   }
+  /*
   public double getLeftPosition() {
     return HelixMath.convertFromTicksToFeet(fl.getSelectedSensorPosition(0), Constants.WHEEL_DIAMETER, Constants.ENCODER_TICK_LEFT_REVOLUTION);
   }
@@ -160,6 +187,6 @@ private AHRS m_gyro = new AHRS();
   public double getRightPosition() {
     return  HelixMath.convertFromTicksToFeet(br.getSelectedSensorPosition(0), Constants.WHEEL_DIAMETER, Constants.ENCODER_TICK_RIGHT_REVOLUTION);
   }
-
+*/
 
 }
