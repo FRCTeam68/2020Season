@@ -100,7 +100,7 @@ public class RobotContainer {
 		return buttonPressed;
 	}
 
-	public boolean getXboxDriveLB() {
+	public static boolean getXboxDriveLB() {
 		boolean buttonPressed = false;
 		if(xboxDriveLB.get()){
 			buttonPressed = true;

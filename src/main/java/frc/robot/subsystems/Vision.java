@@ -30,11 +30,12 @@ public class Vision extends SubsystemBase {
     }
 
     public Vision() {
-        Limelight = NetworkTableInstance.getDefault().getTable("limelight");
-        V = Limelight.getEntry("tv");
-        X = Limelight.getEntry("tx");
-        Y = Limelight.getEntry("ty");
-        A = Limelight.getEntry("ta");
+   
+      Limelight = NetworkTableInstance.getDefault().getTable("limelight");
+      X = Limelight.getEntry("tx");
+      Y = Limelight.getEntry("ty");
+      A = Limelight.getEntry("ta");
+      V = Limelight.getEntry("tv");
 
     }
 
@@ -45,42 +46,43 @@ public class Vision extends SubsystemBase {
 
   public boolean getTarget(){
    
-    double v = V.getDouble(0.0);
+    final double v = V.getDouble(0.0);
     boolean isThereTarget;
     isThereTarget = false;
-    if(v == 1){
+    if (v == 1) {
       isThereTarget = true;
     }
-    
+
     return isThereTarget;
   }
 
-  public double getXValue(){
-    double x = X.getDouble(0.0);
+  public double getXValue() {
+    final double x = X.getDouble(0.0);
     return x;
   }
-  public double getYValue(){
-    double y = Y.getDouble(0.0);
+
+  public double getYValue() {
+    final double y = Y.getDouble(0.0);
     return y;
   }
-  public double getArea(){
-    double area = A.getDouble(0.0);
+
+  public double getArea() {
+    final double area = A.getDouble(0.0);
     return area;
   }
 
-  public void setCameraMode(double ledMode, double camMode){
+  public void setCameraMode(final double ledMode, final double camMode) {
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(ledMode);
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(camMode);
   }
-  
 
-  public double steeringAdjust(){
-        
-     double steeringAdjust = 0; 
-     double x = X.getDouble(0.0);
-     double Kp = -0.015;
-     double min_command = 0.008;
-     double heading_error = -x;
+  public double steeringAdjust() {
+
+    double steeringAdjust = 0;
+    final double x = X.getDouble(0.0);
+    final double Kp = -0.013;
+    final double min_command = 0.009;
+    final double heading_error = -x;
 
         if(x>1.0){
           steeringAdjust = Kp*heading_error+min_command;
