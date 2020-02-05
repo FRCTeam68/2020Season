@@ -1,5 +1,7 @@
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
@@ -19,6 +21,10 @@ public class DriveTrain extends SubsystemBase {
   private TalonFX bl; // back left
   private TalonFX fl; // front left
 
+  //Solenoid Gear Shifter
+  private DoubleSolenoid shiftGear;
+
+    
   public static DriveTrain driveTrain;
 
   public static DriveTrain getDriveTrain() {
@@ -48,7 +54,31 @@ public class DriveTrain extends SubsystemBase {
     bl.configPeakOutputReverse(-1);
     fl.configPeakOutputReverse(-1);
 
-  }
+    // Gear Shift Solenoid
+
+    shiftGear = new DoubleSolenoid(Constants.DRIVE_SHIFTER_PCM_A, Constants.DRIVE_SHIFTER_PCM_B);
+    this.setShiftLow(); }
+
+     public void setShifterHigh() {
+        shiftGear.set(Value.kForward);
+    } 
+
+      public void setShiftLow() {
+        shiftGear.set(Value.kReverse);
+    }
+
+    public void shiftGear() {
+      if(this.getShifter() == Value.kForward){
+        this.setShiftLow();
+    } else {}
+        this.setShifterHigh();
+ 
+      }
+
+      public DoubleSolenoid.Value getShifter() {
+        return shiftGear.get();
+      }
+
 
   public void setSpeedFalcon(double left, double right) {
     fr.set(ControlMode.PercentOutput, right);

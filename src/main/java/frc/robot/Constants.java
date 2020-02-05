@@ -74,4 +74,10 @@ public final class Constants {
     public static final int FALCON_FL = 2;
     public static final int FALCON_BR = 3;
     public static final int FALCON_BL = 4;
+
+    //pneumatics constants
+
+    public static final int DRIVE_SHIFTER_PCM_A = 1;
+    public static final int DRIVE_SHIFTER_PCM_B = 2;
+
 }
