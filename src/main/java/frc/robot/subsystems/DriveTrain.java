@@ -40,10 +40,10 @@ public class DriveTrain extends SubsystemBase {
     bl = new TalonFX(Constants.FALCON_BL);
     fl = new TalonFX(Constants.FALCON_FL);
 
-    fr.setNeutralMode(NeutralMode.Coast);
-    br.setNeutralMode(NeutralMode.Coast);
-    fl.setNeutralMode(NeutralMode.Coast);
-    bl.setNeutralMode(NeutralMode.Coast);
+    fr.setNeutralMode(NeutralMode.Brake);
+    br.setNeutralMode(NeutralMode.Brake);
+    fl.setNeutralMode(NeutralMode.Brake);
+    bl.setNeutralMode(NeutralMode.Brake);
 
     fr.configPeakOutputForward(1);
     br.configPeakOutputForward(1);
@@ -57,7 +57,8 @@ public class DriveTrain extends SubsystemBase {
     // Gear Shift Solenoid
 
     shiftGear = new DoubleSolenoid(Constants.DRIVE_SHIFTER_PCM_A, Constants.DRIVE_SHIFTER_PCM_B);
-    this.setShiftLow(); }
+    this.setShiftLow(); 
+  }
 
      public void setShifterHigh() {
         shiftGear.set(Value.kForward);
@@ -70,10 +71,12 @@ public class DriveTrain extends SubsystemBase {
     public void shiftGear() {
       if(this.getShifter() == Value.kForward){
         this.setShiftLow();
-    } else {}
-        this.setShifterHigh();
- 
+      } 
+      else {
+      this.setShifterHigh();
       }
+ 
+    }
 
       public DoubleSolenoid.Value getShifter() {
         return shiftGear.get();

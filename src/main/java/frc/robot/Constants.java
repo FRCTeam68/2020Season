@@ -70,10 +70,10 @@ public final class Constants {
 
     //drive motor values
 
-    public static final int FALCON_FR = 1;
-    public static final int FALCON_FL = 2;
-    public static final int FALCON_BR = 3;
-    public static final int FALCON_BL = 4;
+    public static final int FALCON_FR = 3;
+    public static final int FALCON_FL = 1;
+    public static final int FALCON_BR = 4;
+    public static final int FALCON_BL = 2;
 
     //pneumatics constants
 

@@ -30,7 +30,7 @@ public class DriveWithXboxJoysticks extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      DriveTrain.getDriveTrain().setSpeedFalcon(RobotContainer.getRobotContainer().getLeftXboxJoystickValue(), RobotContainer.getRobotContainer().getRightXboxJoystickValue());
+    DriveTrain.getDriveTrain().setSpeedFalcon(-RobotContainer.getLeftXboxJoystickValue(),RobotContainer.getRightXboxJoystickValue());
   }
 
   // Called once the command ends or is interrupted.

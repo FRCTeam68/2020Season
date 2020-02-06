@@ -11,8 +11,12 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj.buttons.Button;
+
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+
 import frc.robot.Robot;
+import frc.robot.commands.*;
 /*import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -29,9 +33,25 @@ public class RobotContainer {
 
   //private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
-  XboxController xboxDrive = new XboxController(Constants.XBOX_DRIVE);
+  static XboxController xboxDrive = new XboxController(Constants.XBOX_DRIVE);
 
-	private static RobotContainer robotContainer;
+  //private POVButton xboxDrivePOVUp;
+	// private POVButton xboxDrivePOVDown;
+	// private POVButton xboxDrivePOVLeft;
+	// private POVButton xboxDrivePOVRight;
+	private static JoystickButton xboxDriveRB;
+	private static JoystickButton xboxDriveLB;
+	// private static JoystickButton xboxDriveRTButton;
+	// private static JoystickButton xboxDriveLTButton;
+	// private static JoystickButton xboxDriveTriangle;
+	// private static JoystickButton xboxDriveCircle;
+	// private static JoystickButton xboxDriveSquare;
+	// private static JoystickButton xboxDriveX;
+	// private static JoystickButton xboxDriveStart;
+	// private static JoystickButton xboxDriveSL;
+	// private static JoystickButton xboxDriveSR;
+
+	public static RobotContainer robotContainer;
 	
 
 	public static RobotContainer getRobotContainer(){
@@ -43,6 +63,13 @@ public class RobotContainer {
 
   public RobotContainer() {
     // Configure the button bindings
+    
+   
+	xboxDriveRB = new JoystickButton(xboxDrive, Constants.XBOX_DRIVE_RB);
+
+	xboxDriveLB = new JoystickButton(xboxDrive, Constants.XBOX_DRIVE_LB);
+	
+
     configureButtonBindings();
   }
 
@@ -53,8 +80,12 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+
+	//xboxDriveLB.whenPressed(new GearShifting());
+    
+
   }	
-  public double getLeftXboxJoystickValue() {
+  	public static double getLeftXboxJoystickValue() {
 		double leftAxis;
 		leftAxis = xboxDrive.getY(Hand.kLeft);
 		// Allow for up to 10% of joystick noises
@@ -63,7 +94,7 @@ public class RobotContainer {
 	}
 
 	// Drivetrain Tank Drive Right
-	public double getRightXboxJoystickValue() {
+	public static double getRightXboxJoystickValue() {
 		double rightAxis;
 		rightAxis = xboxDrive.getY(Hand.kRight);
 		// Allow for up to 10% of joystick noise

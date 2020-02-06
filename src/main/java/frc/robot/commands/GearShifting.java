@@ -7,6 +7,8 @@
 
 package frc.robot.commands;
 
+
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.subsystems.DriveTrain;
@@ -15,6 +17,9 @@ public class GearShifting extends CommandBase {
   /**
    * Creates a new GearShifting.
    */
+
+  boolean isFinished = false;
+
   public GearShifting() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(Robot.driveTrain);
@@ -28,9 +33,10 @@ public class GearShifting extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    DriveTrain.getDriveTrain().setShiftLow();
+    DriveTrain.getDriveTrain().shiftGear();
+    isFinished = true;
       
-    DriveTrain.getDriveTrain().setShifterHigh();
+   // DriveTrain.getDriveTrain().setShifterHigh();
   }
 
   // Called once the command ends or is interrupted.
@@ -41,7 +47,7 @@ public class GearShifting extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return isFinished;
   }
 
 }
