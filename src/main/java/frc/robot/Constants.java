@@ -7,13 +7,16 @@
 
 package frc.robot;
 
+
 /**
- * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
- * constants.  This class should not be used for any other purpose.  All constants should be
- * declared globally (i.e. public static).  Do not put anything functional in this class.
+ * The Constants class provides a convenient place for teams to hold robot-wide
+ * numerical or boolean constants. This class should not be used for any other
+ * purpose. All constants should be declared globally (i.e. public static). Do
+ * not put anything functional in this class.
  *
- * <p>It is advised to statically import this class (or one of its inner classes) wherever the
- * constants are needed, to reduce verbosity.
+ * <p>
+ * It is advised to statically import this class (or one of its inner classes)
+ * wherever the constants are needed, to reduce verbosity.
  */
 public final class Constants {
     //Controller Inputs
@@ -74,4 +77,42 @@ public final class Constants {
     public static final int FALCON_FL = 2;
     public static final int FALCON_BR = 3;
     public static final int FALCON_BL = 4;
+    
+
+    // Drivetrain Left PID Config
+    public static final int DRIVETRAIN_LEFT_PID_SLOT = 0;
+    public static final double DRIVETRAIN_LEFT_PID_F = 0.507;
+    public static final double  DRIVETRAIN_LEFT_PID_P = 1;
+    public static final double DRIVETRAIN_LEFT_PID_I = 0;
+    public static final double DRIVETRAIN_LEFT_PID_D = 0;
+    // Drivetrain Right PID Config
+    public static final int DRIVETRAIN_RIGHT_PID_SLOT = 0;
+    public static final double DRIVETRAIN_RIGHT_PID_F = 0.507;
+    public static final double DRIVETRAIN_RIGHT_PID_P = 1;
+    public static final double DRIVETRAIN_RIGHT_PID_I = 0;
+    public static final double DRIVETRAIN_RIGHT_PID_D = 0;
+
+    public static final double DRIVETRAIN_RIGHT_SLOT = 0;
+    public static final double DRIVETRAIN_LEFT_SLOT = 0;
+
+    //auton
+    public static final double WHEEL_DIAMETER = 7;
+    public static final double MAX_SPEED = 7;
+    public static final int ENCODER_TICK_LEFT_REVOLUTION = 24500; //-24427
+    public static final int ENCODER_TICK_RIGHT_REVOLUTION = 24500; //24508
+    public static final double AUTON_DISTANCE_KP = 2.8; //.08
+    public static final double AUTON_DISTANCE_KI = 0;
+    public static final double AUTON_DISTANCE_KD = .4;
+    public static final double AUTON_ANGLE_KP = 4;//SET THESE VALUES 
+    public static final double AUTON_ANGLE_KI = 0;
+    public static final double AUTON_ANGLE_KD = 1.6;
+    public static final double AUTON_PI_OFFSET = -0.2; //TLDR this will make robot turn more or less 
+    /*
+    Only change PI offset if the 
+    Robot doesnt match 6.3 Rads on a full 360 Degree turn
+    This is very experimental
+    Set to negative if the robot doesnt turn enough
+    Set to positive if the robot turns too much
+     */
 }
+ 
