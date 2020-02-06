@@ -78,7 +78,6 @@ private AHRS m_gyro = new AHRS();
     br.selectProfileSlot(Constants.DRIVETRAIN_RIGHT_PID_SLOT, 0);
     br.setSensorPhase(false);
 
-
     fl.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,0,0);
     fl.selectProfileSlot(Constants.DRIVETRAIN_LEFT_PID_SLOT, 0);
     fl.setSensorPhase(false);

@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 //import frc.robot.commands.auton;
 import frc.robot.subsystems.DriveTrain;
 import frc.paths.Curve;
+import frc.paths.CurveEckert;
 import frc.robot.commands.PathFollower;
 //import frc.robot.subsystems.DriveTrainAuton;
 
@@ -90,7 +91,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     
     driveTrain.ResetEncoders();
-    autonomousCommand = new PathFollower(new Curve());
+    autonomousCommand = new PathFollower(new CurveEckert());
     if(autonomousCommand != null){
       autonomousCommand.schedule();
     }
@@ -121,7 +122,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
 
-
+    SmartDashboard.putNumber("HEADING IN RADS", driveTrain.getYAW()*(180/3.141592654));
   }
 
   @Override
