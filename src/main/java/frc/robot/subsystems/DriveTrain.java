@@ -85,11 +85,14 @@ private AHRS m_gyro = new AHRS();
     */
     br.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor,0,0);
     br.selectProfileSlot(Constants.DRIVETRAIN_RIGHT_PID_SLOT, 0);
-    br.setSensorPhase(false);
+    br.setSensorPhase(true);
+    br.setInverted(true);
+    fr.setInverted(true);
 
     fl.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor,0,0);
     fl.selectProfileSlot(Constants.DRIVETRAIN_LEFT_PID_SLOT, 0);
-    fl.setSensorPhase(true);
+    fl.setSensorPhase(false);
+    //fl.setInverted(true);
     
 
     bl.set(ControlMode.Follower, fl.getDeviceID());

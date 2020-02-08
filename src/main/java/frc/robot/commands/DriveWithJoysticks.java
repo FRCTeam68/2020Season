@@ -34,7 +34,8 @@ public class DriveWithJoysticks extends CommandBase {
     }
     else{
 
-      DriveTrain.getDriveTrain().setSpeedFalcon(-Robot.m_robotContainer.getLeftXboxJoystickValue(), Robot.m_robotContainer.getRightXboxJoystickValue());    }
+      DriveTrain.getDriveTrain().setSpeedFalcon(Robot.m_robotContainer.getLeftXboxJoystickValue(), Robot.m_robotContainer.getRightXboxJoystickValue());  
+      }
   }
 
 

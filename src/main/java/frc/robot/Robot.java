@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Pnuematics;
 import frc.robot.subsystems.Vision;
+import frc.paths.TenFeetNewRobot;
 import frc.paths.bruh;
 import frc.robot.commands.PathFollower;
 //import frc.robot.subsystems.DriveTrainAuton;
@@ -51,7 +52,7 @@ public class Robot extends TimedRobot {
     driveTrain = new DriveTrain();
     m_robotContainer = new RobotContainer();
     vision = new Vision();
-
+    pnuematics = new Pnuematics();
     driveTrain.resetYaw(); 
     
   }
@@ -97,7 +98,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
 
     driveTrain.ResetEncoders();
-    autonomousCommand = new PathFollower(new bruh());
+    autonomousCommand = new PathFollower(new TenFeetNewRobot());
     if(autonomousCommand != null){
       autonomousCommand.schedule();
     }
@@ -116,7 +117,6 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
     driveTrain.ResetEncoders();
     driveTrain.resetYaw(); 
-    pnuematics = new Pnuematics();
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
@@ -130,8 +130,14 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-
-    SmartDashboard.putNumber("HEADING IN RADS", Math.toRadians(Robot.driveTrain.getHeading()));
+    SmartDashboard.putNumber("HEADING IN RADS",(Robot.driveTrain.getYAW()-180)*(3.141592654/180));
+    SmartDashboard.putNumber("HEADING IN DEGS", Robot.driveTrain.getYAW());
+    SmartDashboard.putBoolean("Target", Robot.vision.getTarget());
+    SmartDashboard.putNumber("Right Enc", Robot.driveTrain.getRightEnc());
+    SmartDashboard.putNumber("Left Enc", Robot.driveTrain.getLeftEnc());
+    SmartDashboard.putNumber("LimelightX", Robot.vision.getXValue());
+    SmartDashboard.putNumber("LimelightY", Robot.vision.getYValue());
+    SmartDashboard.putNumber("LimelightArea", Robot.vision.getArea());
   }
 
   @Override
