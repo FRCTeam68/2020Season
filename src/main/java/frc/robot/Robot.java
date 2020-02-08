@@ -7,13 +7,13 @@
 
 package frc.robot;
 
-
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 //import frc.robot.commands.auton;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Pnuematics;
 import frc.paths.bruh;
 import frc.robot.commands.PathFollower;
 //import frc.robot.subsystems.DriveTrainAuton;
@@ -30,6 +30,8 @@ public class Robot extends TimedRobot {
   public static RobotContainer m_robotContainer;
 
   public static DriveTrain driveTrain;
+  
+  public static Pnuematics pnuematics;
 
   CommandBase autonomousCommand;
 
@@ -45,7 +47,6 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     driveTrain = new DriveTrain();
     m_robotContainer = new RobotContainer();
-
     driveTrain.resetYaw(); 
     
   }
@@ -110,6 +111,7 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
     driveTrain.ResetEncoders();
     driveTrain.resetYaw(); 
+    pnuematics = new Pnuematics();
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove

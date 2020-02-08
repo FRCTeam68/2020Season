@@ -8,9 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
-import com.revrobotics.CANEncoder;
 
 import frc.robot.Constants;
 import frc.robot.Robot;
@@ -28,7 +26,6 @@ import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import com.ctre.phoenix.sensors.CANCoder;
 //import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 public class DriveTrain extends SubsystemBase {
   /**

@@ -7,18 +7,17 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.DriveTrain;
 import frc.robot.Robot;
 
-public class DriveWithJoysticks extends CommandBase {
+public class ShiftGears extends CommandBase {
   /**
-   * Creates a new DriveWithJoysticks.
+   * Creates a new ShiftGears.
    */
-  public DriveWithJoysticks() {
+  Boolean finished = false;
+  public ShiftGears() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.driveTrain);
+   // addRequirements(Robot.pnuematics);
   }
 
   // Called when the command is initially scheduled.
@@ -29,24 +28,19 @@ public class DriveWithJoysticks extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
-    //System.out.println(Robot.m_robotContainer);''
-    SmartDashboard.putNumber("left Enc",Robot.driveTrain.getLeftEnc());
-    SmartDashboard.putNumber("Right Enc",Robot.driveTrain.getRightEnc());
-
-    SmartDashboard.putNumber("Right Joy",Robot.m_robotContainer.getLeftXboxJoystickValue());
-    SmartDashboard.putNumber("left joy",Robot.m_robotContainer.getRightXboxJoystickValue());
-
-
-
-    DriveTrain.getDriveTrain().setSpeedFalcon(-Robot.m_robotContainer.getLeftXboxJoystickValue(), Robot.m_robotContainer.getRightXboxJoystickValue());
+    Robot.pnuematics.gearShifter();
+    finished = true;
+      
   }
 
-
+  // Called once the command ends or is interrupted.
+  @Override
+  public void end(boolean interrupted) {
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return finished;
   }
 }

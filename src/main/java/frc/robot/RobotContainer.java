@@ -10,7 +10,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants;
+import frc.robot.commands.ShiftGears;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 
 /**
@@ -25,7 +27,11 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
+
   XboxController xboxDrive;
+  JoystickButton xboxDriveRT;
+
+  //Command shiftGear = new ShiftGears();
 
   private static RobotContainer robotContainer;
 
@@ -40,16 +46,19 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
     xboxDrive = new XboxController(Constants.XBOX_DRIVE);
+    xboxDriveRT = new JoystickButton(xboxDrive, Constants.XBOX_DRIVE_RT_BUTTON);
+
+    xboxDriveRT.whenPressed(new ShiftGears());
   }
 
-  /**
+  /** 
    * Use this method to define your button->command mappings. Buttons can be
    * created by instantiating a {@link GenericHID} or one of its subclasses
    * ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then
    * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    xboxDrive = new XboxController(Constants.XBOX_DRIVE);
+
   }
 
   public double getLeftXboxJoystickValue() {
