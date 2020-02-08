@@ -7,8 +7,11 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
+import com.revrobotics.CANEncoder;
+
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.commands.DriveWithJoysticks;
@@ -25,15 +28,20 @@ import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.ctre.phoenix.sensors.CANCoder;
 //import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 public class DriveTrain extends SubsystemBase {
   /**
    * Creates a new DriveTrain.
    */ 
-  private WPI_TalonSRX fr; //front right
-  private WPI_TalonSRX br; //back right
-  private WPI_TalonSRX bl; //back left
-  private WPI_TalonSRX fl; //front left\
+  private WPI_TalonFX fr; //front right
+  private WPI_TalonFX br; //back right
+  private WPI_TalonFX bl; //back left
+  private WPI_TalonFX fl; //front left\
+  /*
+  private CANCoder leftDriveEnc;
+  private CANCoder RightDriveEnc;
+  */
 
   private final DifferentialDriveOdometry m_odometry;
 
@@ -69,16 +77,20 @@ private AHRS m_gyro = new AHRS();
     
 		
     // DriveTrain Motors Config
-    fr = new WPI_TalonSRX(Constants.TALONSRX_FR);
-    br = new WPI_TalonSRX(Constants.TALONSRX_BR);
-    bl = new WPI_TalonSRX(Constants.TALONSRX_BL);
-    fl = new WPI_TalonSRX(Constants.TALONSRX_FL);
-
-    br.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,0,0);
+    fr = new WPI_TalonFX(Constants.TALONFX_FR);
+    br = new WPI_TalonFX(Constants.TALONFX_BR);
+    bl = new WPI_TalonFX(Constants.TALONFX_BL);
+    fl = new WPI_TalonFX(Constants.TALONFX_FL);
+    /*
+    CAN ENCODER GETS DEGREES NOT ENCODER TICKS
+    leftDriveEnc = new CANCoder(Constants.CANENCODER_LEFT_DRIVE);
+    RightDriveEnc = new CANCoder(Constants.CANENCODER_RIGHT_DRIVE);
+    */
+    br.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor,0,0);
     br.selectProfileSlot(Constants.DRIVETRAIN_RIGHT_PID_SLOT, 0);
     br.setSensorPhase(false);
 
-    fl.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,0,0);
+    fl.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor,0,0);
     fl.selectProfileSlot(Constants.DRIVETRAIN_LEFT_PID_SLOT, 0);
     fl.setSensorPhase(true);
     

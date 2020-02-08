@@ -73,10 +73,14 @@ public final class Constants {
 
     //drive motor values
 
-    public static final int TALONSRX_FR = 1;
-    public static final int TALONSRX_FL = 2;
-    public static final int TALONSRX_BR = 4;
-    public static final int TALONSRX_BL = 3;
+    public static final int TALONFX_FR = 3;
+    public static final int TALONFX_FL = 1;
+    public static final int TALONFX_BR = 4;
+    public static final int TALONFX_BL = 2;
+
+    //CAN ENCODER
+    public static final int CANENCODER_LEFT_DRIVE = 0;
+    public static final int CANENCODER_RIGHT_DRIVE = 0;
 
     // Drivetrain Left PID Config
     public static final int DRIVETRAIN_LEFT_PID_SLOT = 0;
@@ -102,7 +106,7 @@ public final class Constants {
     public static final double AUTON_DISTANCE_KP = 2.8; //.08
     public static final double AUTON_DISTANCE_KI = 0;
     public static final double AUTON_DISTANCE_KD = .4;
-    public static final double AUTON_ANGLE_KP = 20;//SET THESE VALUES 
+    public static final double AUTON_ANGLE_KP = 10;//SET THESE VALUES 
     public static final double AUTON_ANGLE_KI = 0;
     public static final double AUTON_ANGLE_KD = 0;
 }

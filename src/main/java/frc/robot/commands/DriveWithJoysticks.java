@@ -34,12 +34,12 @@ public class DriveWithJoysticks extends CommandBase {
     SmartDashboard.putNumber("left Enc",Robot.driveTrain.getLeftEnc());
     SmartDashboard.putNumber("Right Enc",Robot.driveTrain.getRightEnc());
 
-    SmartDashboard.putNumber("Right Joy",Robot.m_robotContainer.getRightXboxJoystickValue());
-    SmartDashboard.putNumber("left joy",Robot.m_robotContainer.getLeftXboxJoystickValue());
+    SmartDashboard.putNumber("Right Joy",Robot.m_robotContainer.getLeftXboxJoystickValue());
+    SmartDashboard.putNumber("left joy",Robot.m_robotContainer.getRightXboxJoystickValue());
 
 
 
-    DriveTrain.getDriveTrain().setSpeedFalcon(Robot.m_robotContainer.getLeftXboxJoystickValue(), Robot.m_robotContainer.getRightXboxJoystickValue());
+    DriveTrain.getDriveTrain().setSpeedFalcon(Robot.m_robotContainer.getRightXboxJoystickValue(), Robot.m_robotContainer.getLeftXboxJoystickValue());
   }
 
 

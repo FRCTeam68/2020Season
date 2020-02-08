@@ -14,9 +14,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 //import frc.robot.commands.auton;
 import frc.robot.subsystems.DriveTrain;
-import frc.paths.CurveEckert;
-import frc.paths.RAR;
-import frc.paths.ratliffCurve;
+import frc.paths.bruh;
 import frc.robot.commands.PathFollower;
 //import frc.robot.subsystems.DriveTrainAuton;
 
@@ -93,7 +91,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
 
     driveTrain.ResetEncoders();
-    autonomousCommand = new PathFollower(new ratliffCurve());
+    autonomousCommand = new PathFollower(new bruh());
     if(autonomousCommand != null){
       autonomousCommand.schedule();
     }
