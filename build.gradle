@@ -43,7 +43,7 @@ def includeDesktopSupport = false
 // Defining my dependencies. In this case, WPILib (+ friends), and vendor libraries.
 // Also defines JUnit 4.
 dependencies {
-    compile 'com.github.Team319:BobTrajectory:master-SNAPSHOT'
+
     implementation wpi.deps.wpilib()
     nativeZip wpi.deps.wpilibJni(wpi.platforms.roborio)
     nativeDesktopZip wpi.deps.wpilibJni(wpi.platforms.desktop)
@@ -54,6 +54,8 @@ dependencies {
     nativeDesktopZip wpi.deps.vendor.jni(wpi.platforms.desktop)
 
     testImplementation 'junit:junit:4.12'
+    compile 'com.github.Team319:BobTrajectory:master-SNAPSHOT'
+
 
     // Enable simulation gui support. Must check the box in vscode to enable support
     // upon debugging

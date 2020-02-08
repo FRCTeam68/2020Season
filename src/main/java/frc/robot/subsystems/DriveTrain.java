@@ -80,7 +80,8 @@ private AHRS m_gyro = new AHRS();
 
     fl.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,0,0);
     fl.selectProfileSlot(Constants.DRIVETRAIN_LEFT_PID_SLOT, 0);
-    fl.setSensorPhase(false);
+    fl.setSensorPhase(true);
+    
 
     bl.set(ControlMode.Follower, fl.getDeviceID());
     fr.set(ControlMode.Follower, br.getDeviceID());
@@ -115,6 +116,7 @@ private AHRS m_gyro = new AHRS();
     m_xEntry.setNumber(translation.getX());
     m_yEntry.setNumber(translation.getY());
 
+    
     //SmartDashboard.putNumber("m_xEntry", m_xEntry);
   }
 
@@ -147,16 +149,17 @@ private AHRS m_gyro = new AHRS();
   }
 
   public void resetYaw(){
+    //m_gyro.reset();
     m_gyro.zeroYaw();
   }
 
   /**
    * Returns the heading of the robot.
    *
-   * @return the robot's heading in degrees, from 180 to 180
+   * @return the robot's heading in degrees, from and degree
    */
-  public float getHeading() {
-    return m_gyro.getYaw();
+  public double getHeading() {
+    return m_gyro.getAngle();
   }
 
   public double getYAW() {
@@ -166,6 +169,7 @@ private AHRS m_gyro = new AHRS();
     return m_gyro.isCalibrating();
   }
 
+  
   /**
    * Returns the turn rate of the robot.
    *

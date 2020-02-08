@@ -61,7 +61,8 @@ public class PathFollower extends HelixFollower  {
     @Override
     public double getCurrentHeading() {
         // Here we need to return the current heading of the robot in RADIANS (positive counter-clockwise).
-        double heading = Robot.driveTrain.getHeading()*(180/(3.141592654 + Constants.AUTON_PI_OFFSET));
+        double heading = (Robot.driveTrain.getYAW()-180)*(3.141592654/180);
+        //double heading = 0.0;
         /*
         If does a full 360 degrees which is 2PI Radians or 6.28 radins 
         You have to change the conversion above "(180/3.141592654)"

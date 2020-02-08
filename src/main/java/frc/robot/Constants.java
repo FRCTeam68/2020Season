@@ -102,16 +102,8 @@ public final class Constants {
     public static final double AUTON_DISTANCE_KP = 2.8; //.08
     public static final double AUTON_DISTANCE_KI = 0;
     public static final double AUTON_DISTANCE_KD = .4;
-    public static final double AUTON_ANGLE_KP = 4;//SET THESE VALUES 
+    public static final double AUTON_ANGLE_KP = 20;//SET THESE VALUES 
     public static final double AUTON_ANGLE_KI = 0;
-    public static final double AUTON_ANGLE_KD = 1.6;
-    public static final double AUTON_PI_OFFSET = -0.2; //TLDR this will make robot turn more or less 
-    /*
-    Only change PI offset if the 
-    Robot doesnt match 6.3 Rads on a full 360 Degree turn
-    This is very experimental
-    Set to negative if the robot doesnt turn enough
-    Set to positive if the robot turns too much
-     */
+    public static final double AUTON_ANGLE_KD = 0;
 }
  

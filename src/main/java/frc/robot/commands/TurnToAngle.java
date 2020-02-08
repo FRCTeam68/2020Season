@@ -10,34 +10,25 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class ShiftGears extends CommandBase {
+public class TurnToAngle extends CommandBase {
   /**
-   * Creates a new ShiftGears.
+   * Creates a new TurnToAngle.
    */
-  public ShiftGears() {
+  public TurnToAngle() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.compressor);
+    addRequirements(Robot.driveTrain);
+    
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    /*
-    True = HighGear
-    False = LowGear
-
-    
-    */
-    if(Robot.compressor.gearState()){
-      Robot.compressor.setShiftLow();
-    } else {
-      Robot.compressor.setShifterHigh();
-    }
   }
 
   // Called once the command ends or is interrupted.

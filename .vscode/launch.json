@@ -9,6 +9,13 @@
       "name": "CodeLens (Launch) - BOBRunner",
       "request": "launch",
       "mainClass": "frc.robot.BOBRunner",
+      "projectName": "2020Season-89616287178cd55aba9f3beae851286e4c89fcc6"
+    },
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - BOBRunner",
+      "request": "launch",
+      "mainClass": "frc.robot.BOBRunner",
       "projectName": "2020Season"
     },
     {

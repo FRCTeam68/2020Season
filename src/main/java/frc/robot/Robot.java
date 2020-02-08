@@ -14,8 +14,9 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 //import frc.robot.commands.auton;
 import frc.robot.subsystems.DriveTrain;
-import frc.paths.Curve;
 import frc.paths.CurveEckert;
+import frc.paths.RAR;
+import frc.paths.ratliffCurve;
 import frc.robot.commands.PathFollower;
 //import frc.robot.subsystems.DriveTrainAuton;
 
@@ -47,7 +48,7 @@ public class Robot extends TimedRobot {
     driveTrain = new DriveTrain();
     m_robotContainer = new RobotContainer();
 
-    driveTrain.resetYaw(); // ONLY CALL ON ROBOT INIT
+    driveTrain.resetYaw(); 
     
   }
 
@@ -78,6 +79,7 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {
   }
+  
 
   @Override
   public void disabledPeriodic() {
@@ -89,9 +91,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    
+
     driveTrain.ResetEncoders();
-    autonomousCommand = new PathFollower(new CurveEckert());
+    autonomousCommand = new PathFollower(new ratliffCurve());
     if(autonomousCommand != null){
       autonomousCommand.schedule();
     }
@@ -102,12 +104,14 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    SmartDashboard.putNumber("HEADING IN RADS", Math.toRadians(Robot.driveTrain.getYAW()));
+    SmartDashboard.putNumber("HEADING IN RADS",(Robot.driveTrain.getYAW()-180)*(3.141592654/180));
+    SmartDashboard.putNumber("HEADING IN DEGS", Robot.driveTrain.getYAW());
   }
 
   @Override
   public void teleopInit() {
     driveTrain.ResetEncoders();
+    driveTrain.resetYaw(); 
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
@@ -122,7 +126,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
 
-    SmartDashboard.putNumber("HEADING IN RADS", driveTrain.getYAW()*(180/3.141592654));
+    SmartDashboard.putNumber("HEADING IN RADS", Math.toRadians(Robot.driveTrain.getHeading()));
   }
 
   @Override
