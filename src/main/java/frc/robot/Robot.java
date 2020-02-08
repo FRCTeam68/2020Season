@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 //import frc.robot.commands.auton;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Pnuematics;
+import frc.robot.subsystems.Vision;
 import frc.paths.bruh;
 import frc.robot.commands.PathFollower;
 //import frc.robot.subsystems.DriveTrainAuton;
@@ -33,6 +34,8 @@ public class Robot extends TimedRobot {
   
   public static Pnuematics pnuematics;
 
+  public static Vision vision;
+
   CommandBase autonomousCommand;
 
   /**
@@ -47,6 +50,8 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     driveTrain = new DriveTrain();
     m_robotContainer = new RobotContainer();
+    vision = new Vision();
+
     driveTrain.resetYaw(); 
     
   }

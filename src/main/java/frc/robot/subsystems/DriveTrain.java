@@ -191,14 +191,23 @@ private AHRS m_gyro = new AHRS();
     return br.getSelectedSensorPosition(0);
 
   }
-  /*
-  public double getLeftPosition() {
-    return HelixMath.convertFromTicksToFeet(fl.getSelectedSensorPosition(0), Constants.WHEEL_DIAMETER, Constants.ENCODER_TICK_LEFT_REVOLUTION);
+  public double leftVisionAdjusted(){
+    double leftSpeed;
+    double joystickSpeed;
+    double visionCorrect;
+    joystickSpeed = Robot.m_robotContainer.getLeftXboxJoystickValue();
+    visionCorrect = Robot.vision.steeringAdjust();
+    leftSpeed = joystickSpeed += visionCorrect;
+    return leftSpeed;
   }
-
-  public double getRightPosition() {
-    return  HelixMath.convertFromTicksToFeet(br.getSelectedSensorPosition(0), Constants.WHEEL_DIAMETER, Constants.ENCODER_TICK_RIGHT_REVOLUTION);
+  public double rightVisionAdjusted(){
+    double rightSpeed;
+    double joystickSpeed;
+    double visionCorrect;
+    joystickSpeed = Robot.m_robotContainer.getRightXboxJoystickValue();
+    visionCorrect = Robot.vision.steeringAdjust();
+    rightSpeed =  joystickSpeed -= visionCorrect;
+    return rightSpeed;
   }
-*/
 
 }

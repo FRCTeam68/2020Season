@@ -30,6 +30,7 @@ public class RobotContainer {
 
   XboxController xboxDrive;
   JoystickButton xboxDriveRT;
+	private static JoystickButton xboxDriveRB;
 
   //Command shiftGear = new ShiftGears();
 
@@ -45,9 +46,6 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-    xboxDrive = new XboxController(Constants.XBOX_DRIVE);
-    xboxDriveRT = new JoystickButton(xboxDrive, Constants.XBOX_DRIVE_RT_BUTTON);
-
     xboxDriveRT.whenPressed(new ShiftGears());
   }
 
@@ -58,6 +56,9 @@ public class RobotContainer {
    * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    xboxDrive = new XboxController(Constants.XBOX_DRIVE);
+    xboxDriveRB = new JoystickButton(xboxDrive, Constants.XBOX_DRIVE_RB);
+    xboxDriveRT = new JoystickButton(xboxDrive, Constants.XBOX_DRIVE_RT_BUTTON);
 
   }
 
@@ -78,6 +79,14 @@ public class RobotContainer {
     return rightAxis;
 
   }
+  public boolean getXboxDriveRB() {
+		boolean buttonPressed = false;
+		if (xboxDriveRB.get()) {
+			buttonPressed = true;
+		}
+		return buttonPressed;
+	}
+
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
