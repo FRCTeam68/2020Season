@@ -11,3 +11,13 @@ Drag the left and right CSV files into the paths directory and disconnect the ca
 In VS Code navigate to the Robot.java and go to autonomousInit and where we insantiate a new autonTraj change the string from "/stleft.csv" to "/filename.csv" ALWAYS KEEP THE /
 To tune pid navigate to the PathFollower subsystem and change the double P double I and double D numbers to calculate a more accurate auton :-)
 -Connor 68
+
+
+NOTICE
+Auton
+-If robot do not turn enough change Robot Base in Bob traectory
+increase = turn more decrease = turn less (Changes jerk)
+-NEVER CALL FOR NAVX RESET ONLY RESET YAW
+-RESTART ROBOT CODE BETWEEN AUTONS
+-SET SENSOR PHASE CHANGES WHICH WAY THE ENCODER READS
+
