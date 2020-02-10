@@ -13,7 +13,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 //import frc.robot.commands.auton;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.EndGame;
+import frc.robot.subsystems.Hopper;
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Pnuematics;
+import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Vision;
 import frc.paths.TenFeetNewRobot;
 import frc.paths.bruh;
@@ -37,6 +41,16 @@ public class Robot extends TimedRobot {
 
   public static Vision vision;
 
+  public static EndGame endGame;
+
+  public static Hopper hopper;
+
+  public static Intake intake;
+
+  public static Shooter shooter;
+
+  
+
   CommandBase autonomousCommand;
 
   /**
@@ -53,6 +67,12 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
     vision = new Vision();
     pnuematics = new Pnuematics();
+    endGame = new EndGame();
+    hopper = new Hopper();
+    intake = new Intake();
+    shooter = new Shooter();
+
+
     driveTrain.resetYaw(); 
     
   }

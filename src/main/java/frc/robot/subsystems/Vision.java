@@ -77,8 +77,8 @@ public class Vision extends SubsystemBase {
 
     double steeringAdjust = 0;
     final double x = X.getDouble(0.0);
-    final double Kp = -0.013;
-    final double min_command = 0.009;
+    final double Kp = -0.015;
+    final double min_command = 0.06;
     final double heading_error = -x;
 
         if(x>1.0){

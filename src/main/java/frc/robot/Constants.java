@@ -113,4 +113,24 @@ public final class Constants {
 
     public static final int DRIVE_SHIFTER_PCM_A = 1;
     public static final int DRIVE_SHIFTER_PCM_B = 0;
+
+    // shooter subsystem
+
+    public static final int SHOOTER_WHEELSPINNER_1 = 0;
+    public static final int SHOOTER_WHEELSPINNER_2 = 0;
+    public static final int SHOOTER_ANGLE = 0;
+    public static final int SHOOTER_FEEDER = 0;
+
+    //endgame subsystem
+    public static final int ENDGAME_WINCH_1 = 0;
+    public static final int ENDGAME_WINCH_2 = 0;
+    public static final int ENDGAME_SERVO = 0;
+    
+    //Hopper subsystem
+    public static final int HOPPER_AGITATOR = 0;
+
+    //Intake Subsystem
+    public static final int INTAKE_MOTOR = 0;
+    //spinner subsystem
+    public static final int SPINNER_MOTOR = 0;
 }
