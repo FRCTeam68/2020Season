@@ -1,6 +1,9 @@
 # 2020Season
 Projects for the 2020 season
 
+THIS BRANCH WE SHOULD ALL UPLOAD THE CODE TO PLEASE IF YOU CREATE 
+A NEW SUBSYSTEM SUCCSESSFULY PLEASE MERGE IT INTO THIS BRANCH\
+
 
 To upload Robot Code first install FileZilla from https://filezilla-project.org/download.php?type=client
 After installation connect to the robot via USB Cable
@@ -20,4 +23,4 @@ increase = turn more decrease = turn less (Changes jerk)
 -NEVER CALL FOR NAVX RESET ONLY RESET YAW
 -RESTART ROBOT CODE BETWEEN AUTONS
 -SET SENSOR PHASE CHANGES WHICH WAY THE ENCODER READS
-\
+
