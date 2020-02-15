@@ -102,9 +102,9 @@ public final class Constants {
     public static final double MAX_SPEED = 17;
     public static final int ENCODER_TICK_LEFT_REVOLUTION = 36950; // -24427
     public static final int ENCODER_TICK_RIGHT_REVOLUTION = 36950; // 24508
-    public static final double AUTON_DISTANCE_KP = 2.8; // .08
+    public static final double AUTON_DISTANCE_KP = 8; // .08
     public static final double AUTON_DISTANCE_KI = 0;
-    public static final double AUTON_DISTANCE_KD = .4;
+    public static final double AUTON_DISTANCE_KD = 1.23;
     public static final double AUTON_ANGLE_KP = 0;// SET THESE VALUES
     public static final double AUTON_ANGLE_KI = 0;
     public static final double AUTON_ANGLE_KD = 0;
@@ -113,6 +113,7 @@ public final class Constants {
 
     public static final int DRIVE_SHIFTER_PCM_A = 1;
     public static final int DRIVE_SHIFTER_PCM_B = 0;
+    public static final int AIR_PUMP_CAN = 16;
 
     // shooter subsystem
 

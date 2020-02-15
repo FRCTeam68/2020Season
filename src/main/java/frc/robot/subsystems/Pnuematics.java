@@ -18,13 +18,13 @@ public class Pnuematics extends SubsystemBase {
    * Creates a new Pnuematics.
    */
 
-  public Compressor compressor;
+  //public Compressor airPump;
   private DoubleSolenoid gearShifter;
 
   public Pnuematics() {
-    //compressor = new Compressor(16);
-    gearShifter = new DoubleSolenoid(16, Constants.DRIVE_SHIFTER_PCM_A, Constants.DRIVE_SHIFTER_PCM_B);
-    setShifterHigh();
+    //airPump = new Compressor(Constants.AIR_PUMP_CAN);
+    gearShifter = new DoubleSolenoid(Constants.AIR_PUMP_CAN, Constants.DRIVE_SHIFTER_PCM_A, Constants.DRIVE_SHIFTER_PCM_B);
+    setShiftLow();
   }
 
   @Override

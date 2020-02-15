@@ -19,8 +19,11 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Pnuematics;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Vision;
-import frc.paths.TenFeetNewRobot;
+import frc.paths.Curve;
 import frc.paths.bruh;
+import frc.paths.bruh10;
+import frc.paths.bruh20;
+import frc.paths.straight10;
 import frc.robot.commands.PathFollower;
 //import frc.robot.subsystems.DriveTrainAuton;
 
@@ -67,11 +70,12 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
     vision = new Vision();
     pnuematics = new Pnuematics();
+    /*
     endGame = new EndGame();
     hopper = new Hopper();
     intake = new Intake();
     shooter = new Shooter();
-
+    */
 
     driveTrain.resetYaw(); 
     
@@ -118,7 +122,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
 
     driveTrain.ResetEncoders();
-    autonomousCommand = new PathFollower(new TenFeetNewRobot());
+    autonomousCommand = new PathFollower(new bruh10());
     if(autonomousCommand != null){
       autonomousCommand.schedule();
     }
