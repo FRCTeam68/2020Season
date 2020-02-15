@@ -69,6 +69,11 @@ public final class Constants {
     public static final double PID_P = .4;
     public static final double PID_I = 0.0;
     public static final double PID_D = 0.0;
+    //shooter velocity
+    public static final double SHOOTER_PID_F = 0.03; // 0.025
+    public static final double SHOOTER_PID_P = .4;
+    public static final double SHOOTER_PID_I = 0.0;
+    public static final double SHOOTER_PID_D = 0.0;
 
     // drive motor values
 
@@ -117,8 +122,8 @@ public final class Constants {
 
     // shooter subsystem
 
-    public static final int SHOOTER_WHEELSPINNER_1 = 0;
-    public static final int SHOOTER_WHEELSPINNER_2 = 0;
+    public static final int SHOOTER_WHEELSPINNER_1 = 28;
+    public static final int SHOOTER_WHEELSPINNER_2 = 29;
     public static final int SHOOTER_ANGLE = 0;
     public static final int SHOOTER_FEEDER = 0;
 

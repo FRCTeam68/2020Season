@@ -7,7 +7,11 @@
 
 package frc.robot;
 
+import java.util.Map;
+
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -25,7 +29,9 @@ import frc.paths.bruh10;
 import frc.paths.bruh20;
 import frc.paths.straight10;
 import frc.robot.commands.PathFollower;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 //import frc.robot.subsystems.DriveTrainAuton;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -56,6 +62,8 @@ public class Robot extends TimedRobot {
 
   CommandBase autonomousCommand;
 
+
+
   /**
    * This function is run when the robot is first started up and should be used
    * for any initialization code.
@@ -70,6 +78,7 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
     vision = new Vision();
     pnuematics = new Pnuematics();
+    shooter = new Shooter();
     /*
     endGame = new EndGame();
     hopper = new Hopper();
@@ -147,6 +156,8 @@ public class Robot extends TimedRobot {
     // this line or comment it out.
 
 
+
+
   }
 
   /**
@@ -162,6 +173,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("LimelightX", Robot.vision.getXValue());
     SmartDashboard.putNumber("LimelightY", Robot.vision.getYValue());
     SmartDashboard.putNumber("LimelightArea", Robot.vision.getArea());
+
+    //(SmartDashboard.getKeys());
   }
 
   @Override
