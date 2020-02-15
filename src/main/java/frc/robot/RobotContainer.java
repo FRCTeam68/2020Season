@@ -30,7 +30,9 @@ public class RobotContainer {
 
   XboxController xboxDrive;
   JoystickButton xboxDriveRT;
-	private static JoystickButton xboxDriveRB;
+  private static JoystickButton xboxDriveRB;
+  
+  XboxController xboxManipulator;
 
   //Command shiftGear = new ShiftGears();
 
@@ -59,6 +61,7 @@ public class RobotContainer {
     xboxDrive = new XboxController(Constants.XBOX_DRIVE);
     xboxDriveRB = new JoystickButton(xboxDrive, Constants.XBOX_DRIVE_RB);
     xboxDriveRT = new JoystickButton(xboxDrive, Constants.XBOX_DRIVE_RT_BUTTON);
+    xboxManipulator = new XboxController(Constants.XBOX_MANIPULATE);
 
   }
 
@@ -79,6 +82,26 @@ public class RobotContainer {
     return rightAxis;
 
   }
+
+  public double getLeftXboxManipulatorJoystickValue() {
+    double leftAxis;
+    leftAxis = xboxManipulator.getY(Hand.kLeft);
+    // Allow for up to 10% of joystick noises\
+    leftAxis = (Math.abs(leftAxis) < 0.1) ? 0 : leftAxis;
+    return leftAxis;
+  }
+
+  // Drivetrain Tank Drive Right
+  public double getRightXboxManipulatorJoystickValue() {
+    double rightAxis;
+    rightAxis = xboxManipulator.getY(Hand.kRight);
+    // Allow for up to 10% of joystick noise
+    rightAxis = (Math.abs(rightAxis) < 0.1) ? 0 : rightAxis;
+    return rightAxis;
+
+  }
+
+
   public boolean getXboxDriveRB() {
 		boolean buttonPressed = false;
 		if (xboxDriveRB.get()) {
