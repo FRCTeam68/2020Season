@@ -7,11 +7,8 @@
 
 package frc.robot;
 
-import java.util.Map;
 
-import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -23,13 +20,8 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Pnuematics;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Vision;
-import frc.paths.Curve;
-import frc.paths.bruh;
 import frc.paths.bruh10;
-import frc.paths.bruh20;
-import frc.paths.straight10;
 import frc.robot.commands.PathFollower;
-import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 //import frc.robot.subsystems.DriveTrainAuton;
 
 
@@ -58,7 +50,7 @@ public class Robot extends TimedRobot {
 
   public static Shooter shooter;
 
-  
+  public static SmartPID smartPID;
 
   CommandBase autonomousCommand;
 
@@ -79,6 +71,7 @@ public class Robot extends TimedRobot {
     vision = new Vision();
     pnuematics = new Pnuematics();
     shooter = new Shooter();
+    smartPID = new SmartPID();
     /*
     endGame = new EndGame();
     hopper = new Hopper();

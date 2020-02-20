@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants;
 import frc.robot.commands.ShiftGears;
+import frc.robot.commands.setShooterVelocity;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -29,10 +30,12 @@ public class RobotContainer {
 
 
   XboxController xboxDrive;
-  JoystickButton xboxDriveRT;
-  private static JoystickButton xboxDriveRB;
-  
   XboxController xboxManipulator;
+  JoystickButton xboxDriveRT;
+  JoystickButton xboxDriveRB;
+  JoystickButton xboxManipX;
+
+  
 
   //Command shiftGear = new ShiftGears();
 
@@ -49,6 +52,7 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
     xboxDriveRT.whenPressed(new ShiftGears());
+    xboxManipX.whenPressed(new setShooterVelocity());
   }
 
   /** 
@@ -59,9 +63,10 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     xboxDrive = new XboxController(Constants.XBOX_DRIVE);
+    xboxManipulator = new XboxController(Constants.XBOX_MANIPULATE);
     xboxDriveRB = new JoystickButton(xboxDrive, Constants.XBOX_DRIVE_RB);
     xboxDriveRT = new JoystickButton(xboxDrive, Constants.XBOX_DRIVE_RT_BUTTON);
-    xboxManipulator = new XboxController(Constants.XBOX_MANIPULATE);
+    xboxManipX = new JoystickButton(xboxManipulator, Constants.XBOX_MANIPULATE_X);
 
   }
 
