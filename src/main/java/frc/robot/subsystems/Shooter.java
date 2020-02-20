@@ -8,12 +8,11 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
-import frc.robot.commands.SetShooterSpeed;
+import frc.robot.commands.setShooterVelocity;
 
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
@@ -31,8 +30,7 @@ public class Shooter extends SubsystemBase {
   private CANSparkMax shooterWheel2;
   private WPI_TalonSRX shooterAngle;
   private WPI_VictorSPX feeder;
-  private CANEncoder shooterWheel1Enc;
-  private CANEncoder shooterWheel2Enc;
+
   private CANPIDController pidController1;
   private CANPIDController pidController2;
   private NetworkTableEntry ent;
@@ -49,47 +47,17 @@ public class Shooter extends SubsystemBase {
     shooterAngle.setSensorPhase(false);
     feeder.setSensorPhase(false);
 
-    shooterWheel1Enc = shooterWheel1.getEncoder();
-    shooterWheel2Enc = shooterWheel2.getEncoder();
+
     pidController1 = shooterWheel1.getPIDController();
     pidController2 = shooterWheel2.getPIDController();
 
-    pidController1.setP(Constants.SHOOTER_PID_P);
-    pidController1.setI(Constants.SHOOTER_PID_I);
-    pidController1.setD(Constants.SHOOTER_PID_D);
-    pidController1.setFF(Constants.SHOOTER_PID_F);
-    pidController2.setP(Constants.SHOOTER_PID_P);
-    pidController2.setI(Constants.SHOOTER_PID_I);
-    pidController2.setD(Constants.SHOOTER_PID_D);
-    pidController2.setFF(Constants.SHOOTER_PID_F);
 
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    CommandScheduler.getInstance().setDefaultCommand(Robot.shooter, new SetShooterSpeed());
-    SmartDashboard.putNumber("Velocity", shooterWheel1Enc.getVelocity());
-    SmartDashboard.putNumber("Velocity 2", shooterWheel2Enc.getVelocity());
-
-    /*    Robot.smartPID.SmartPIDEntry("CUNT", 0, 1, 0);
-
-     * pidController1.setP(SmartDashboard.getNumber("kProportion", 0));
-     * pidController1.setI(SmartDashboard.getNumber("kIntegral", 0));
-     * pidController1.setD(SmartDashboard.getNumber("kDerivitive", 0));
-     * 
-     * pidController1.setFF(SmartDashboard.getNumber("kFeedForward", 0));
-     * pidController2.setP(SmartDashboard.getNumber("kProportion", 0));
-     * pidController2.setI(SmartDashboard.getNumber("kIntegral", 0));
-     * pidController2.setD(SmartDashboard.getNumber("kDerivitive", 0));
-     * pidController2.setFF(SmartDashboard.getNumber("kFeedForward", 0));
-     */
-  }
-
-
-  public void setShooterSpeed(double shooterSpeed) {
-    shooterWheel1.set(shooterSpeed);
-    shooterWheel2.set(-shooterSpeed);
+    CommandScheduler.getInstance().setDefaultCommand(Robot.shooter, new setShooterVelocity());
   }
 
   public void setShooterPID(double p, double i, double d, double f, double iZ) {
@@ -105,20 +73,6 @@ public class Shooter extends SubsystemBase {
     pidController2.setFF(f);
     pidController2.setOutputRange(-1, 1);
     pidController1.setOutputRange(-1, 1);
-
-    /*
-     * pidController1.setP(SmartDashboard.getNumber("kProportion", 0));
-     * pidController1.setI(SmartDashboard.getNumber("kIntegral", 0));
-     * pidController1.setD(SmartDashboard.getNumber("kDerivitive", 0));
-     * pidController1.setFF(SmartDashboard.getNumber("kFeedForward", 0));
-     * 
-     * 
-     * pidController1.setFF(SmartDashboard.getNumber("kFeedForward", 0));
-     * pidController2.setP(SmartDashboard.getNumber("kProportion", 0));
-     * pidController2.setI(SmartDashboard.getNumber("kIntegral", 0));
-     * pidController2.setD(SmartDashboard.getNumber("kDerivitive", 0));
-     * pidController2.setFF(SmartDashboard.getNumber("kFeedForward", 0));
-     */
   }
 
   public void setShooterVelocity(double shooterVelocity) {

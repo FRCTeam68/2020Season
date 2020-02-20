@@ -18,7 +18,7 @@ public class setShooterVelocity extends CommandBase  {
 
   public setShooterVelocity() {
     // Use addRequirements() here to declare subsystem dependencies.
-   // addRequirements(Robot.smartPID);
+    addRequirements(Robot.shooter);
   }
 
   // Called when the command is initially scheduled.

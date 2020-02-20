@@ -7,22 +7,12 @@
 
 package frc.robot;
 
-
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 //import frc.robot.commands.auton;
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.EndGame;
-import frc.robot.subsystems.Hopper;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Pnuematics;
-import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.Vision;
-import frc.paths.bruh10;
-import frc.robot.commands.PathFollower;
 //import frc.robot.subsystems.DriveTrainAuton;
+import frc.robot.subsystems.Shooter;
 
 
 /**
@@ -35,18 +25,6 @@ import frc.robot.commands.PathFollower;
 public class Robot extends TimedRobot {
 
   public static RobotContainer m_robotContainer;
-
-  public static DriveTrain driveTrain;
-  
-  public static Pnuematics pnuematics;
-
-  public static Vision vision;
-
-  public static EndGame endGame;
-
-  public static Hopper hopper;
-
-  public static Intake intake;
 
   public static Shooter shooter;
 
@@ -66,32 +44,10 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our
     // autonomous chooser on the dashboard.
-    driveTrain = new DriveTrain();
     m_robotContainer = new RobotContainer();
-    vision = new Vision();
-    pnuematics = new Pnuematics();
     shooter = new Shooter();
-    smartPID = new SmartPID();
-    /*
-    endGame = new EndGame();
-    hopper = new Hopper();
-    intake = new Intake();
-    shooter = new Shooter();
-    */
-
-    driveTrain.resetYaw(); 
-    
   }
 
-  /**
-   * This function is called every robot packet, no matter the mode. Use this for
-   * items like diagnostics that you want ran during disabled, autonomous,
-   * teleoperated and test.
-   *
-   * <p>
-   * This runs after the mode specific periodic functions, but before LiveWindow
-   * and SmartDashboard integrated updating.
-   */
   @Override
   public void robotPeriodic() {
     // Runs the Scheduler. This is responsible for polling buttons, adding
@@ -123,11 +79,6 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
 
-    driveTrain.ResetEncoders();
-    autonomousCommand = new PathFollower(new bruh10());
-    if(autonomousCommand != null){
-      autonomousCommand.schedule();
-    }
   }
 
   /**
@@ -135,20 +86,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    SmartDashboard.putNumber("HEADING IN RADS",(Robot.driveTrain.getYAW()-180)*(3.141592654/180));
-    SmartDashboard.putNumber("HEADING IN DEGS", Robot.driveTrain.getYAW());
+
   }
 
   @Override
   public void teleopInit() {
-    driveTrain.ResetEncoders();
-    driveTrain.resetYaw(); 
-    // This makes sure that the autonomous stops running when
-    // teleop starts running. If you want the autonomous to
-    // continue until interrupted by another command, remove
-    // this line or comment it out.
-
-
 
 
   }
@@ -158,16 +100,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    SmartDashboard.putNumber("HEADING IN RADS",(Robot.driveTrain.getYAW()-180)*(3.141592654/180));
-    SmartDashboard.putNumber("HEADING IN DEGS", Robot.driveTrain.getYAW());
-    SmartDashboard.putBoolean("Target", Robot.vision.getTarget());
-    SmartDashboard.putNumber("Right Enc", Robot.driveTrain.getRightEnc());
-    SmartDashboard.putNumber("Left Enc", Robot.driveTrain.getLeftEnc());
-    SmartDashboard.putNumber("LimelightX", Robot.vision.getXValue());
-    SmartDashboard.putNumber("LimelightY", Robot.vision.getYValue());
-    SmartDashboard.putNumber("LimelightArea", Robot.vision.getArea());
-
-    //(SmartDashboard.getKeys());
   }
 
   @Override

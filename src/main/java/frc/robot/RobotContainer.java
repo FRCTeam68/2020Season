@@ -10,7 +10,6 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants;
-import frc.robot.commands.ShiftGears;
 import frc.robot.commands.setShooterVelocity;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -51,7 +50,6 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-    xboxDriveRT.whenPressed(new ShiftGears());
     xboxManipX.whenPressed(new setShooterVelocity());
   }
 
