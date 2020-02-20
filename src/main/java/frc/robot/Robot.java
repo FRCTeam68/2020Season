@@ -46,6 +46,7 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     shooter = new Shooter();
+    smartPID = new SmartPID();
   }
 
   @Override
