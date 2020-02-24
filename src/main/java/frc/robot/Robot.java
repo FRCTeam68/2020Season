@@ -80,6 +80,7 @@ public class Robot extends TimedRobot {
     */
 
     driveTrain.resetYaw(); 
+    shooter.zeroEncoders();
     
   }
 

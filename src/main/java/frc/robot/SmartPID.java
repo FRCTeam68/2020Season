@@ -13,7 +13,6 @@ import java.util.Map;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import frc.robot.Robot;
 
 /**
  * Add your docs here.
@@ -29,7 +28,7 @@ public class SmartPID {
     NetworkTableEntry entry_f = Shuffleboard.getTab("SmartPID").add("kFeedForward", 0)
             .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 10)).getEntry();
     NetworkTableEntry entry_setpoint = Shuffleboard.getTab("SmartPID").add("kSetPoint", 0)
-            .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 7200)).getEntry();
+            .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1000)).getEntry();
     NetworkTableEntry entry_iZone = Shuffleboard.getTab("SmartPID").add("kiZone", 0)
             .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 10)).getEntry();
 
@@ -59,7 +58,7 @@ public class SmartPID {
     }
 
     public double getEntryF() {
-        double f = entry_f.getDouble(0);
+        double f = entry_f.getDouble(0.00015);
         return f;
     }
 
@@ -83,6 +82,4 @@ public class SmartPID {
         double entryValue = entry.getDouble(0);
         return entryValue;
     }
-
-
 }

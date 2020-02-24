@@ -29,6 +29,7 @@ public class SetShooterSpeed extends CommandBase {
   @Override
   public void execute() {
     Robot.shooter.setShooterSpeed(Robot.m_robotContainer.getRightXboxManipulatorJoystickValue());
+    
   }
 
   // Called once the command ends or is interrupted.
