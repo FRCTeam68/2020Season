@@ -20,6 +20,8 @@ import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
@@ -35,7 +37,15 @@ public class Shooter extends SubsystemBase {
   private CANEncoder shooterWheel2Enc;
   private CANPIDController pidController1;
   private CANPIDController pidController2;
-  private NetworkTableEntry ent;
+  
+  private NetworkTableEntry entryP;
+  private NetworkTableEntry entryI;
+  private NetworkTableEntry entryD;
+  private NetworkTableEntry entryF;
+  private NetworkTableEntry entrySetPoint;
+
+
+
 
   public Shooter() {
     shooterWheel1 = new CANSparkMax(Constants.SHOOTER_WHEELSPINNER_1, MotorType.kBrushless);
@@ -45,6 +55,8 @@ public class Shooter extends SubsystemBase {
     
     feeder = new WPI_VictorSPX(Constants.SHOOTER_FEEDER);
     shooterAngle = new WPI_TalonSRX(Constants.SHOOTER_ANGLE);
+    shooterAngle.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,0,0);
+    shooterAngle.selectProfileSlot(Constants.SHOOTER_PID_SLOT, 0);
 
     shooterAngle.setSensorPhase(false);
     feeder.setSensorPhase(false);
@@ -71,62 +83,49 @@ public class Shooter extends SubsystemBase {
     CommandScheduler.getInstance().setDefaultCommand(Robot.shooter, new SetShooterSpeed());
     SmartDashboard.putNumber("Velocity", shooterWheel1Enc.getVelocity());
     SmartDashboard.putNumber("Velocity 2", shooterWheel2Enc.getVelocity());
+    SmartDashboard.putNumber("Angle Enc", shooterAngle.getSelectedSensorPosition());
 
-    /*    Robot.smartPID.SmartPIDEntry("CUNT", 0, 1, 0);
-
-     * pidController1.setP(SmartDashboard.getNumber("kProportion", 0));
-     * pidController1.setI(SmartDashboard.getNumber("kIntegral", 0));
-     * pidController1.setD(SmartDashboard.getNumber("kDerivitive", 0));
-     * 
-     * pidController1.setFF(SmartDashboard.getNumber("kFeedForward", 0));
-     * pidController2.setP(SmartDashboard.getNumber("kProportion", 0));
-     * pidController2.setI(SmartDashboard.getNumber("kIntegral", 0));
-     * pidController2.setD(SmartDashboard.getNumber("kDerivitive", 0));
-     * pidController2.setFF(SmartDashboard.getNumber("kFeedForward", 0));
-     */
   }
 
 
   public void setShooterSpeed(double shooterSpeed) {
-    shooterWheel1.set(shooterSpeed);
-    shooterWheel2.set(-shooterSpeed);
+    shooterWheel1.set(-shooterSpeed);
+    shooterWheel2.set(shooterSpeed);
+    feeder.set(shooterSpeed);
+  }
+  public void setShooterAngle(double angle){
+    shooterAngle.set(ControlMode.Position,angle);
+  }
+  public void setAnglePIDF(double p,double i,double d,double f){
+    shooterAngle.config_kP(Constants.SHOOTER_PID_SLOT, p);
+    shooterAngle.config_kI(Constants.SHOOTER_PID_SLOT, i);
+    shooterAngle.config_kD(Constants.SHOOTER_PID_SLOT, d);
+    shooterAngle.config_kF(Constants.SHOOTER_PID_SLOT, f);
   }
 
-  public void setShooterPID(double p, double i, double d, double f, double iZ) {
-    pidController1.setIZone(iZ);
+
+  public void setShooterPID(double p, double i, double d, double f, double p_2, double i_2, double d_2, double f_2) {
     pidController1.setP(p);
     pidController1.setI(i);
     pidController1.setD(d);
     pidController1.setFF(f); // CALCULATED F = .0002 for 100% and F = .000266667 for 75%
-    pidController2.setIZone(iZ);
-    pidController2.setP(p);
-    pidController2.setI(i);
-    pidController2.setD(d);
-    pidController2.setFF(f);
+    pidController2.setP(p_2);
+    pidController2.setI(i_2);
+    pidController2.setD(d_2);
+    pidController2.setFF(f_2);
     pidController2.setOutputRange(-1, 1);
     pidController1.setOutputRange(-1, 1);
-
-    /*
-     * pidController1.setP(SmartDashboard.getNumber("kProportion", 0));
-     * pidController1.setI(SmartDashboard.getNumber("kIntegral", 0));
-     * pidController1.setD(SmartDashboard.getNumber("kDerivitive", 0));
-     * pidController1.setFF(SmartDashboard.getNumber("kFeedForward", 0));
-     * 
-     * 
-     * pidController1.setFF(SmartDashboard.getNumber("kFeedForward", 0));
-     * pidController2.setP(SmartDashboard.getNumber("kProportion", 0));
-     * pidController2.setI(SmartDashboard.getNumber("kIntegral", 0));
-     * pidController2.setD(SmartDashboard.getNumber("kDerivitive", 0));
-     * pidController2.setFF(SmartDashboard.getNumber("kFeedForward", 0));
-     */
   }
 
-  public void setShooterVelocity(double shooterVelocity) {
+  public void setShooterVelocity(double shooterVelocity, double shooterVelocity_2) {
 
     pidController1.setReference(-shooterVelocity, ControlType.kVelocity);
-    pidController2.setReference(shooterVelocity, ControlType.kVelocity);
+    pidController2.setReference(shooterVelocity_2, ControlType.kVelocity);
   }
-  public double p(){
-    return  Robot.smartPID.createCustomEntry(ent, "Test", 0, 3);
+  public void zeroEncoders(){
+    shooterAngle.setSelectedSensorPosition(0);
   }
+  
+
+
 }
