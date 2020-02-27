@@ -9,8 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import frc.robot.Constants; 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import frc.robot.Robot;
 import frc.robot.commands.*;
