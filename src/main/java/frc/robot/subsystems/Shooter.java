@@ -104,25 +104,23 @@ public class Shooter extends SubsystemBase {
   }
 
 
-  public void setShooterPID(double p, double i, double d, double f, double iZ) {
-    pidController1.setIZone(iZ);
+  public void setShooterPID(double p, double i, double d, double f, double p_2, double i_2, double d_2, double f_2) {
     pidController1.setP(p);
     pidController1.setI(i);
     pidController1.setD(d);
     pidController1.setFF(f); // CALCULATED F = .0002 for 100% and F = .000266667 for 75%
-    pidController2.setIZone(iZ);
-    pidController2.setP(p);
-    pidController2.setI(i);
-    pidController2.setD(d);
-    pidController2.setFF(f);
+    pidController2.setP(p_2);
+    pidController2.setI(i_2);
+    pidController2.setD(d_2);
+    pidController2.setFF(f_2);
     pidController2.setOutputRange(-1, 1);
     pidController1.setOutputRange(-1, 1);
   }
 
-  public void setShooterVelocity(double shooterVelocity) {
+  public void setShooterVelocity(double shooterVelocity, double shooterVelocity_2) {
 
     pidController1.setReference(-shooterVelocity, ControlType.kVelocity);
-    pidController2.setReference(shooterVelocity, ControlType.kVelocity);
+    pidController2.setReference(shooterVelocity_2, ControlType.kVelocity);
   }
   public void zeroEncoders(){
     shooterAngle.setSelectedSensorPosition(0);

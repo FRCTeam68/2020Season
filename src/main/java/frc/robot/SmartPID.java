@@ -31,6 +31,19 @@ public class SmartPID {
             .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1000)).getEntry();
     NetworkTableEntry entry_iZone = Shuffleboard.getTab("SmartPID").add("kiZone", 0)
             .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 10)).getEntry();
+    NetworkTableEntry entry_p_2 = Shuffleboard.getTab("SmartPID").add("kProportion", 0)
+            .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 10)).getEntry();
+    NetworkTableEntry entry_i_2 = Shuffleboard.getTab("SmartPID").add("kIntegral", 0)
+            .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 10)).getEntry();
+    NetworkTableEntry entry_d_2 = Shuffleboard.getTab("SmartPID").add("kDerivitive", 0)
+            .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 10)).getEntry();
+    NetworkTableEntry entry_f_2 = Shuffleboard.getTab("SmartPID").add("kFeedForward", 0)
+            .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 10)).getEntry();
+    NetworkTableEntry entry_setpoint_2 = Shuffleboard.getTab("SmartPID").add("kSetPoint", 0)
+            .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1000)).getEntry();
+    NetworkTableEntry entry_iZone_2 = Shuffleboard.getTab("SmartPID").add("kiZone", 0)
+            .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 10)).getEntry();
+
 
     /**
      * @param
@@ -66,8 +79,39 @@ public class SmartPID {
         double iZone = entry_iZone.getDouble(0);
         return iZone;
     }
+    public double getEntrySetPoint_2() {
+        double rpm_2 = entry_setpoint_2.getDouble(0);
+        return rpm_2;
+    }
+
+    public double getEntryP_2() {
+        double p_2 = entry_p_2.getDouble(0);
+        return p_2;
+    }
+
+    public double getEntryI_2() {
+        double i_2 = entry_i_2.getDouble(0);
+        return i_2;
+    }
+
+    public double getEntryD_2() {
+        double d_2 = entry_d_2.getDouble(0);
+        return d_2;
+    }
+
+    public double getEntryF_2() {
+        double f_2 = entry_f_2.getDouble(0.00015);
+        return f_2;
+    }
+
+    public double getEntryiZone_2() {
+        double iZone_2 = entry_iZone_2.getDouble(0);
+        return iZone_2;
+    }
     
     /** 
+     * 
+     * THIS CUSTOM ENTRY CURRENTLY IS IN A NON WORKiNG STATE
     * This will create a network table that will return the value that has
     * been set in the shuffle board app, this way you can dynamically tune PID
     * without having to restart the robot and redeploy code

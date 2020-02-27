@@ -40,9 +40,12 @@ public class setShooterVelocity extends CommandBase  {
     Robot.smartPID.getEntryI(),
     Robot.smartPID.getEntryD(),
     Robot.smartPID.getEntryF(),
-    Robot.smartPID.getEntryiZone());
+    Robot.smartPID.getEntryP_2(),
+    Robot.smartPID.getEntryI_2(),
+    Robot.smartPID.getEntryD_2(),
+    Robot.smartPID.getEntryF_2());
   
-    Robot.shooter.setShooterVelocity(Robot.smartPID.getEntrySetPoint());
+    Robot.shooter.setShooterVelocity(Robot.smartPID.getEntrySetPoint(),Robot.smartPID.getEntrySetPoint_2());
   }
 
   // Called once the command ends or is interrupted.
