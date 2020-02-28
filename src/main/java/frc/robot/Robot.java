@@ -72,6 +72,7 @@ public class Robot extends TimedRobot {
     pnuematics = new Pnuematics();
     shooter = new Shooter();
     smartPID = new SmartPID();
+    intake = new Intake();
     /*
     endGame = new EndGame();
     hopper = new Hopper();

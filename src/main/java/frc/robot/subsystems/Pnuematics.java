@@ -19,11 +19,13 @@ public class Pnuematics extends SubsystemBase {
 
   //public Compressor airPump;
   private DoubleSolenoid gearShifter;
-
+  private DoubleSolenoid intakeMover;
   public Pnuematics() {
     //airPump = new Compressor(Constants.AIR_PUMP_CAN);
     gearShifter = new DoubleSolenoid(Constants.AIR_PUMP_CAN, Constants.DRIVE_SHIFTER_PCM_A, Constants.DRIVE_SHIFTER_PCM_B);
+    intakeMover = new DoubleSolenoid(Constants.AIR_PUMP_CAN, Constants.INTAKE_PCM_A, Constants.INTAKE_PCM_B);
     setShiftLow();
+    setIntakeIn();
   }
 
   @Override
@@ -46,6 +48,23 @@ public class Pnuematics extends SubsystemBase {
       this.setShiftLow();
     } else {
       this.setShifterHigh();
+    }
+  }
+  public void setIntakeIn() {
+    gearShifter.set(Value.kReverse);
+  }
+
+  public void setIntakeOut() {
+    gearShifter.set(Value.kForward);
+  }
+  public Value getIntakePCM() {
+    return intakeMover.get();
+  }
+  public void changeIntakeMode() {
+    if (this.getIntakePCM() == Value.kReverse) {
+      this.setIntakeIn();
+    } else {
+      this.setIntakeOut();
     }
   }
 }

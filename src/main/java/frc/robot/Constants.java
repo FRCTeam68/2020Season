@@ -118,6 +118,8 @@ public final class Constants {
 
     public static final int DRIVE_SHIFTER_PCM_A = 1;
     public static final int DRIVE_SHIFTER_PCM_B = 0;
+    public static final int INTAKE_PCM_A = 2;
+    public static final int INTAKE_PCM_B = 3;
     public static final int AIR_PUMP_CAN = 16;
 
     // shooter subsystem

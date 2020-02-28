@@ -7,7 +7,6 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -24,6 +23,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 
 public class Shooter extends SubsystemBase {
   /**
@@ -37,15 +37,8 @@ public class Shooter extends SubsystemBase {
   private CANEncoder shooterWheel2Enc;
   private CANPIDController pidController1;
   private CANPIDController pidController2;
-  
-  private NetworkTableEntry entryP;
-  private NetworkTableEntry entryI;
-  private NetworkTableEntry entryD;
-  private NetworkTableEntry entryF;
-  private NetworkTableEntry entrySetPoint;
-
-
-
+  private SimpleMotorFeedforward smFF_pid1;
+  private SimpleMotorFeedforward smFF_pid2;
 
   public Shooter() {
     shooterWheel1 = new CANSparkMax(Constants.SHOOTER_WHEELSPINNER_1, MotorType.kBrushless);
@@ -104,28 +97,24 @@ public class Shooter extends SubsystemBase {
   }
 
 
-  public void setShooterPID(double p, double i, double d, double f, double p_2, double i_2, double d_2, double f_2) {
+  public void setShooterPID(double p, double i, double d, double p_2, double i_2, double d_2) {
     pidController1.setP(p);
     pidController1.setI(i);
     pidController1.setD(d);
-    pidController1.setFF(f); // CALCULATED F = .0002 for 100% and F = .000266667 for 75%
     pidController2.setP(p_2);
     pidController2.setI(i_2);
     pidController2.setD(d_2);
-    pidController2.setFF(f_2);
     pidController2.setOutputRange(-1, 1);
     pidController1.setOutputRange(-1, 1);
   }
 
   public void setShooterVelocity(double shooterVelocity, double shooterVelocity_2) {
-
-    pidController1.setReference(-shooterVelocity, ControlType.kVelocity);
-    pidController2.setReference(shooterVelocity_2, ControlType.kVelocity);
+    // the value for pidController1 is - because it is backward
+    pidController1.setReference(-shooterVelocity, ControlType.kVelocity, 0, smFF_pid1.calculate(shooterVelocity / 60, (shooterVelocity - shooterWheel1Enc.getVelocity()) / 60));
+    pidController2.setReference(shooterVelocity_2, ControlType.kVelocity, 0, smFF_pid2.calculate(shooterVelocity_2 / 60, (shooterVelocity_2 - shooterWheel2Enc.getVelocity()) / 60));
+    
   }
   public void zeroEncoders(){
     shooterAngle.setSelectedSensorPosition(0);
   }
-  
-
-
 }

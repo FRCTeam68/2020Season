@@ -10,8 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants;
-import frc.robot.commands.SetShooterAngle;
-import frc.robot.commands.SetShooterSpeed;
+import frc.robot.commands.ChangeIntakePos;
 import frc.robot.commands.ShiftGears;
 import frc.robot.commands.setShooterVelocity;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
@@ -36,6 +35,8 @@ public class RobotContainer {
   JoystickButton xboxDriveRT;
   JoystickButton xboxDriveRB;
   JoystickButton xboxManipX;
+  JoystickButton xboxManipCircle;
+
 
   
 
@@ -55,6 +56,7 @@ public class RobotContainer {
     configureButtonBindings();
     xboxDriveRT.whenPressed(new ShiftGears());
     xboxManipX.whenPressed(new setShooterVelocity());
+    xboxManipCircle.whenPressed(new ChangeIntakePos());
   }
 
   /** 
@@ -68,6 +70,7 @@ public class RobotContainer {
     xboxDriveRB = new JoystickButton(xboxDrive, Constants.XBOX_DRIVE_RB);
     xboxDriveRT = new JoystickButton(xboxDrive, Constants.XBOX_DRIVE_RT_BUTTON);
     xboxManipX = new JoystickButton(xboxManipulator, Constants.XBOX_MANIPULATE_X);
+    xboxManipCircle = new JoystickButton(xboxManipulator, Constants.XBOX_MANIPULATE_CIRCLE);
 
   }
 
