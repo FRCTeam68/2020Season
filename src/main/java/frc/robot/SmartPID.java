@@ -9,7 +9,6 @@ package frc.robot;
 
 import java.util.Map;
 
-
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -28,28 +27,40 @@ public class SmartPID {
     NetworkTableEntry entry_f = Shuffleboard.getTab("SmartPID").add("kFeedForward", 0)
             .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 10)).getEntry();
     NetworkTableEntry entry_setpoint = Shuffleboard.getTab("SmartPID").add("kSetPoint", 0)
-            .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1000)).getEntry();
+            .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 10000)).getEntry();
     NetworkTableEntry entry_iZone = Shuffleboard.getTab("SmartPID").add("kiZone", 0)
             .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 10)).getEntry();
-    NetworkTableEntry entry_p_2 = Shuffleboard.getTab("SmartPID").add("kProportion", 0)
+
+    NetworkTableEntry entry_p_2 = Shuffleboard.getTab("SmartPID").add("kProportion_2", 0)
             .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 10)).getEntry();
-    NetworkTableEntry entry_i_2 = Shuffleboard.getTab("SmartPID").add("kIntegral", 0)
+    NetworkTableEntry entry_i_2 = Shuffleboard.getTab("SmartPID").add("kIntegral_2", 0)
             .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 10)).getEntry();
-    NetworkTableEntry entry_d_2 = Shuffleboard.getTab("SmartPID").add("kDerivitive", 0)
+    NetworkTableEntry entry_d_2 = Shuffleboard.getTab("SmartPID").add("kDerivitive_2", 0)
             .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 10)).getEntry();
-    NetworkTableEntry entry_f_2 = Shuffleboard.getTab("SmartPID").add("kFeedForward", 0)
+    NetworkTableEntry entry_f_2 = Shuffleboard.getTab("SmartPID").add("kFeedForward_2", 0)
             .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 10)).getEntry();
-    NetworkTableEntry entry_setpoint_2 = Shuffleboard.getTab("SmartPID").add("kSetPoint", 0)
+    NetworkTableEntry entry_setpoint_2 = Shuffleboard.getTab("SmartPID").add("kSetPoint_2", 0)
             .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1000)).getEntry();
-    NetworkTableEntry entry_iZone_2 = Shuffleboard.getTab("SmartPID").add("kiZone", 0)
+    NetworkTableEntry entry_iZone_2 = Shuffleboard.getTab("SmartPID").add("kiZone_2", 0)
             .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 10)).getEntry();
 
+    NetworkTableEntry entry_p_3 = Shuffleboard.getTab("SmartPID").add("kProportion_3", 0)
+            .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 10)).getEntry();
+    NetworkTableEntry entry_i_3 = Shuffleboard.getTab("SmartPID").add("kIntegral_3", 0)
+            .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 10)).getEntry();
+    NetworkTableEntry entry_d_3 = Shuffleboard.getTab("SmartPID").add("kDerivitive_3", 0)
+            .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 10)).getEntry();
+    NetworkTableEntry entry_f_e = Shuffleboard.getTab("SmartPID").add("kFeedForward_3", 0)
+            .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 10)).getEntry();
+    NetworkTableEntry entry_setpoint_3 = Shuffleboard.getTab("SmartPID").add("kSetPoint_3", 0)
+            .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1000)).getEntry();
+    NetworkTableEntry entry_iZone_3 = Shuffleboard.getTab("SmartPID").add("kiZone_3", 0)
+            .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 10)).getEntry();
 
     /**
-     * @param
-     * These are prebuilt widgets that are already integrated into the
-     * Shuffleboard app
-    */
+     * @param These are prebuilt widgets that are already integrated into the
+     *              Shuffleboard app
+     */
     public double getEntrySetPoint() {
         double rpm = entry_setpoint.getDouble(0);
         return rpm;
@@ -79,6 +90,7 @@ public class SmartPID {
         double iZone = entry_iZone.getDouble(0);
         return iZone;
     }
+
     public double getEntrySetPoint_2() {
         double rpm_2 = entry_setpoint_2.getDouble(0);
         return rpm_2;
@@ -108,21 +120,25 @@ public class SmartPID {
         double iZone_2 = entry_iZone_2.getDouble(0);
         return iZone_2;
     }
-    
-    /** 
+    public double getEntrySetPoint_3() {
+        double rpm_3 = entry_setpoint_3.getDouble(0);
+        return rpm_3;
+    }
+    /**
      * 
-     * THIS CUSTOM ENTRY CURRENTLY IS IN A NON WORKiNG STATE
-    * This will create a network table that will return the value that has
-    * been set in the shuffle board app, this way you can dynamically tune PID
-    * without having to restart the robot and redeploy code
-    * @param entry The network table entry that will create the dashboard widget
-    * @param VarName This string wll be the name of the dashboard widget
-    * @param min The minimum input of the dashboard widget
-    * @param max The maximum input of the dashboard widget
-    */
-    public double createCustomEntry(NetworkTableEntry entry ,String VarName,double min,double max){
-        entry =  Shuffleboard.getTab("SmartPID").add(VarName, 0)
-        .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", min, "max", max)).getEntry();
+     * THIS CUSTOM ENTRY CURRENTLY IS IN A NON WORKiNG STATE This will create a
+     * network table that will return the value that has been set in the shuffle
+     * board app, this way you can dynamically tune PID without having to restart
+     * the robot and redeploy code
+     * 
+     * @param entry   The network table entry that will create the dashboard widget
+     * @param VarName This string wll be the name of the dashboard widget
+     * @param min     The minimum input of the dashboard widget
+     * @param max     The maximum input of the dashboard widget
+     */
+    public double createCustomEntry(NetworkTableEntry entry, String VarName, double min, double max) {
+        entry = Shuffleboard.getTab("SmartPID").add(VarName, 0).withWidget(BuiltInWidgets.kNumberSlider)
+                .withProperties(Map.of("min", min, "max", max)).getEntry();
         double entryValue = entry.getDouble(0);
         return entryValue;
     }

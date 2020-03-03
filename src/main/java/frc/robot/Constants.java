@@ -70,10 +70,11 @@ public final class Constants {
     public static final double PID_I = 0.0;
     public static final double PID_D = 0.0;
     //shooter velocity
-    public static final double SHOOTER_PID_F = 0.03; // 0.025
-    public static final double SHOOTER_PID_P = .4;
+    public static final double SHOOTER_PID_F = 0.001; // 0.025
+    public static final double SHOOTER_PID_P = 0.0;
     public static final double SHOOTER_PID_I = 0.0;
     public static final double SHOOTER_PID_D = 0.0;
+
 
     // drive motor values
 
@@ -107,9 +108,9 @@ public final class Constants {
     public static final double MAX_SPEED = 17;
     public static final int ENCODER_TICK_LEFT_REVOLUTION = 36950; // -24427
     public static final int ENCODER_TICK_RIGHT_REVOLUTION = 36950; // 24508
-    public static final double AUTON_DISTANCE_KP = 8; // .08
+    public static final double AUTON_DISTANCE_KP = 5.8;// .08
     public static final double AUTON_DISTANCE_KI = 0;
-    public static final double AUTON_DISTANCE_KD = 1.23;
+    public static final double AUTON_DISTANCE_KD = 2;
     public static final double AUTON_ANGLE_KP = 0;// SET THESE VALUES
     public static final double AUTON_ANGLE_KI = 0;
     public static final double AUTON_ANGLE_KD = 0;
@@ -129,6 +130,17 @@ public final class Constants {
     public static final int SHOOTER_ANGLE = 11;
     public static final int SHOOTER_FEEDER = 7;
     public static final int SHOOTER_PID_SLOT = 0;
+    public static final int SHOOTER_LIMIT_SWITCH = 0;
+    public static final double SHOOTER_ANGLE_KF = 0.013;
+    public static final double SHOTOER_ANGLE_KP = .01;
+    public static final double SHOOTER_MEDIUM_TICKS = -14000;
+    public static final double SHOOTER_LOW_TICKS = -10000;
+    public static final double SHOOTER_CURVE_SIDE = 1000;
+    public static final double SHOOTER_CURVE_OTHER = 200;
+    public static final double SHOOTER_LOW_SPEED_LEFT = 675;
+    public static final double SHOOTER_LOW_SPEED_RIGHT = 220;
+    public static final double SHOOTER_MEDIUM_SPEED_LEFT = 630;
+    public static final double SHOOTER_MEDIUM_SPEED_RIGHT = 110;
 
     //endgame subsystem
     public static final int ENDGAME_WINCH_1 = 0;
@@ -136,10 +148,12 @@ public final class Constants {
     public static final int ENDGAME_SERVO = 0;
     
     //Hopper subsystem
-    public static final int HOPPER_AGITATOR = 0;
+    public static final int HOPPER_AGITATOR1 = 5;
+    public static final int HOPPER_AGITATOR2 = 6;
+
 
     //Intake Subsystem
-    public static final int INTAKE_MOTOR = 0;
+    public static final int INTAKE_MOTOR = 12;
     //spinner subsystem
     public static final int SPINNER_MOTOR = 0;
 }

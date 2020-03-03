@@ -7,7 +7,6 @@
 
 package frc.robot;
 
-
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -20,6 +19,11 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Pnuematics;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Vision;
+import frc.paths.Auton1;
+import frc.paths.Auton1p1;
+import frc.paths.Auton1p2;
+import frc.paths.FullAuton;
+import frc.paths.FullAutonp2;
 import frc.paths.bruh10;
 import frc.robot.commands.PathFollower;
 //import frc.robot.subsystems.DriveTrainAuton;
@@ -54,6 +58,7 @@ public class Robot extends TimedRobot {
 
   CommandBase autonomousCommand;
 
+  CommandBase autonomousCommandp2;
 
 
   /**
@@ -73,6 +78,8 @@ public class Robot extends TimedRobot {
     shooter = new Shooter();
     smartPID = new SmartPID();
     intake = new Intake();
+    hopper = new Hopper();
+
     /*
     endGame = new EndGame();
     hopper = new Hopper();
@@ -126,7 +133,9 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
 
     driveTrain.ResetEncoders();
-    autonomousCommand = new PathFollower(new bruh10());
+    autonomousCommand = new PathFollower(new FullAuton()).andThen(new PathFollower(new FullAutonp2()).reverse());
+    //autonomousCommandp2 = new PathFollower(new Auton1p2());
+
     if(autonomousCommand != null){
       autonomousCommand.schedule();
     }
@@ -144,6 +153,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
     driveTrain.ResetEncoders();
+    shooter.zeroEncoders();
     driveTrain.resetYaw(); 
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to

@@ -9,14 +9,16 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants; 
+import frc.robot.Constants;
+
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import frc.robot.Robot;
 import frc.robot.commands.*;
 
 public class Intake extends SubsystemBase {
 
-  private WPI_VictorSPX intakeMotor;
+  private WPI_TalonSRX intakeMotor;
   
   public static Intake intake;
   /**
@@ -29,7 +31,7 @@ public class Intake extends SubsystemBase {
     return intake;
   } 
   public Intake() {
-    intakeMotor = new WPI_VictorSPX(Constants.INTAKE_MOTOR);
+    intakeMotor = new WPI_TalonSRX(Constants.INTAKE_MOTOR);
     intakeMotor.configPeakOutputForward(1);
     intakeMotor.configPeakOutputReverse(-1);
 

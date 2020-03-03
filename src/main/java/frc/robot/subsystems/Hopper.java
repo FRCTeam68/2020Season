@@ -15,14 +15,22 @@ public class Hopper extends SubsystemBase {
   /**
    * Creates a new Hopper.
    */
-  WPI_VictorSPX agitator;
+  WPI_VictorSPX agitator1;
+  WPI_VictorSPX agitator2;
+
   public Hopper() {
-  agitator = new WPI_VictorSPX(Constants.HOPPER_AGITATOR);
-  agitator.setSensorPhase(false);
+  agitator1 = new WPI_VictorSPX(Constants.HOPPER_AGITATOR1);
+  agitator2 = new WPI_VictorSPX(Constants.HOPPER_AGITATOR2);
+  agitator1.setSensorPhase(false);
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+  }
+
+  public void setAgitatorSpeed(double speed, double speed2){
+    agitator1.set(speed);
+    agitator2.set(speed2);
   }
 }

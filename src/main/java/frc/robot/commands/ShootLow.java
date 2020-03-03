@@ -8,12 +8,14 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
+import frc.robot.Robot;
 
-public class SetShooterAngle extends CommandBase {
+public class ShootLow extends CommandBase {
   /**
-   * Creates a new SetShooterAngle.
+   * Creates a new ShootLow.
    */
-  public SetShooterAngle() {
+  public ShootLow() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -23,16 +25,10 @@ public class SetShooterAngle extends CommandBase {
   }
 
   // Called every time the scheduler runs while the command is scheduled.
-  
   @Override
   public void execute() {
-    /*
-    Robot.shooter.setAnglePIDF(Robot.smartPID.getEntryP(),
-    Robot.smartPID.getEntryI(),
-    Robot.smartPID.getEntryD(),
-    Robot.smartPID.getEntryF());
-    Robot.shooter.setShooterAngle(Robot.smartPID.getEntrySetPoint());
-    */
+    Robot.shooter.setShooterAngle(Constants.SHOOTER_LOW_TICKS);
+    Robot.shooter.setShooterVelocity(Constants.SHOOTER_LOW_SPEED_LEFT,Constants.SHOOTER_LOW_SPEED_RIGHT);
   }
 
   // Called once the command ends or is interrupted.
