@@ -117,4 +117,7 @@ public class Shooter extends SubsystemBase {
     shooterAngle.setSelectedSensorPosition(10);
     feeder.set(0);
   }
+  public int getEncoderTicks(){
+    return shooterAngle.getSelectedSensorPosition();
+  }
 }

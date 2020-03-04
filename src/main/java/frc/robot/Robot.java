@@ -8,8 +8,10 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.CommandGroupBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 //import frc.robot.commands.auton;
 import frc.robot.subsystems.DriveTrain;
@@ -23,6 +25,7 @@ import frc.paths.FullAuton;
 import frc.paths.FullAutonp2;
 import frc.robot.commands.PathFollower;
 //import frc.robot.subsystems.DriveTrainAuton;
+import frc.robot.commands.RunAuton;
 
 
 /**
@@ -52,9 +55,8 @@ public class Robot extends TimedRobot {
 
   public static SmartPID smartPID;
 
-  CommandBase autonomousCommand;
+  CommandGroup autonomousCommand;
 
-  CommandBase autonomousCommandp2;
 
 
   /**
@@ -130,11 +132,11 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
 
     driveTrain.ResetEncoders();
-    autonomousCommand = new PathFollower(new FullAuton()).andThen(new PathFollower(new FullAutonp2()).reverse());
+    autonomousCommand = new RunAuton();
     //autonomousCommandp2 = new PathFollower(new Auton1p2());
 
     if(autonomousCommand != null){
-      autonomousCommand.schedule();
+      autonomousCommand.start();
     }
   }
 

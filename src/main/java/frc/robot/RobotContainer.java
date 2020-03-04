@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants;
 import frc.robot.commands.ChangeIntakePos;
+import frc.robot.commands.LiftAdd1Deg;
+import frc.robot.commands.LiftMinus1Deg;
 import frc.robot.commands.ShiftGears;
 import frc.robot.commands.ShootLow;
 import frc.robot.commands.ShootMedium;
@@ -40,8 +42,9 @@ public class RobotContainer {
   JoystickButton xboxManipCircle;
   JoystickButton xboxManipRS;
   JoystickButton xboxManipSquare;
+  JoystickButton xboxManipLT;
+  JoystickButton xboxManipRT;
 
-  
 
   //Command shiftGear = new ShiftGears();
 
@@ -64,6 +67,9 @@ public class RobotContainer {
     xboxManipSquare.whileHeld(new Zero());
     xboxManipX.whenReleased(new Zero());
     xboxManipCircle.whenReleased(new Zero());
+    xboxManipLT.whenPressed(new LiftMinus1Deg());
+    xboxManipRT.whenPressed(new LiftAdd1Deg());
+
   }
 
   /** 
@@ -81,6 +87,8 @@ public class RobotContainer {
     xboxManipCircle = new JoystickButton(xboxManipulator, Constants.XBOX_MANIPULATE_CIRCLE);
     xboxManipRS = new JoystickButton(xboxManipulator, Constants.XBOX_MANIPULATE_SR);
     xboxManipSquare = new JoystickButton(xboxManipulator, Constants.XBOX_MANIPULATE_SQUARE);
+    xboxManipLT = new JoystickButton(xboxManipulator, Constants.XBOX_MANIPULATE_LT);
+    xboxManipRT = new JoystickButton(xboxManipulator, Constants.XBOX_MANIPULATE_RT);
 
   }
 

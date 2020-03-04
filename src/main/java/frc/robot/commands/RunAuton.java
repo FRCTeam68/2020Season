@@ -8,19 +8,28 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.paths.FullAuton;
 import frc.paths.FullAutonp2;
+import frc.paths.SixBallp1;
+import frc.paths.SixBallp2;
 
 public class RunAuton extends CommandGroup {
   /**
    * Add your docs here.
    */
   public RunAuton() {
-    new ParallelCommandGroup(new ChangeIntakePos(), new IntakeCommand());
-    new SequentialCommandGroup(new PathFollower(new FullAuton())
-    .andThen(new PathFollower(new FullAutonp2())));
-    new ParallelCommandGroup(new ShootLow(),new SetAgitator());
+    new SequentialCommandGroup(new PathFollower(new SixBallp1()));
+    new ParallelCommandGroup(new ShootLow(), new SetAgitator());
+    new WaitCommand(3);
+    new ParallelCommandGroup(new Zero());
+    new ParallelCommandGroup(new ChangeIntakePos(), new SetIntakeWithDouble(1));
+    new SequentialCommandGroup(new PathFollower(new SixBallp2()));
+    new ParallelCommandGroup(new SetIntakeWithDouble(0));
+    new ParallelCommandGroup(new ShootLow(), new SetAgitator());
+    new WaitCommand(3);
+    new ParallelCommandGroup(new Zero());
     }
 }
