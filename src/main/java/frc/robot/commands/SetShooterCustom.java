@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.Robot;
 
 public class SetShooterCustom extends CommandBase {
@@ -31,7 +32,7 @@ public class SetShooterCustom extends CommandBase {
   public void execute() {
     
     Robot.shooter.setShooterAngle(Robot.smartPID.getEntrySetPoint());
-    Robot.shooter.setShooterVelocity(Robot.smartPID.getEntrySetPoint_2(), Robot.smartPID.getEntrySetPoint_3());
+    Robot.shooter.setShooterVelocity(Robot.smartPID.getEntrySetPoint_2(), Robot.smartPID.getEntrySetPoint_3(), Constants.SHOOTER_FEEDER_SPEED);
     
     if(Robot.shooter.getLimitSwitch()){
       SmartDashboard.putBoolean("Limit Switch Hit", true);

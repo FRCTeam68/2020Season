@@ -141,10 +141,10 @@ public final class Constants {
     public static final double SHOOTER_LOW_SPEED_RIGHT = 220;
     public static final double SHOOTER_MEDIUM_SPEED_LEFT = 630;
     public static final double SHOOTER_MEDIUM_SPEED_RIGHT = 110;
+    public static final double SHOOTER_FEEDER_SPEED = .5;
 
     //endgame subsystem
-    public static final int ENDGAME_WINCH_1 = 0;
-    public static final int ENDGAME_WINCH_2 = 0;
+    public static final int ENDGAME_WINCH = 30;
     public static final int ENDGAME_SERVO = 0;
     
     //Hopper subsystem

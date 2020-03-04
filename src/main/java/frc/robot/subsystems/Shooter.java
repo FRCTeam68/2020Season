@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.commands.SetShooterCustom;
-import frc.robot.commands.SetShooterSpeed;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -24,7 +23,6 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 
 public class Shooter extends SubsystemBase {
   /**
@@ -38,8 +36,10 @@ public class Shooter extends SubsystemBase {
   private CANEncoder shooterWheel2Enc;
   private CANPIDController pidController1;
   private CANPIDController pidController2;
+  /*
   private SimpleMotorFeedforward smFF_pid1;
   private SimpleMotorFeedforward smFF_pid2;
+  */
   private DigitalInput limitSwitch;
 
   public Shooter() {
@@ -104,11 +104,11 @@ public class Shooter extends SubsystemBase {
   }
   
 
-  public void setShooterVelocity(double shooterVelocity, double shooterVelocity_2) {
+  public void setShooterVelocity(double shooterVelocity, double shooterVelocity_2, double feederSpeed) {
     // the value for pidController1 is - because it is backward
     pidController1.setReference(-shooterVelocity, ControlType.kVelocity);
     pidController2.setReference(shooterVelocity_2, ControlType.kVelocity);
-    feeder.set(.5);
+    feeder.set(feederSpeed);
   }
   public void setFeederZero(){
     feeder.set(0);

@@ -11,12 +11,10 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants;
 import frc.robot.commands.ChangeIntakePos;
-import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.ShiftGears;
 import frc.robot.commands.ShootLow;
 import frc.robot.commands.ShootMedium;
 import frc.robot.commands.Zero;
-import frc.robot.commands.setShooterVelocity;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 

@@ -19,12 +19,8 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Pnuematics;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Vision;
-import frc.paths.Auton1;
-import frc.paths.Auton1p1;
-import frc.paths.Auton1p2;
 import frc.paths.FullAuton;
 import frc.paths.FullAutonp2;
-import frc.paths.bruh10;
 import frc.robot.commands.PathFollower;
 //import frc.robot.subsystems.DriveTrainAuton;
 
@@ -79,6 +75,7 @@ public class Robot extends TimedRobot {
     smartPID = new SmartPID();
     intake = new Intake();
     hopper = new Hopper();
+    endGame = new EndGame();
 
     /*
     endGame = new EndGame();

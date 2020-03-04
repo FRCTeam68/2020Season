@@ -29,7 +29,7 @@ public class Zero extends CommandBase {
   @Override
   public void execute() {
     Robot.shooter.setShooterAngle(0);
-    Robot.shooter.setShooterVelocity(0, 0);
+    Robot.shooter.setShooterVelocity(0, 0, 0);
     Robot.shooter.setFeederZero();
     Robot.hopper.setAgitatorSpeed(0, 0);
     if(Robot.shooter.getLimitSwitch()){

@@ -8,14 +8,13 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.Robot;
 
-public class ShootLow extends CommandBase {
+public class SetAgitator extends CommandBase {
   /**
-   * Creates a new ShootLow.
+   * Creates a new SetAgitator.
    */
-  public ShootLow() {
+  public SetAgitator() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -27,8 +26,7 @@ public class ShootLow extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.shooter.setShooterAngle(Constants.SHOOTER_LOW_TICKS);
-    Robot.shooter.setShooterVelocity(Constants.SHOOTER_LOW_SPEED_LEFT,Constants.SHOOTER_LOW_SPEED_RIGHT, Constants.SHOOTER_FEEDER_SPEED);
+    Robot.hopper.setAgitatorSpeed(-.75,.5);
   }
 
   // Called once the command ends or is interrupted.

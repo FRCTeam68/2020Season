@@ -29,7 +29,7 @@ public class ShootMedium extends CommandBase {
   public void execute() {
     Robot.shooter.setShooterAngle(Constants.SHOOTER_MEDIUM_TICKS);
     Robot.hopper.setAgitatorSpeed(-.75,.5);
-    Robot.shooter.setShooterVelocity(Constants.SHOOTER_MEDIUM_SPEED_LEFT,Constants.SHOOTER_MEDIUM_SPEED_RIGHT);
+    Robot.shooter.setShooterVelocity(Constants.SHOOTER_MEDIUM_SPEED_LEFT,Constants.SHOOTER_MEDIUM_SPEED_RIGHT, Constants.SHOOTER_FEEDER_SPEED);
 
   }
 

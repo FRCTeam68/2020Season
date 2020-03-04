@@ -18,6 +18,9 @@ public class RunAuton extends CommandGroup {
    * Add your docs here.
    */
   public RunAuton() {
-    new ParallelCommandGroup(new ChangeIntakePos(), new IntakeCommand()
+    new ParallelCommandGroup(new ChangeIntakePos(), new IntakeCommand());
+    new SequentialCommandGroup(new PathFollower(new FullAuton())
+    .andThen(new PathFollower(new FullAutonp2())));
+    new ParallelCommandGroup(new ShootLow(),new SetAgitator());
     }
 }
