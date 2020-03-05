@@ -174,9 +174,11 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("Target", Robot.vision.getTarget());
     SmartDashboard.putNumber("Right Enc", Robot.driveTrain.getRightEnc());
     SmartDashboard.putNumber("Left Enc", Robot.driveTrain.getLeftEnc());
-    SmartDashboard.putNumber("LimelightX", Robot.vision.getXValue());
-    SmartDashboard.putNumber("LimelightY", Robot.vision.getYValue());
-    SmartDashboard.putNumber("LimelightArea", Robot.vision.getArea());
+
+    SmartDashboard.putNumber("Distance to Target", Robot.vision.calcDistance());
+  //SmartDashboard.putNumber("LimelightX", Robot.vision.getXValue());
+  //SmartDashboard.putNumber("LimelightY", Robot.vision.getYValue());
+  //SmartDashboard.putNumber("LimelightArea", Robot.vision.getArea());
 
     //(SmartDashboard.getKeys());
   }
