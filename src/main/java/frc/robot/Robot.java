@@ -170,13 +170,21 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Right Enc", Robot.driveTrain.getRightEnc());
     SmartDashboard.putNumber("Left Enc", Robot.driveTrain.getLeftEnc());
 
-    SmartDashboard.putNumber("Distance to Target", Robot.vision.calcDistance());
+    if(Robot.m_robotContainer.getXboxDriveRB() == true){
+      SmartDashboard.putNumber("Distance to Target", Robot.vision.calcDistance());
+    }
+    else{
+      SmartDashboard.putNumber("Distance to Target", 0);
+    }
+    
   //SmartDashboard.putNumber("LimelightX", Robot.vision.getXValue());
   //SmartDashboard.putNumber("LimelightY", Robot.vision.getYValue());
   //SmartDashboard.putNumber("LimelightArea", Robot.vision.getArea());
 
     //(SmartDashboard.getKeys());
   }
+
+  //Robbie was here
 
   @Override
   public void testInit() {

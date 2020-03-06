@@ -14,6 +14,7 @@ public class LiftAdd1Deg extends CommandBase {
   /**
    * Creates a new LiftAdd1Deg.
    */
+  private double currentAngle;
   public LiftAdd1Deg() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -21,12 +22,14 @@ public class LiftAdd1Deg extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    currentAngle = Robot.shooter.getEncoderTicks();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.shooter.setShooterAngle(Robot.shooter.getEncoderTicks() -1000);
+    
+    //Robot.shooter.setShooterAngle(currentAngle - 1000);
 
     
   }
