@@ -55,8 +55,8 @@ public class Robot extends TimedRobot {
 
   public static SmartPID smartPID;
 
-  CommandGroup autonomousCommand;
-
+  CommandGroupBase cb;
+  RunAuton ra;
 
 
   /**
@@ -132,12 +132,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
 
     driveTrain.ResetEncoders();
-    autonomousCommand = new RunAuton();
-    //autonomousCommandp2 = new PathFollower(new Auton1p2());
 
-    if(autonomousCommand != null){
-      autonomousCommand.start();
-    }
   }
 
   /**
