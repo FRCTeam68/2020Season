@@ -15,6 +15,7 @@ public class ShootMedium extends CommandBase {
   /**
    * Creates a new ShootMedium.
    */
+  private Boolean finished = false;
   public ShootMedium() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -30,7 +31,7 @@ public class ShootMedium extends CommandBase {
     Robot.shooter.setShooterAngle(Constants.SHOOTER_MEDIUM_TICKS);
     Robot.hopper.setAgitatorSpeed(-.75,.5);
     Robot.shooter.setShooterVelocity(Constants.SHOOTER_MEDIUM_SPEED_LEFT,Constants.SHOOTER_MEDIUM_SPEED_RIGHT, Constants.SHOOTER_FEEDER_SPEED);
-
+    finished = true;
   }
 
   // Called once the command ends or is interrupted.
@@ -41,6 +42,6 @@ public class ShootMedium extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return finished;
   }
 }

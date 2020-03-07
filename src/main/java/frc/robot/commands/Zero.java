@@ -15,7 +15,7 @@ public class Zero extends CommandBase {
   /**
    * Creates a new Zero.
    */
-  boolean isDone;
+  boolean isDone = false;
   public Zero() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -39,6 +39,7 @@ public class Zero extends CommandBase {
       SmartDashboard.putBoolean("Limit Switch Hit", false);
 
     }
+    isDone = true;
   }
 
   // Called once the command ends or is interrupted.

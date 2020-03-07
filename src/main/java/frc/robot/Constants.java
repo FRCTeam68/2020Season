@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.I2C;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
  * numerical or boolean constants. This class should not be used for any other
@@ -156,4 +158,7 @@ public final class Constants {
     public static final int INTAKE_MOTOR = 12;
     //spinner subsystem
     public static final int SPINNER_MOTOR = 0;
+    //dj spinner sub
+    public static final I2C.Port i2cPort = I2C.Port.kOnboard;
+
 }

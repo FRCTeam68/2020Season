@@ -8,11 +8,11 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.CommandGroup;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.CommandGroupBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.subsystems.DJSpinner;
 //import frc.robot.commands.auton;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.EndGame;
@@ -21,12 +21,10 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Pnuematics;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Vision;
-import frc.paths.FullAuton;
-import frc.paths.FullAutonp2;
-import frc.robot.commands.PathFollower;
-//import frc.robot.subsystems.DriveTrainAuton;
-import frc.robot.commands.RunAuton;
+import frc.robot.commands.RunAutonSequence;
+import edu.wpi.first.wpilibj.DriverStation;
 
+//import frc.robot.subsystems.DriveTrainAuton;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -40,7 +38,7 @@ public class Robot extends TimedRobot {
   public static RobotContainer m_robotContainer;
 
   public static DriveTrain driveTrain;
-  
+
   public static Pnuematics pnuematics;
 
   public static Vision vision;
@@ -55,9 +53,9 @@ public class Robot extends TimedRobot {
 
   public static SmartPID smartPID;
 
-  CommandGroupBase cb;
-  RunAuton ra;
+  public static DJSpinner djspinner;
 
+  SequentialCommandGroup autonomousCommand;
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -78,17 +76,15 @@ public class Robot extends TimedRobot {
     intake = new Intake();
     hopper = new Hopper();
     endGame = new EndGame();
-
+    djspinner = new DJSpinner();
     /*
-    endGame = new EndGame();
-    hopper = new Hopper();
-    intake = new Intake();
-    shooter = new Shooter();
-    */
+     * endGame = new EndGame(); hopper = new Hopper(); intake = new Intake();
+     * shooter = new Shooter();
+     */
 
-    driveTrain.resetYaw(); 
+    driveTrain.resetYaw();
     shooter.zeroEncoders();
-    
+
   }
 
   /**
@@ -118,7 +114,6 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {
   }
-  
 
   @Override
   public void disabledPeriodic() {
@@ -132,7 +127,10 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
 
     driveTrain.ResetEncoders();
-
+    autonomousCommand = new RunAutonSequence();
+    if (autonomousCommand != null) {
+      autonomousCommand.schedule();
+    }
   }
 
   /**
@@ -140,7 +138,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    SmartDashboard.putNumber("HEADING IN RADS",(Robot.driveTrain.getYAW()-180)*(3.141592654/180));
+    SmartDashboard.putNumber("HEADING IN RADS", (Robot.driveTrain.getYAW() - 180) * (3.141592654 / 180));
     SmartDashboard.putNumber("HEADING IN DEGS", Robot.driveTrain.getYAW());
   }
 
@@ -148,14 +146,11 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
     driveTrain.ResetEncoders();
     shooter.zeroEncoders();
-    driveTrain.resetYaw(); 
+    driveTrain.resetYaw();
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-
-
-
 
   }
 
@@ -164,27 +159,26 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    SmartDashboard.putNumber("HEADING IN RADS",(Robot.driveTrain.getYAW()-180)*(3.141592654/180));
+    SmartDashboard.putNumber("HEADING IN RADS", (Robot.driveTrain.getYAW() - 180) * (3.141592654 / 180));
     SmartDashboard.putNumber("HEADING IN DEGS", Robot.driveTrain.getYAW());
     SmartDashboard.putBoolean("Target", Robot.vision.getTarget());
     SmartDashboard.putNumber("Right Enc", Robot.driveTrain.getRightEnc());
     SmartDashboard.putNumber("Left Enc", Robot.driveTrain.getLeftEnc());
 
-    if(Robot.m_robotContainer.getXboxDriveRB() == true){
+    if (Robot.m_robotContainer.getXboxDriveRB() == true) {
       SmartDashboard.putNumber("Distance to Target", Robot.vision.calcDistance());
-    }
-    else{
+    } else {
       SmartDashboard.putNumber("Distance to Target", 0);
     }
-    
-  //SmartDashboard.putNumber("LimelightX", Robot.vision.getXValue());
-  //SmartDashboard.putNumber("LimelightY", Robot.vision.getYValue());
-  //SmartDashboard.putNumber("LimelightArea", Robot.vision.getArea());
 
-    //(SmartDashboard.getKeys());
+    // SmartDashboard.putNumber("LimelightX", Robot.vision.getXValue());
+    // SmartDashboard.putNumber("LimelightY", Robot.vision.getYValue());
+    // SmartDashboard.putNumber("LimelightArea", Robot.vision.getArea());
+
+    // (SmartDashboard.getKeys());
   }
 
-  //Robbie was here
+  // Robbie was here
 
   @Override
   public void testInit() {

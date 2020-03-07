@@ -8,16 +8,16 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.paths.SixBallp1;
-import frc.paths.SixBallp2;
+import frc.robot.Robot;
+import frc.robot.subsystems.DriveTrain;
 
-public class RunAuton extends CommandBase {
+public class AutonLock extends CommandBase {
   /**
-   * Creates a new RunAuton.
+   * Creates a new AutonLock.
    */
-  public RunAuton() {
+  private Boolean finished = false;
+
+  public AutonLock() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -29,21 +29,8 @@ public class RunAuton extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    new SequentialCommandGroup(new ChangeIntakePos(),
-    new ShootMedium(),
-    );
-    /*
-    new SequentialCommandGroup(new PathFollower(new SixBallp1()));
-    new ParallelCommandGroup(new ShootLow(), new SetAgitator());
-   // new WaitCommand(3);
-    new ParallelCommandGroup(new Zero());
-    new ParallelCommandGroup(new ChangeIntakePos(), new SetIntakeWithDouble(1));
-    new SequentialCommandGroup(new PathFollower(new SixBallp2()));
-    new ParallelCommandGroup(new SetIntakeWithDouble(0));
-    new ParallelCommandGroup(new ShootLow(), new SetAgitator());
-  //  new WaitCommand(3);
-    new ParallelCommandGroup(new Zero());
-    */
+    DriveTrain.getDriveTrain().setSpeedFalcon(Robot.driveTrain.leftVisionAdjusted(),Robot.driveTrain.rightVisionAdjusted());
+    finished = true;
   }
 
   // Called once the command ends or is interrupted.
@@ -54,6 +41,6 @@ public class RunAuton extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return finished;
   }
 }

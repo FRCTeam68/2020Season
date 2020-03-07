@@ -13,6 +13,7 @@ import frc.robot.Constants;
 import frc.robot.commands.ChangeIntakePos;
 import frc.robot.commands.LiftAdd1Deg;
 import frc.robot.commands.LiftMinus1Deg;
+import frc.robot.commands.SetAgitator;
 import frc.robot.commands.ShiftGears;
 import frc.robot.commands.ShootLow;
 import frc.robot.commands.ShootMedium;
@@ -68,7 +69,7 @@ public class RobotContainer {
     xboxManipX.whenReleased(new Zero());
     xboxManipCircle.whenReleased(new Zero());
     xboxManipLT.whenPressed(new LiftMinus1Deg());
-    xboxManipRT.whenPressed(new LiftAdd1Deg());
+    xboxManipRT.whenPressed(new SetAgitator());
 
   }
 

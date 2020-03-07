@@ -8,16 +8,15 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.Robot;
+import frc.robot.subsystems.DriveTrain;
 
-public class ShootLow extends CommandBase {
+public class AutonLockZero extends CommandBase {
   /**
-   * Creates a new ShootLow.
+   * Creates a new AutonLockZero.
    */
-  public ShootLow() {
+  boolean finished = false;
+  public AutonLockZero() {
     // Use addRequirements() here to declare subsystem dependencies.
-    //addRequirements(Robot.shooter);
   }
 
   // Called when the command is initially scheduled.
@@ -28,8 +27,8 @@ public class ShootLow extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.shooter.setShooterAngle(Constants.SHOOTER_LOW_TICKS);
-    Robot.shooter.setShooterVelocity(Constants.SHOOTER_LOW_SPEED_LEFT,Constants.SHOOTER_LOW_SPEED_RIGHT, Constants.SHOOTER_FEEDER_SPEED);
+    DriveTrain.getDriveTrain().setSpeedFalcon(0,0);
+    finished = true;
   }
 
   // Called once the command ends or is interrupted.
@@ -40,6 +39,6 @@ public class ShootLow extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return finished;
   }
 }

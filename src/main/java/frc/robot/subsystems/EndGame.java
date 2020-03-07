@@ -15,7 +15,6 @@ import frc.robot.commands.SetWhinchSpeed;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 //import edu.wpi.first.wpilibj.Servo;
 public class EndGame extends SubsystemBase {
   /**
