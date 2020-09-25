@@ -80,10 +80,10 @@ public final class Constants {
 
     // drive motor values
 
-    public static final int TALONFX_FR = 3;
-    public static final int TALONFX_FL = 1;
-    public static final int TALONFX_BR = 4;
-    public static final int TALONFX_BL = 2;
+    public static final int TALONFX_FR = 11;
+    public static final int TALONFX_FL = 13;
+    public static final int TALONFX_BR = 12;
+    public static final int TALONFX_BL = 14;
 
     // CAN ENCODER
     public static final int CANENCODER_LEFT_DRIVE = 0;
@@ -123,13 +123,13 @@ public final class Constants {
     public static final int DRIVE_SHIFTER_PCM_B = 0;
     public static final int INTAKE_PCM_A = 2;
     public static final int INTAKE_PCM_B = 3;
-    public static final int AIR_PUMP_CAN = 16;
+    public static final int AIR_PUMP_CAN = 0;
 
     // shooter subsystem
 
-    public static final int SHOOTER_WHEELSPINNER_1 = 28;
-    public static final int SHOOTER_WHEELSPINNER_2 = 29;
-    public static final int SHOOTER_ANGLE = 11;
+    public static final int SHOOTER_WHEELSPINNER_1 = 1;
+    public static final int SHOOTER_WHEELSPINNER_2 = 2;
+    public static final int SHOOTER_ANGLE = 8;
     public static final int SHOOTER_FEEDER = 7;
     public static final int SHOOTER_PID_SLOT = 0;
     public static final int SHOOTER_LIMIT_SWITCH = 0;
@@ -155,7 +155,7 @@ public final class Constants {
 
 
     //Intake Subsystem
-    public static final int INTAKE_MOTOR = 12;
+    public static final int INTAKE_MOTOR = 3;
     //spinner subsystem
     public static final int SPINNER_MOTOR = 0;
     //dj spinner sub
