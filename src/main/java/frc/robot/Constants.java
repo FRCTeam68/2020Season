@@ -127,8 +127,8 @@ public final class Constants {
 
     // shooter subsystem
 
-    public static final int SHOOTER_WHEELSPINNER_1 = 1;
-    public static final int SHOOTER_WHEELSPINNER_2 = 30;
+    public static final int SHOOTER_WHEELSPINNER_1 = 6;
+    public static final int SHOOTER_WHEELSPINNER_2 = 2;
     public static final int SHOOTER_ANGLE = 8;
     public static final int SHOOTER_FEEDER = 7;
     public static final int SHOOTER_PID_SLOT = 0;
@@ -146,7 +146,7 @@ public final class Constants {
     public static final double SHOOTER_FEEDER_SPEED = .5;
 
     //endgame subsystem
-    public static final int ENDGAME_WINCH = 6;
+    public static final int ENDGAME_WINCH = 1;
     public static final int ENDGAME_SERVO = 0;
     
     //Hopper subsystem
