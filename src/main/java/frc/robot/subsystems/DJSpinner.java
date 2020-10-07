@@ -13,22 +13,22 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.revrobotics.ColorMatch;
-import com.revrobotics.ColorMatchResult;
-import com.revrobotics.ColorSensorV3;
+//import com.revrobotics.ColorMatch;
+//import com.revrobotics.ColorMatchResult;
+//import com.revrobotics.ColorSensorV3;
 import frc.robot.Constants;
 
 public class DJSpinner extends SubsystemBase {
   /**
    * Creates a new DJSpinner.
    */
-  private final WPI_TalonSRX spinner;
+ // private final WPI_TalonSRX spinner;
 
-  private final ColorSensorV3 sensor;
+ // private final ColorSensorV3 sensor;
 
   private static DJSpinner djSpinner;
   
-
+/*
   private final Color kBlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
   private final Color kGreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
   private final Color kRedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
@@ -36,7 +36,7 @@ public class DJSpinner extends SubsystemBase {
 
   private final ColorMatch m_colorMatcher = new ColorMatch();
   private String colorString;
-
+*/
 
   public static DJSpinner getDJSpinner() {
     if (djSpinner == null) {
@@ -44,7 +44,7 @@ public class DJSpinner extends SubsystemBase {
     }
     return djSpinner;
   }
-
+/*
   public DJSpinner() {
     spinner = new WPI_TalonSRX(Constants.SPINNER_MOTOR);
     spinner.setNeutralMode(NeutralMode.Brake);
@@ -59,17 +59,18 @@ public class DJSpinner extends SubsystemBase {
     m_colorMatcher.addColorMatch(kRedTarget);
     m_colorMatcher.addColorMatch(kYellowTarget);  
   }
-
+*/
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
 
-    Color detectedColor = sensor.getColor();
+  //  Color detectedColor = sensor.getColor();
 
     /**
      * Run the color match algorithm on our detected color
      */
-    ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
+    /*
+     ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
 
     if (match.color == kBlueTarget) {
       colorString = "Blue";
@@ -95,4 +96,6 @@ public class DJSpinner extends SubsystemBase {
   public void spinMotor(double speed){
     spinner.set(speed);
   }
+  */
+}
 }

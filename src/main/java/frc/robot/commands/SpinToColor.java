@@ -27,6 +27,7 @@ public class SpinToColor extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+   /*
     String gameData;
     gameData = DriverStation.getInstance().getGameSpecificMessage();
     if (gameData.length() > 0) {
@@ -69,6 +70,7 @@ public class SpinToColor extends CommandBase {
     } else {
       Robot.djspinner.spinMotor(0);
     }
+    */
   }
 
   // Called once the command ends or is interrupted.
