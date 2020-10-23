@@ -15,6 +15,10 @@ public class DriveWithJoysticks extends CommandBase {
   /**
    * Creates a new DriveWithJoysticks.
    */
+  double leftStick;
+  double rightStick;
+  double rightSpeed;
+  double leftSpeed;
   public DriveWithJoysticks() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(Robot.driveTrain);
@@ -28,13 +32,24 @@ public class DriveWithJoysticks extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
+    leftStick = -Robot.m_robotContainer.getLeftXboxJoystickValue();
+    rightStick = Robot.m_robotContainer.getRightXboxJoystickValueX();
+    if(rightStick > 0 || leftStick == leftStick){
+      rightSpeed = leftStick - rightStick;
+      leftSpeed = leftStick + rightStick;
+    } else if(rightStick < 0 || leftStick == leftStick){
+      leftSpeed = leftStick + rightStick;
+      rightSpeed = leftStick - rightStick;
+    } else {
+      leftSpeed = leftStick;
+      rightSpeed = leftStick;
+    }
     if(Robot.m_robotContainer.getXboxDriveRB() == true){ 
       DriveTrain.getDriveTrain().setSpeedFalcon(Robot.driveTrain.leftVisionAdjusted(),Robot.driveTrain.rightVisionAdjusted());
     }
     else{
 
-      DriveTrain.getDriveTrain().setSpeedFalcon(-Robot.m_robotContainer.getLeftXboxJoystickValue(), -Robot.m_robotContainer.getRightXboxJoystickValue());  
+      DriveTrain.getDriveTrain().setSpeedFalcon(leftSpeed, rightSpeed);  
       }
   }
 

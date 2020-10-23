@@ -108,7 +108,13 @@ public class RobotContainer {
     // Allow for up to 10% of joystick noise
     rightAxis = (Math.abs(rightAxis) < 0.1) ? 0 : rightAxis;
     return rightAxis;
-
+  }
+  public double getRightXboxJoystickValueX() {
+    double rightAxis;
+    rightAxis = xboxDrive.getX(Hand.kRight);
+    // Allow for up to 10% of joystick noise
+    rightAxis = (Math.abs(rightAxis) < 0.1) ? 0 : rightAxis;
+    return rightAxis;
   }
 
   public double getLeftXboxManipulatorJoystickValue() {
