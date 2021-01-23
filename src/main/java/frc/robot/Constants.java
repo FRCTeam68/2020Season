@@ -130,7 +130,7 @@ public final class Constants {
     public static final int SHOOTER_WHEELSPINNER_1 = 6;
     public static final int SHOOTER_WHEELSPINNER_2 = 2;
     public static final int SHOOTER_ANGLE = 8;
-    public static final int SHOOTER_FEEDER = 7;
+    public static final int SHOOTER_FEEDER = 3;
     public static final int SHOOTER_PID_SLOT = 0;
     public static final int SHOOTER_LIMIT_SWITCH = 0;
     public static final double SHOOTER_ANGLE_KF = 0.013;
@@ -155,7 +155,7 @@ public final class Constants {
 
 
     //Intake Subsystem
-    public static final int INTAKE_MOTOR = 3;
+    public static final int INTAKE_MOTOR = 5;
     //spinner subsystem
     public static final int SPINNER_MOTOR = 0;
     //dj spinner sub

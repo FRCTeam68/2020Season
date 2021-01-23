@@ -11,5 +11,13 @@
     "**/.project": true,
     "**/.settings": true,
     "**/.factorypath": true
-  }
+  },
+  "java.completion.guessMethodArguments": true,
+  "java.completion.importOrder": [
+  
+    "java",
+    "javax",
+    "com",
+    "org"
+  ]
 }
