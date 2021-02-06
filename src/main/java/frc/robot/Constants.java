@@ -141,17 +141,17 @@ public final class Constants {
     public static final double SHOOTER_CURVE_OTHER = 200;
     public static final double SHOOTER_LOW_SPEED_LEFT = 675;
     public static final double SHOOTER_LOW_SPEED_RIGHT = 220;
-    public static final double SHOOTER_MEDIUM_SPEED_LEFT = 630;
-    public static final double SHOOTER_MEDIUM_SPEED_RIGHT = 110;
+    public static final double SHOOTER_MEDIUM_SPEED_LEFT = -630;
+    public static final double SHOOTER_MEDIUM_SPEED_RIGHT = -110;
     public static final double SHOOTER_FEEDER_SPEED = .5;
 
-    //endgame subsystem
+    //endgame 20
     public static final int ENDGAME_WINCH = 1;
     public static final int ENDGAME_SERVO = 0;
     
     //Hopper subsystem
-    public static final int HOPPER_AGITATOR1 = 5;
-    public static final int HOPPER_AGITATOR2 = 6;
+    public static final int HOPPER_AGITATOR1 = 251231;//current value unknown
+    public static final int HOPPER_AGITATOR2 = 250000;//current value unknown
 
 
     //Intake Subsystem
