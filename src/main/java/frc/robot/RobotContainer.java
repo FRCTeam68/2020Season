@@ -66,10 +66,11 @@ public class RobotContainer {
     xboxManipCircle.whileHeld(new ShootMedium());
     xboxManipRS.whenPressed(new ChangeIntakePos());
     xboxManipSquare.whileHeld(new Zero());
-    xboxManipX.whenReleased(new Zero());
+    //xboxManipX.whenReleased(new Zero());
     xboxManipCircle.whenReleased(new Zero());
     xboxManipLT.whenPressed(new LiftMinus1Deg());
     xboxManipRT.whenPressed(new SetAgitator());
+    
 
   }
 
@@ -90,12 +91,14 @@ public class RobotContainer {
     xboxManipSquare = new JoystickButton(xboxManipulator, Constants.XBOX_MANIPULATE_SQUARE);
     xboxManipLT = new JoystickButton(xboxManipulator, Constants.XBOX_MANIPULATE_LT);
     xboxManipRT = new JoystickButton(xboxManipulator, Constants.XBOX_MANIPULATE_RT);
+    
 
   }
 
   public double getLeftXboxJoystickValue() {
     double leftAxis;
     leftAxis = xboxDrive.getY(Hand.kLeft);
+
     // Allow for up to 10% of joystick noises\
     leftAxis = (Math.abs(leftAxis) < 0.1) ? 0 : leftAxis;
     return leftAxis;
@@ -111,7 +114,9 @@ public class RobotContainer {
   }
   public double getRightXboxJoystickValueX() {
     double rightAxis;
-    rightAxis = xboxDrive.getX(Hand.kRight);
+    
+    rightAxis = xboxDrive.getRawAxis(2);
+    
     // Allow for up to 10% of joystick noise
     rightAxis = (Math.abs(rightAxis) < 0.1) ? 0 : rightAxis;
     return rightAxis;

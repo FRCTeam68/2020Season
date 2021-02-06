@@ -41,8 +41,8 @@ public class DriveWithJoysticks extends CommandBase {
       leftSpeed = leftStick + rightStick;
       rightSpeed = leftStick - rightStick;
     } else {
-      leftSpeed = leftStick;
-      rightSpeed = leftStick;
+      leftSpeed = 0;
+      rightSpeed = 0;
     }
     if(Robot.m_robotContainer.getXboxDriveRB() == true){ 
       DriveTrain.getDriveTrain().setSpeedFalcon(Robot.driveTrain.leftVisionAdjusted(),Robot.driveTrain.rightVisionAdjusted());
