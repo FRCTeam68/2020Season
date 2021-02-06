@@ -8,6 +8,8 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -19,6 +21,8 @@ import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
@@ -35,32 +39,43 @@ public class Shooter extends SubsystemBase {
   private CANPIDController pidController2;
   private NetworkTableEntry ent;
 
+  private DigitalInput limitSwitch;
+
   public Shooter() {
     shooterWheel1 = new CANSparkMax(Constants.SHOOTER_WHEELSPINNER_1, MotorType.kBrushless);
     shooterWheel2 = new CANSparkMax(Constants.SHOOTER_WHEELSPINNER_2, MotorType.kBrushless);
     shooterWheel1.restoreFactoryDefaults();
     shooterWheel2.restoreFactoryDefaults();
     
+    limitSwitch = new DigitalInput(0);
     feeder = new WPI_VictorSPX(Constants.SHOOTER_FEEDER);
     shooterAngle = new WPI_TalonSRX(Constants.SHOOTER_ANGLE);
-
-    shooterAngle.setSensorPhase(false);
+    shooterAngle.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,0,0);
+    shooterAngle.selectProfileSlot(0, 0);
+    shooterAngle.setSensorPhase(true);
     feeder.setSensorPhase(false);
 
 
     pidController1 = shooterWheel1.getPIDController();
     pidController2 = shooterWheel2.getPIDController();
 
-
+    zeroEnc();
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    CommandScheduler.getInstance().setDefaultCommand(Robot.shooter, new setShooterVelocity());
+    //CommandScheduler.getInstance().setDefaultCommand(Robot.shooter, new setShooterVelocity());
+    SmartDashboard.putNumber("angle", Robot.shooter.shooterEnc());
+    
+    if(limitSwitch.get()){
+      shooterAngle.setSelectedSensorPosition(0);
+    }
+    
   }
 
   public void setShooterPID(double p, double i, double d, double f, double iZ) {
+    /*
     pidController1.setIZone(iZ);
     pidController1.setP(p);
     pidController1.setI(i);
@@ -73,14 +88,25 @@ public class Shooter extends SubsystemBase {
     pidController2.setFF(f);
     pidController2.setOutputRange(-1, 1);
     pidController1.setOutputRange(-1, 1);
+    */
+    shooterAngle.config_kP(0, p);
+    shooterAngle.config_kI(0, i);
+    shooterAngle.config_kD(0, d);
+    shooterAngle.config_kF(0, f);
   }
 
   public void setShooterVelocity(double shooterVelocity) {
-
-    pidController1.setReference(-shooterVelocity, ControlType.kVelocity);
-    pidController2.setReference(shooterVelocity, ControlType.kVelocity);
+    shooterAngle.set(ControlMode.Position,shooterVelocity);
+    /*pidController1.setReference(-shooterVelocity, ControlType.kVelocity);
+    pidController2.setReference(shooterVelocity, ControlType.kVelocity);*/
   }
   public double p(){
     return  Robot.smartPID.createCustomEntry(ent, "Test", 0, 3);
+  }
+  public double shooterEnc(){
+    return shooterAngle.getSelectedSensorPosition();
+  }
+  public void zeroEnc(){
+    shooterAngle.setSelectedSensorPosition(0);
   }
 }

@@ -47,6 +47,7 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
     shooter = new Shooter();
     smartPID = new SmartPID();
+    //shooter.zeroEnc();
   }
 
   @Override
@@ -92,6 +93,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    shooter.zeroEnc();
 
 
   }

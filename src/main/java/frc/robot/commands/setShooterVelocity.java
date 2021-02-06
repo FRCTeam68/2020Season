@@ -18,13 +18,13 @@ public class setShooterVelocity extends CommandBase  {
 
   public setShooterVelocity() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.shooter);
+    //addRequirements(Robot.shooter);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-   // SmartDashboard.putNumber("rotations", SmartDashboard.getNumber("kRotations", 0));
+    SmartDashboard.putNumber("rotations", SmartDashboard.getNumber("kRotations", 0));
     //Robot.smartPID.setShooterVelocity(1);
   }
 
@@ -39,7 +39,8 @@ public class setShooterVelocity extends CommandBase  {
     Robot.smartPID.getEntryD(),
     Robot.smartPID.getEntryF(),
     Robot.smartPID.getEntryiZone());
-    
+
+
     Robot.shooter.setShooterVelocity(Robot.smartPID.getEntrySetPoint());
   }
 

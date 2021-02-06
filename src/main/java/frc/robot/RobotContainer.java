@@ -50,7 +50,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-    xboxManipX.whenPressed(new setShooterVelocity());
+    xboxManipX.whileHeld(new setShooterVelocity());
   }
 
   /** 

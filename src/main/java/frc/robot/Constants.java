@@ -124,7 +124,7 @@ public final class Constants {
 
     public static final int SHOOTER_WHEELSPINNER_1 = 28;
     public static final int SHOOTER_WHEELSPINNER_2 = 29;
-    public static final int SHOOTER_ANGLE = 0;
+    public static final int SHOOTER_ANGLE = 8;
     public static final int SHOOTER_FEEDER = 0;
 
     //endgame subsystem
