@@ -108,7 +108,10 @@ public class Shooter extends SubsystemBase {
     // the value for pidController1 is - because it is backward
     pidController1.setReference(-shooterVelocity, ControlType.kVelocity);
     pidController2.setReference(shooterVelocity_2, ControlType.kVelocity);
-    feeder.set(feederSpeed);
+   // feeder.set(.5);
+  }
+  public void setFeederSpeed(double speed){
+    feeder.set(speed);
   }
   public void setFeederZero(){
     feeder.set(0);

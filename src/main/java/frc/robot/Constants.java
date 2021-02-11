@@ -133,8 +133,8 @@ public final class Constants {
     public static final int SHOOTER_FEEDER = 3;
     public static final int SHOOTER_PID_SLOT = 0;
     public static final int SHOOTER_LIMIT_SWITCH = 0;
-    public static final double SHOOTER_ANGLE_KF = 0.013;
-    public static final double SHOTOER_ANGLE_KP = .01;
+    public static final double SHOOTER_ANGLE_KF = 0.08;//.02
+    public static final double SHOTOER_ANGLE_KP = .4;//.01
     public static final double SHOOTER_MEDIUM_TICKS = -14000;
     public static final double SHOOTER_LOW_TICKS = -10000;
     public static final double SHOOTER_CURVE_SIDE = 1000;
